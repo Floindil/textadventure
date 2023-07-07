@@ -1,0 +1,38 @@
+{
+    "General": {
+        "Name": "Franz",
+        "Race": "Human",
+        "Sex": "Male"
+    },
+    "Attributes": {
+        "Health": 5,
+        "Stamina": 5,
+        "Mana": 5,
+        "Strenght": 5,
+        "Dexterity": 5,
+        "Light": 5,
+        "Dark": 5
+    },
+    "Attributbonuses": {
+        "Health": 5,
+        "Stamina": 5,
+        "Mana": 5,
+        "Strenght": 5,
+        "Dexterity": 5,
+        "Light": 5,
+        "Dark": 5
+    },
+    "Items": {
+        "Consumables": [],
+        "Keyitems": [],
+        "Weapons": [],
+        "Armor": [],
+        "Talisman": [],
+        "Equipped": {
+            "Armor": null,
+            "Right Hand": null,
+            "Left Hand": null,
+            "Talisman": null
+        }
+    }
+}
