@@ -1,10 +1,10 @@
 from tkinter import Tk, Button, Label, Listbox, Toplevel
-from .configuration.settings import rootsize
+from .configuration.settings import rootconfig
 
 root = Tk()
-root.title('Adventure')
-root_width = int(rootsize['width'])
-root_height = int(rootsize['height'])
+root.title(rootconfig['name'])
+root_width = int(rootconfig['width'])
+root_height = int(rootconfig['height'])
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 center_x = int(screen_width/2 - root_width/2)

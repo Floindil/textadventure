@@ -1,40 +1,7 @@
-from methods import Test
+from unittest import TestCase
 from assets.player import player
-from assets.items import itemlist as il
 
-class Itemtest(Test):
-    def test_items(self):
-        player.info['Name'] = 'Franzel'
-
-        il.sword.add()
-        il.leatherarmor.add()
-        il.shield.add()
-        il.apple.add()
-        il.greatsword.add()
-        il.poisonedapple.add()
-        il.healthtalisman.add()
-        il.testkey.add()
-
-        self.use_item(il.apple)
-        self.use_item(il.poisonedapple)
-
-        self.create_summary()
-        print(self.summary)
-
-    def test_equipment(self):
-        il.sword.add()
-        il.leatherarmor.add()
-        il.shield.add()
-
-        il.leatherarmor.equip()
-        il.sword.equip(0)
-        il.shield.equip(1)
-
-        self.create_summary()
-        print(self.summary)
-
-    ######################## METHODS FOR TESTING ########################
-
+class Test(TestCase):
     def use_item(self, item):
         print(f'use item {item.name} at {player.attributes["Health"]} health')
         item.use()

@@ -3,7 +3,8 @@ import os
 
 load_dotenv()
 
-rootsize = {
-    'width' : os.getenv('rootwidth'),
-    'height' : os.getenv('rootheight')
+rootconfig = {
+    'name' : os.getenv('Gamename'),
+    'width' : os.getenv('Rootwidth'),
+    'height' : os.getenv('Rootheight')
 }

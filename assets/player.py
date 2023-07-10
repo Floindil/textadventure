@@ -80,38 +80,5 @@ class Player:
             self.attributes = data['Attributes']
             self.attributbonuses = data['Attributbonuses']
             self.items = data['Items']
-
-    def create_summary(self):
-        consumables = []
-        for consumable in self.items['Consumables']:
-            consumables.append(consumable.name)
-        keyitems = []
-        for keyitem in self.items['Keyitems']:
-            keyitems.append(keyitem.name)
-        weapons = []
-        for weapon in self.items['Weapons']:
-            weapons.append(weapon.name)
-        armors = []
-        for armor in self.items['Armor']:
-            armors.append(armor.name)
-        talismans = []
-        for talisman in self.items['Talisman']:
-            talismans.append(talisman.name)
-        equips = []
-        equiped = self.items['Equipped']
-        for type in equiped:
-            item = equiped[type]
-            if item != None:
-                equips.append(item.name)
-
-        self.summary = f'''{self.info}
-    {self.attributes}
-    {self.attributbonuses}
-    Keyitems: {keyitems}
-    Consumables: {consumables}
-    Weapons: {weapons}
-    Armors: {armors}
-    Talismans: {talismans}
-    Equipped: {equips}'''
         
 player = Player()
