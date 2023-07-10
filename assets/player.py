@@ -1,11 +1,13 @@
 import json
 
 class Player:
-    def __init__(self, name, race, sex):
-        self.name = name
-        self.race = race
-        self.sex = sex
-        self.languages = [race]
+    def __init__(self):
+        self.info = {
+            'Name' : '',
+            'Race' : '',
+            'Sex' : '',
+            'Languages' : []
+        }
         self.attributes = {
             'Health' : 5,
             'Stamina' : 5,
@@ -14,16 +16,16 @@ class Player:
             'Dexterity' : 5,
             'Light' : 5,
             'Dark' : 5
-            }
+        }
         self.attributbonuses = {
-            'Health' : 5,
-            'Stamina' : 5,
-            'Mana' : 5,
-            'Strenght' : 5,
-            'Dexterity' : 5,
-            'Light' : 5,
-            'Dark' : 5
-            }
+            'Health' : 0,
+            'Stamina' : 0,
+            'Mana' : 0,
+            'Strenght' : 0,
+            'Dexterity' : 0,
+            'Light' : 0,
+            'Dark' : 0
+        }
         self.items = {
             'Consumables' : [],
             'Keyitems' : [],
@@ -37,6 +39,7 @@ class Player:
                 'Talisman': None
             }
         }
+        self.damage = 0
 
     def add(self, item : str, type : str):
         self.items[type].append(item)
@@ -63,11 +66,7 @@ class Player:
     def save(self, file):
         with open(f'{file}.json', 'w') as f:
             player = {
-                'General' : {
-                    'Name' : self.name,
-                    'Race' : self.race,
-                    'Sex' : self.sex
-                },
+                'Info' : self.info,
                 'Attributes' : self.attributes,
                 'Attributbonuses' : self.attributbonuses,
                 'Items' : self.items
@@ -77,25 +76,42 @@ class Player:
     def load(self, file):
         with open(f'{file}.json', 'r') as f:
             data = json.load(f)
-            self.name = data['General']['Name']
-            self.race = data['General']['Race']
-            self.sex = data['General']['Sex']
+            self.info = data['info']
             self.attributes = data['Attributes']
             self.attributbonuses = data['Attributbonuses']
-            self.consumables = data['Items']['Consumables']
-            self.keyitems = data['Items']['Keyitems']
-            self.weapons = data['Items']['Weapons']
-            self.armor = data['Items']['Armor']
-            self.talisman = data['Items']['Talisman']
-            self.equipment = data['Items']['Equipped']
+            self.items = data['Items']
 
     def create_summary(self):
-        self.summary = f'''{self.name, self.race, self.sex}
+        consumables = []
+        for consumable in self.items['Consumables']:
+            consumables.append(consumable.name)
+        keyitems = []
+        for keyitem in self.items['Keyitems']:
+            keyitems.append(keyitem.name)
+        weapons = []
+        for weapon in self.items['Weapons']:
+            weapons.append(weapon.name)
+        armors = []
+        for armor in self.items['Armor']:
+            armors.append(armor.name)
+        talismans = []
+        for talisman in self.items['Talisman']:
+            talismans.append(talisman.name)
+        equips = []
+        equiped = self.items['Equipped']
+        for type in equiped:
+            item = equiped[type]
+            if item != None:
+                equips.append(item.name)
+
+        self.summary = f'''{self.info}
     {self.attributes}
     {self.attributbonuses}
-    {self.items['Consumables']}
-    {self.items['Keyitems']}
-    {self.items['Weapons']}
-    {self.items['Armor']}
-    {self.items['Talisman']}
-    {self.items['Equipped']}'''
+    Keyitems: {keyitems}
+    Consumables: {consumables}
+    Weapons: {weapons}
+    Armors: {armors}
+    Talismans: {talismans}
+    Equipped: {equips}'''
+        
+player = Player()
