@@ -1,1 +1,0 @@
-from .assets.items.itemlist import *

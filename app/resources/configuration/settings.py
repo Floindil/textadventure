@@ -8,3 +8,12 @@ rootconfig = {
     'width' : os.getenv('Rootwidth'),
     'height' : os.getenv('Rootheight')
 }
+
+playercreationconfig = {
+    'width' : os.getenv('PlayerCreationWidth'),
+    'height' : os.getenv('PlayerCreationHeight')
+}
+
+padding = {
+    'padding' : os.getenv('Padding')
+}
