@@ -1,10 +1,8 @@
 from methods import Test
-from app.assets.player import player
 from app.assets.items.itemlist import *
 
 class TestItem(Test):
     def test_item(self):
-        player.info['Name'] = 'Franzel'
 
         sword.add()
         leatherarmor.add()
