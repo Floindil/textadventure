@@ -1,9 +1,12 @@
 from .basic.menu import Menu
 from app.resources.tkresource import Widgets
+from app.resources.configuration.settings import playercreationconfig
 
 class PlayerCreation(Menu):
     def __init__(self):
-        super().__init__(title = 'Character Creation', width = 500, height = 500)
+        width = playercreationconfig['PlayerCreationWidth']
+        height = playercreationconfig['PlayerCreationHeight']
+        super().__init__(title = 'Character Creation', width = width, height = height)
         self.data = {
             'Race' : None,
             'Sex' : None
@@ -13,7 +16,7 @@ class PlayerCreation(Menu):
         super().open(master)
         column1 = self.window.pad_left
         line1 = self.window.pad_top
-        line_padding = 25
+        line_padding = self.window.pad_line
         center = self.window.center_x
 
         self.nameselect = Widgets(self.master, center, line1, 'nw')
@@ -22,14 +25,14 @@ class PlayerCreation(Menu):
 
         sex = []
         line2 = line1 + line_padding
-        female = SelectButton(self.master, center - 50, line1 + 25, 'n', 'Female', 'Sex', sex, self.data)
-        male = SelectButton(self.master, center + 50, line1 + 25, 'n', 'Male', 'Sex', sex, self.data)
+        SelectButton(self.master, center - 50, line1 + 25, 'n', 'Female', 'Sex', sex, self.data)
+        SelectButton(self.master, center + 50, line1 + 25, 'n', 'Male', 'Sex', sex, self.data)
 
         races = []
         line3 = line2 + line_padding
-        human = SelectButton(self.master, center -100, line3, 'n', 'Human', 'Race', races, self.data)
-        dwarf = SelectButton(self.master, center +100, line3, 'n', 'Dwarf', 'Race', races, self.data)
-        elf = SelectButton(self.master, center , line3, 'n', 'Elf', 'Race', races, self.data)
+        SelectButton(self.master, center -100, line3, 'n', 'Human', 'Race', races, self.data)
+        SelectButton(self.master, center +100, line3, 'n', 'Dwarf', 'Race', races, self.data)
+        SelectButton(self.master, center , line3, 'n', 'Elf', 'Race', races, self.data)
 
 
         finalize = Widgets(self.master, self.window.center_x, self.window.pad_bottom, 's')

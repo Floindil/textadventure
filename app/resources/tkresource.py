@@ -2,15 +2,15 @@ from tkinter import Tk, Button, Label, Listbox, Entry, Toplevel
 from .configuration.settings import rootconfig, padding
 
 root = Tk()
-root.title(rootconfig['name'])
-root_width = int(rootconfig['width'])
-root_height = int(rootconfig['height'])
+root.title(rootconfig['GameName'])
+root_width = int(rootconfig['RootWidth'])
+root_height = int(rootconfig['RootHeight'])
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 center_x = int(screen_width/2 - root_width/2)
 center_y = int(screen_height/2 - root_height/2)
 root.geometry(f'{root_width}x{root_height}+{center_x}+{center_y}')
-value = int(padding['padding'])
+value = int(padding['BorderPadding'])
 rootpadding = {
     'pad_left' : value,
     'pad_right' : screen_width - value,
@@ -62,6 +62,7 @@ class Window:
         self.pad_right = width - value
         self.pad_top = value
         self.pad_bottom = height - value
+        self.pad_line = padding['LinePadding']
 
     def enable_fullscreen(self):
         self.window.attributes('-fullscreen', True)

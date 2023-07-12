@@ -1,19 +1,15 @@
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
 rootconfig = {
-    'name' : os.getenv('Gamename'),
-    'width' : os.getenv('Rootwidth'),
-    'height' : os.getenv('Rootheight')
+    'GameName' : 'Legends of Gwyndarth',
+    'RootWidth' : 200,
+    'RootHeight' : 200
 }
 
 playercreationconfig = {
-    'width' : os.getenv('PlayerCreationWidth'),
-    'height' : os.getenv('PlayerCreationHeight')
+    'PlayerCreationWidth' : 500,
+    'PlayerCreationHeight' : 500
 }
 
 padding = {
-    'padding' : os.getenv('Padding')
+    'BorderPadding' : 10,
+    'LinePadding' : 30
 }
