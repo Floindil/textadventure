@@ -1,4 +1,5 @@
-from app.resources.tkresource import Window
+from ...resources.tkresource import Window, Widgets
+from ...resources.configuration.settings import playercreationconfig
 
 class Menu:
     def __init__(self, title, width, height):

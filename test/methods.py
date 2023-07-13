@@ -1,5 +1,5 @@
 from unittest import TestCase
-from app.assets.player import player
+from app.structure.assets.player import player
 
 class Test(TestCase):
     def use_item(self, item):

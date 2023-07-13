@@ -64,7 +64,7 @@ class Player:
         self.attributbonuses[attribute] += value
 
     def save(self, file):
-        with open(f'app/data/{file}.json', 'w') as f:
+        with open(f'app/structure/data/{file}.json', 'w') as f:
             player = {
                 'Info' : self.info,
                 'Attributes' : self.attributes,

@@ -11,5 +11,5 @@ playercreationconfig = {
 
 padding = {
     'BorderPadding' : 10,
-    'LinePadding' : 30
+    'LinePadding' : 40
 }

@@ -1,5 +1,5 @@
 from methods import Test
-from app.assets.items.itemlist import *
+from app.structure.assets.items.itemlist import *
 
 class TestItem(Test):
     def test_item(self):

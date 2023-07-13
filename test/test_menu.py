@@ -1,7 +1,7 @@
 from methods import Test
-from app.menus.playercreation import PlayerCreation
-from app.resources.tkresource import root
 import time
+from app.structure.menus.playercreation import PlayerCreation
+from app.structure.resources.tkresource import root
 
 class TestMenus(Test):
     def test_player_creation(self):

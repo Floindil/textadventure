@@ -1,4 +1,4 @@
-from resources.tkresource import Widgets
+from ..resources.tkresource import Widgets
 
 class UI:
     def __init__(self, master):

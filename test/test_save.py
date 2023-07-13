@@ -1,5 +1,5 @@
 from methods import Test
-from app.assets.player import player
+from app.structure.assets.player import player
 
 class TestSave(Test):
     def test_save(self):

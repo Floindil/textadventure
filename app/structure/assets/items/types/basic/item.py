@@ -1,4 +1,4 @@
-from app.assets.player import player
+from ....player import player
 
 class Item:
     def __init__(self, name : str, description : str, value : int, attribut : str) -> None:

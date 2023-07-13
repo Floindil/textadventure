@@ -1,6 +1,4 @@
-from .basic.menu import Menu
-from app.resources.tkresource import Widgets
-from app.resources.configuration.settings import playercreationconfig
+from .basic.menu import *
 
 class PlayerCreation(Menu):
     def __init__(self):
@@ -14,12 +12,11 @@ class PlayerCreation(Menu):
 
     def open(self, master):
         super().open(master)
-        column1 = self.window.pad_left
         line1 = self.window.pad_top
         line_padding = self.window.pad_line
         center = self.window.center_x
 
-        self.nameselect = Widgets(self.master, center, line1, 'nw')
+        self.nameselect = Widgets(self.master, center, line1, 'n')
         self.nameselect.entry(20)
         self.nameselect.widget.configure(justify = 'center')
 
