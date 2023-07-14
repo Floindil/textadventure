@@ -8,7 +8,7 @@ class Consumable(Item):
 
     def use(self):
         player.change_attribute(self.attribut, self.value)
-        player.remove(self, self.type)
+        player.remove_item(self, self.type)
 
 class Keyitem(Item):
     def __init__(self, name: str, description: str, value: int, attribut: str) -> None:

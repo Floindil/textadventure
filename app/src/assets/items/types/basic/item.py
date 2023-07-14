@@ -9,7 +9,7 @@ class Item:
         self.description = description
 
     def add(self):
-        player.add(self, self.type)
+        player.add_item(self, self.type)
 
     def discard(self):
-        player.remove(self, self.type)
+        player.remove_item(self, self.type)

@@ -33,3 +33,5 @@ leatherarmor = Armor('Leather Armor', leatherarmordescription, 7, None)
 
 healthtalismandescription = 'A small Talisman which increases Health'
 healthtalisman = Talisman('Talisman of Health', healthtalismandescription, 2, 'Health')
+
+itemlist = [apple, poisonedapple, testkey, sword, shield, greatsword, leatherarmor, healthtalisman]

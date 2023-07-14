@@ -1,4 +1,5 @@
 from .basic.menu import *
+from ..assets.player import player
 
 class PlayerCreation(Menu):
     def __init__(self):
@@ -12,34 +13,72 @@ class PlayerCreation(Menu):
 
     def open(self, master):
         super().open(master)
-        line1 = self.window.pad_top
-        line_padding = self.window.pad_line
+        line_padding1 = self.window.pad_line1
+        line_padding2 = self.window.pad_line2
         center = self.window.center_x
+        pad_opposite = self.window.pad_opposite
+        pad = self.window.pad
 
-        self.nameselect = Widgets(self.master, center, line1, 'n')
+        namelabel = Widgets(self.master, center, pad, 'n')
+        namelabel.label('Choose your Name:')
+        namelabel.widget.configure(justify='center')
+
+        line2 = pad + line_padding1
+        self.nameselect = Widgets(self.master, center, line2, 'n')
         self.nameselect.entry(20)
         self.nameselect.widget.configure(justify = 'center')
 
+        line3 = line2 + line_padding2
         sex = []
-        line2 = line1 + line_padding
-        SelectButton(self.master, center - 50, line1 + 25, 'n', 'Female', 'Sex', sex, self.data)
-        SelectButton(self.master, center + 50, line1 + 25, 'n', 'Male', 'Sex', sex, self.data)
+        sexlabel = Widgets(self.master, center, line3, 'n')
+        sexlabel.label('Choose your Sex:')
+        sexlabel.widget.configure(justify='center')
 
+        line4 = line3 + line_padding1
+        SelectButton(self.master, center - 50, line4, 'n', 'Female', 'Sex', sex, self.data)
+        SelectButton(self.master, center + 50, line4, 'n', 'Male', 'Sex', sex, self.data)
+
+        line5 = line4 + line_padding2
+        racelabel = Widgets(self.master, center, line5, 'n')
+        racelabel.label('Choose your Race:')
+        racelabel.widget.configure(justify='center')
+
+        line6 = line5 + line_padding1
         races = []
-        line3 = line2 + line_padding
-        SelectButton(self.master, center -100, line3, 'n', 'Human', 'Race', races, self.data)
-        SelectButton(self.master, center +100, line3, 'n', 'Dwarf', 'Race', races, self.data)
-        SelectButton(self.master, center , line3, 'n', 'Elf', 'Race', races, self.data)
+        SelectButton(self.master, center - center/2, line6, 'n', 'Human', 'Race', races, self.data)
+        SelectButton(self.master, center + center/2, line6, 'n', 'Dwarf', 'Race', races, self.data)
+        SelectButton(self.master, center , line6, 'n', 'Elf', 'Race', races, self.data)
 
+        line7 = line6 + line_padding2
+        labelcontent = player.create_attributestring()
+        attributelabel = Widgets(self.master, center + center/2, line7, 'ne')
+        attributelabel.label(labelcontent)
+        attributelabel.widget.configure(justify = 'left')
 
-        finalize = Widgets(self.master, self.window.center_x, self.window.pad_bottom, 's')
+        labelcontent = player.create_attributevaluestring()
+        attributelabel = Widgets(self.master, center + center/2, line7, 'nw')
+        attributelabel.label(labelcontent)
+        attributelabel.widget.configure(justify = 'left')
+
+        self.infolabel = Widgets(self.master, center, pad_opposite - line_padding1, 's')
+        self.infolabel.label('')
+        finalize = Widgets(self.master, center, pad_opposite, 's')
         finalize.button('Finalize', self.save)
 
     def save(self):
         name = self.nameselect.widget.get()
         race = self.data['Race']
         sex = self.data['Sex']
-        print(name, race, sex)
+        if name == '':
+            self.infolabel.widget.configure(text = 'Please select a Name')
+        elif sex == None:
+            self.infolabel.widget.configure(text = 'Please select a Sex')
+        elif race == None:
+            self.infolabel.widget.configure(text = 'Please select a Race')
+        else:
+            player.set_info(name, sex, race)
+            player.save(name)
+            self.master.destroy()
 
 class SelectButton(Widgets):
     def __init__(self, master, x: int, y: int, anchor: str, text: str, type: str, list: list, data):

@@ -1,9 +1,11 @@
 {
     "Info": {
-        "Name": "",
-        "Race": "",
-        "Sex": "",
-        "Languages": []
+        "Name": "Testname",
+        "Race": "Testrace",
+        "Sex": "Testsex",
+        "Languages": [
+            "Testrace"
+        ]
     },
     "Attributes": {
         "Health": 5,

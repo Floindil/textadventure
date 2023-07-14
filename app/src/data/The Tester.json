@@ -1,0 +1,63 @@
+{
+    "Info": {
+        "Name": "The Tester",
+        "Race": "Robot",
+        "Sex": "Undefined",
+        "Languages": [
+            "Robot",
+            "Robot"
+        ]
+    },
+    "Attributes": {
+        "Health": 9,
+        "Stamina": 1,
+        "Mana": 5,
+        "Strenght": 5,
+        "Dexterity": 5,
+        "Light": 1,
+        "Dark": 9
+    },
+    "Attributbonuses": {
+        "Health": 0,
+        "Stamina": 0,
+        "Mana": 0,
+        "Strenght": 0,
+        "Dexterity": 0,
+        "Light": 0,
+        "Dark": 0
+    },
+    "Items": {
+        "Consumables": [
+            "Apple",
+            "Poisoned Apple",
+            "Apple",
+            "Poisoned Apple"
+        ],
+        "Keyitems": [
+            "Testkey",
+            "Testkey"
+        ],
+        "Weapons": [
+            "Sword",
+            "Shield",
+            "Greatsword",
+            "Sword",
+            "Shield",
+            "Greatsword"
+        ],
+        "Armor": [
+            "Leather Armor",
+            "Leather Armor"
+        ],
+        "Talisman": [
+            "Talisman of Health",
+            "Talisman of Health"
+        ],
+        "Equipped": {
+            "Armor": null,
+            "Right Hand": null,
+            "Left Hand": null,
+            "Talisman": null
+        }
+    }
+}

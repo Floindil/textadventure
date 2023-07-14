@@ -12,10 +12,8 @@ center_y = int(screen_height/2 - root_height/2)
 root.geometry(f'{root_width}x{root_height}+{center_x}+{center_y}')
 value = int(padding['BorderPadding'])
 rootpadding = {
-    'pad_left' : value,
-    'pad_right' : screen_width - value,
-    'pad_top' : value,
-    'pad_bottom' : root_height - value
+    'pad' : value,
+    'pad_opposite' : screen_width - value
 }
         
 root.update_idletasks()
@@ -58,11 +56,10 @@ class Window:
         self.window.geometry(f'{width}x{height}+{int(center_x)}+{int(center_y)}')
         self.center_x = width / 2
         self.center_y = height / 2
-        self.pad_left = value
-        self.pad_right = width - value
-        self.pad_top = value
-        self.pad_bottom = height - value
-        self.pad_line = padding['LinePadding']
+        self.pad = value
+        self.pad_opposite = height - value
+        self.pad_line1 = padding['LinePadding1']
+        self.pad_line2 = padding['LinePadding2']
 
     def enable_fullscreen(self):
         self.window.attributes('-fullscreen', True)
