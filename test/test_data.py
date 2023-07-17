@@ -8,8 +8,9 @@ class TestData(Test):
     
     def test_save(self):
         set_testplayer()
+        self.clear_inventory()
         self.add_all_items()
-        sword.equip(0)
+        sword.equip()
         testdata.save()
 
     def test_load(self):

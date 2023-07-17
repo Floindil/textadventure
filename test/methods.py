@@ -12,6 +12,12 @@ class Test(TestCase):
         for object in itemlist:
             object.add()
 
+    def clear_inventory(self):
+        for type in player.itemtypes:
+            player.items[type] = []
+        for slot in player.slots:
+            player.items['Equipment'][slot] = None
+
     def list_info(self, type):
         infos = ''
         for info in type:
@@ -27,11 +33,11 @@ class Test(TestCase):
     
     def list_equipment(self):
         list = []
-        for item in player.items['Equipped']:
-            if player.items['Equipped'][item] != None:
-                list.append(f'{item}: {player.items["Equipped"][item].name}')
+        for item in player.items['Equipment']:
+            if player.items['Equipment'][item] != None:
+                list.append(f'{item}: {player.items["Equipment"][item].name}')
             else:
-                list.append(f'{item}: {player.items["Equipped"][item]}')
+                list.append(f'{item}: {player.items["Equipment"][item]}')
         return list
 
     def create_summary(self):        
@@ -53,4 +59,4 @@ class Test(TestCase):
     Weapons: {weapons}
     Armors: {armors}
     Talismans: {talismans}
-    Equipped: {equips}'''
+    Equipment: {equips}'''

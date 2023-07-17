@@ -34,10 +34,10 @@ class Weapon(Equipable):
             1 : 'Left Hand'
         }
 
-    def equip(self, slot):
+    def equip(self, slot: int = 0):
         player.equip(self, self.type, self.slot[slot])
 
-    def unequip(self, slot):
+    def unequip(self, slot: int = 0):
         player.unequip(self.type, self.slot[slot])
 
 class Armor(Equipable):

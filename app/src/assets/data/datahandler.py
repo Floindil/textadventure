@@ -11,13 +11,15 @@ class Datahandler:
     def list_items(self, type):
         list = []
         for item in player.items[type]:
+            print(item.name)
+            print(player.items[type])
             if item != None:
                 list.append(item.name)
         return list
     
     def list_equipment(self):
         dict = {}
-        equipment = player.items['Equipped']
+        equipment = player.items['Equipment']
         for item in equipment:
             equipped = equipment[item]
             if equipped != None:
@@ -33,7 +35,7 @@ class Datahandler:
             'Weapons' : self.list_items('Weapons'),
             'Armor' : self.list_items('Armor'),
             'Talisman' : self.list_items('Talisman'),
-            'Equipped' : self.list_equipment()
+            'Equipment' : self.list_equipment()
         }
         return items
 
@@ -56,14 +58,14 @@ class Datahandler:
                 player.items[type].append(item)
 
     def load_equipment(self, slot, data):
-        loaded = data['Items']['Equipped'][slot]
+        loaded = data['Items']['Equipment'][slot]
         if loaded == None:
-            player.items['Equipped'][slot] = None
+            player.items['Equipment'][slot] = None
         else:
             from ..items.itemlist import itemlist
             for item in itemlist:
                 if item.name in loaded:
-                    player.items['Equipped'][slot] = item
+                    player.items['Equipment'][slot] = item
 
     def load_items(self, data):
         for type in player.itemtypes:
@@ -78,3 +80,5 @@ class Datahandler:
             player.attributes = data['Attributes']
             player.attributbonuses = data['Attributbonuses']
             self.load_items(data)
+
+datahandler = Datahandler()

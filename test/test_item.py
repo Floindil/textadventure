@@ -17,7 +17,7 @@ class TestItem(Test):
         self.add_all_items()
 
         leatherarmor.equip()
-        sword.equip(0)
+        sword.equip()
         shield.equip(1)
 
         self.create_summary()
@@ -25,7 +25,7 @@ class TestItem(Test):
         print('')
 
         leatherarmor.unequip()
-        sword.unequip(0)
+        sword.unequip()
         shield.unequip(1)
 
         self.create_summary()
@@ -38,6 +38,6 @@ class TestItem(Test):
             'Weapons' : self.list_items('Weapons'),
             'Armor' : self.list_items('Armor'),
             'Talisman' : self.list_items('Talisman'),
-            'Equipped' : self.list_equipment()
+            'Equipment' : self.list_equipment()
         }
         print(items)

@@ -1,5 +1,6 @@
 from .basic.menu import *
 from ..assets.player import player
+from ..assets.data.datahandler import datahandler
 
 class PlayerCreation(Menu):
     def __init__(self):
@@ -50,12 +51,12 @@ class PlayerCreation(Menu):
         SelectButton(self.master, center , line6, 'n', 'Elf', 'Race', races, self.data)
 
         line7 = line6 + line_padding2
-        labelcontent = player.create_string(player.attributes)
+        labelcontent = player.create_string()
         attributelabel = Widgets(self.master, center + center/2, line7, 'ne')
         attributelabel.label(labelcontent)
         attributelabel.widget.configure(justify = 'left')
 
-        labelcontent = player.create_valuestring(player.attributes)
+        labelcontent = player.create_string(values=1)
         attributelabel = Widgets(self.master, center + center/2, line7, 'nw')
         attributelabel.label(labelcontent)
         attributelabel.widget.configure(justify = 'left')
@@ -77,7 +78,7 @@ class PlayerCreation(Menu):
             self.infolabel.widget.configure(text = 'Please select a Race')
         else:
             player.set_info(name, sex, race)
-            player.save()
+            datahandler.save()
             self.master.destroy()
 
 class SelectButton(Widgets):

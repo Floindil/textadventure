@@ -8,22 +8,22 @@
         ]
     },
     "Attributes": {
-        "Health": 7,
-        "Stamina": 3,
-        "Mana": 5,
-        "Strenght": 5,
-        "Dexterity": 5,
-        "Light": 2,
-        "Dark": 6
+        "Health": 1,
+        "Stamina": 7,
+        "Mana": 3,
+        "Strenght": 8,
+        "Dexterity": 10,
+        "Light": 9,
+        "Dark": 4
     },
     "Attributbonuses": {
-        "Health": 1,
-        "Stamina": -1,
-        "Mana": 0,
-        "Strenght": 0,
-        "Dexterity": 0,
-        "Light": 2,
-        "Dark": -3
+        "Health": 2,
+        "Stamina": 1,
+        "Mana": 1,
+        "Strenght": -1,
+        "Dexterity": 1,
+        "Light": -1,
+        "Dark": -1
     },
     "Items": {
         "Consumables": [
@@ -43,7 +43,7 @@
         "Talisman": [
             "Talisman of Health"
         ],
-        "Equipped": {
+        "Equipment": {
             "Armor": null,
             "Right Hand": "Sword",
             "Left Hand": null,
