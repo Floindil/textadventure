@@ -4,14 +4,7 @@ from app.src.assets.items.itemlist import *
 class TestItem(Test):
     def test_item(self):
 
-        sword.add()
-        leatherarmor.add()
-        shield.add()
-        apple.add()
-        greatsword.add()
-        poisonedapple.add()
-        healthtalisman.add()
-        testkey.add()
+        self.add_all_items()
 
         self.use_item(apple)
         self.use_item(poisonedapple)
@@ -20,13 +13,20 @@ class TestItem(Test):
         print(self.summary)
 
     def test_equipment(self):
-        sword.add()
-        leatherarmor.add()
-        shield.add()
+
+        self.add_all_items()
 
         leatherarmor.equip()
         sword.equip(0)
         shield.equip(1)
+
+        self.create_summary()
+        print(self.summary)
+        print('')
+
+        leatherarmor.unequip()
+        sword.unequip(0)
+        shield.unequip(1)
 
         self.create_summary()
         print(self.summary)

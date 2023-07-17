@@ -22,6 +22,9 @@ class Equipable(Item):
     def equip(self):
         player.equip(self, self.type, self.slot)
 
+    def unequip(self):
+        player.unequip(self.type, self.slot)
+
 class Weapon(Equipable):
     def __init__(self, name: str, description: str, value: int, attribut: str) -> None:
         super().__init__(name, description, value, attribut)
@@ -30,8 +33,12 @@ class Weapon(Equipable):
             0 : 'Right Hand',
             1 : 'Left Hand'
         }
+
     def equip(self, slot):
         player.equip(self, self.type, self.slot[slot])
+
+    def unequip(self, slot):
+        player.unequip(self.type, self.slot[slot])
 
 class Armor(Equipable):
     def __init__(self, name: str, description: str, value: int, attribut: str) -> None:

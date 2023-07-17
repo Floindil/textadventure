@@ -1,11 +1,16 @@
 from unittest import TestCase
 from app.src.assets.player import player
+from app.src.assets.items.itemlist import itemlist
 
 class Test(TestCase):
     def use_item(self, item):
         print(f'use item {item.name} at {player.attributes["Health"]} health')
         item.use()
         print(f'new health: {player.attributes["Health"]}')
+
+    def add_all_items(self):
+        for object in itemlist:
+            object.add()
 
     def list_info(self, type):
         infos = ''

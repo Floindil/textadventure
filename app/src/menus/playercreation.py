@@ -50,12 +50,12 @@ class PlayerCreation(Menu):
         SelectButton(self.master, center , line6, 'n', 'Elf', 'Race', races, self.data)
 
         line7 = line6 + line_padding2
-        labelcontent = player.create_attributestring()
+        labelcontent = player.create_string(player.attributes)
         attributelabel = Widgets(self.master, center + center/2, line7, 'ne')
         attributelabel.label(labelcontent)
         attributelabel.widget.configure(justify = 'left')
 
-        labelcontent = player.create_attributevaluestring()
+        labelcontent = player.create_valuestring(player.attributes)
         attributelabel = Widgets(self.master, center + center/2, line7, 'nw')
         attributelabel.label(labelcontent)
         attributelabel.widget.configure(justify = 'left')
@@ -77,7 +77,7 @@ class PlayerCreation(Menu):
             self.infolabel.widget.configure(text = 'Please select a Race')
         else:
             player.set_info(name, sex, race)
-            player.save(name)
+            player.save()
             self.master.destroy()
 
 class SelectButton(Widgets):

@@ -1,5 +1,5 @@
 from methods import Test
-from testplayer import set_testplayer, player
+from setup import set_testplayer
 
 class Test(Test):
     def test_testplayer(self):
