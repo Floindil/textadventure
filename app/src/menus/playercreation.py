@@ -4,8 +4,8 @@ from ..assets.data.datahandler import datahandler
 
 class PlayerCreation(Menu):
     def __init__(self):
-        width = playercreationconfig['PlayerCreationWidth']
-        height = playercreationconfig['PlayerCreationHeight']
+        width = playercreationconfig['Width']
+        height = playercreationconfig['Height']
         super().__init__(title = 'Character Creation', width = width, height = height)
         self.data = {
             'Race' : None,
@@ -61,10 +61,14 @@ class PlayerCreation(Menu):
         attributelabel.label(labelcontent)
         attributelabel.widget.configure(justify = 'left')
 
-        self.infolabel = Widgets(self.master, center, pad_opposite - line_padding1, 's')
+        self.infolabel = Widgets(self.master, center, pad_opposite, 's')
         self.infolabel.label('')
-        finalize = Widgets(self.master, center, pad_opposite, 's')
+        finalize = Widgets(self.master, pad_opposite, pad_opposite, 'se')
         finalize.button('Finalize', self.save)
+        finalize.widget.configure(width = 10)
+        cancel = Widgets(self.master, pad, pad_opposite, 'sw')
+        cancel.button('Cancel', self.master.destroy)
+        cancel.widget.configure(width = 10)
 
     def save(self):
         name = self.nameselect.widget.get()

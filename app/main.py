@@ -1,7 +1,6 @@
-from src.resources.tkresource import root
-from src.menus.playercreation import PlayerCreation
+from src.menus.mainmenu import Mainmenu, root
 
-creation = PlayerCreation()
-creation.open(root)
+mm = Mainmenu()
+mm.open()
 
 root.mainloop()

@@ -42,8 +42,11 @@ class Player:
         self.skills = []
         self.damage = 0
 
-    def set_info(self, name: str, sex: str, race: str):
+    def set_playername(self, name: str):
         player.info['Name'] = name
+
+    def set_info(self, name: str, sex: str, race: str):
+        self.set_playername(name)
         player.info['Sex'] = sex
         player.info['Race'] = race
         player.add_language(race)

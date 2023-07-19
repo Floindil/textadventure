@@ -1,10 +1,10 @@
-from tkinter import Tk, Button, Label, Listbox, Entry, Toplevel
+from tkinter import Tk, Button, Label, Listbox, Entry, Toplevel, Scrollbar, Frame
 from .configuration.settings import rootconfig, padding
 
 root = Tk()
-root.title(rootconfig['GameName'])
-root_width = int(rootconfig['RootWidth'])
-root_height = int(rootconfig['RootHeight'])
+root.title(rootconfig['Name'])
+root_width = int(rootconfig['Width'])
+root_height = int(rootconfig['Height'])
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 center_x = int(screen_width/2 - root_width/2)
@@ -16,7 +16,7 @@ rootpadding = {
     'pad_opposite' : screen_width - value
 }
         
-root.update_idletasks()
+root.update_idletasks()    
 
 class Widgets:
     def __init__(self, master, x : int, y : int, anchor : str):
@@ -35,12 +35,22 @@ class Widgets:
 
     def listbox(self, width : int, height : int, content : list):
         self.widget = Listbox(self.master, width = width, height = height, justify = 'center')
-        self.widget.place(x = self.x, y = self.y, anchor = self.anchor)
+        self.widget.pack(side = 'left', fill = 'y')
         for item in content:
             self.widget.insert('end', item)
 
+    def scrollbar(self, to_scroll):
+        self.widget = Scrollbar(self.master)
+        self.widget.pack(side = 'right', fill = 'y')
+        to_scroll.config(yscrollcommand = self.widget.set)
+        self.widget.config(command = to_scroll.yview)
+
     def entry(self, width : int):
         self.widget = Entry(self.master, width = width)
+        self.widget.place(x = self.x, y = self.y, anchor = self.anchor)
+    
+    def frame(self):
+        self.widget = Frame(self.master)
         self.widget.place(x = self.x, y = self.y, anchor = self.anchor)
 
 class Window:

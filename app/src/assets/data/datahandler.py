@@ -1,4 +1,4 @@
-import json
+import json, os
 from ..player import player
 
 # used paths:
@@ -80,5 +80,14 @@ class Datahandler:
             player.attributes = data['Attributes']
             player.attributbonuses = data['Attributbonuses']
             self.load_items(data)
+
+    def list_savefiles(self):
+        savefiles = []
+        file_list = os.listdir(datapath)
+        for file in file_list:
+            if file.endswith('.json') == True:
+                to_append = file.replace('.json', '')
+                savefiles.append(to_append)
+        return savefiles
 
 datahandler = Datahandler()

@@ -1,12 +1,19 @@
 rootconfig = {
-    'GameName' : 'Legends of Gwyndarth',
-    'RootWidth' : 200,
-    'RootHeight' : 200
+    'Name' : 'Legends of Gwyndarth',
+    'Width' : 200,
+    'Height' : 200
 }
 
 playercreationconfig = {
-    'PlayerCreationWidth' : 500,
-    'PlayerCreationHeight' : 500
+    'Width' : 500,
+    'Height' : 500
+}
+
+loadwinconfig = {
+    'Width' : 250,
+    'Height' : 300,
+    'LB_Width' : 20,
+    'LB_Height': 13
 }
 
 padding = {

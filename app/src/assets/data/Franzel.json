@@ -1,0 +1,41 @@
+{
+    "Info": {
+        "Name": "Franzel",
+        "Race": "Human",
+        "Sex": "Male",
+        "Languages": [
+            "Human"
+        ]
+    },
+    "Attributes": {
+        "Health": 5,
+        "Stamina": 5,
+        "Mana": 5,
+        "Strenght": 5,
+        "Dexterity": 5,
+        "Light": 5,
+        "Dark": 5
+    },
+    "Attributbonuses": {
+        "Health": 0,
+        "Stamina": 0,
+        "Mana": 0,
+        "Strenght": 0,
+        "Dexterity": 0,
+        "Light": 0,
+        "Dark": 0
+    },
+    "Items": {
+        "Consumables": [],
+        "Keyitems": [],
+        "Weapons": [],
+        "Armor": [],
+        "Talisman": [],
+        "Equipment": {
+            "Armor": null,
+            "Right Hand": null,
+            "Left Hand": null,
+            "Talisman": null
+        }
+    }
+}
