@@ -116,22 +116,5 @@ class Player:
                 if count < len(dict):
                     text += '\n'
         return text
-
-    def create_string(self, bonuses: int = 0, values: int = 0):
-        if bonuses == 1:
-            dict_to_stringify = self.attributbonuses
-        elif bonuses == 0:
-            dict_to_stringify = self.attributes
-        labelcontent = ''
-        count = 0
-        for attribute in dict_to_stringify:
-            if values == 1:
-                labelcontent += str(dict_to_stringify[attribute])
-            elif values == 0:
-                labelcontent += f'{attribute}:    '
-            count += 1
-            if count < len(dict_to_stringify):
-                labelcontent += '\n'
-        return labelcontent
         
 player = Player()

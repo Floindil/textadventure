@@ -1,4 +1,4 @@
-from ..resources.tkresource import root, Widgets, Window
+from ..resources.tkresource import root, Widgets, Window, center_x, center_y
 from ..resources.configuration.settings import rootconfig, loadwinconfig, padding
 from ..assets.data.datahandler import datahandler, datapath
 from ..assets.player import player
@@ -9,6 +9,7 @@ class Mainmenu:
     def __init__(self):
         self.width = rootconfig['Width']
         self.height = rootconfig['Height']
+        root.geometry(f'{self.width}x{self.height}+{center_x}+{center_y}')
         self.load_newest()
 
     def open(self):

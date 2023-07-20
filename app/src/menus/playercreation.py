@@ -50,22 +50,13 @@ class PlayerCreation(Menu):
         SelectButton(self.master, center + center/2, line6, 'n', 'Dwarf', 'Race', races, self.data)
         SelectButton(self.master, center , line6, 'n', 'Elf', 'Race', races, self.data)
 
-        line7 = line6 + line_padding2
-        labelcontent = player.create_string()
-        attributelabel = Widgets(self.master, center + center/2, line7, 'ne')
-        attributelabel.label(labelcontent)
-        attributelabel.widget.configure(justify = 'left')
-
-        labelcontent = player.create_string(values=1)
-        attributelabel = Widgets(self.master, center + center/2, line7, 'nw')
-        attributelabel.label(labelcontent)
-        attributelabel.widget.configure(justify = 'left')
-
         self.infolabel = Widgets(self.master, center, pad_opposite, 's')
         self.infolabel.label('')
+
         finalize = Widgets(self.master, pad_opposite, pad_opposite, 'se')
         finalize.button('Finalize', self.save)
         finalize.widget.configure(width = 10)
+
         cancel = Widgets(self.master, pad, pad_opposite, 'sw')
         cancel.button('Cancel', self.master.destroy)
         cancel.widget.configure(width = 10)
