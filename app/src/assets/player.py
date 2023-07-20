@@ -7,13 +7,13 @@ class Player:
             'Languages' : []
         }
         self.attributes = {
-            'Health' : 5,
-            'Stamina' : 5,
-            'Mana' : 5,
-            'Strenght' : 5,
-            'Dexterity' : 5,
-            'Light' : 5,
-            'Dark' : 5
+            'Health' : '',
+            'Stamina' : '',
+            'Mana' : '',
+            'Strenght' : '',
+            'Dexterity' : '',
+            'Light' : '',
+            'Dark' : ''
         }
         self.attributbonuses = {
             'Health' : 0,
@@ -102,6 +102,20 @@ class Player:
     def unequip(self, type: str, slot: str):
         self.add_item(self.items['Equipment'][slot], type)
         self.items['Equipment'][slot] = None
+
+    def list_dict(self, dict: dict, value: int= 0):
+        text = ''
+        count = 0
+        for key in dict:
+            if type(dict[key]) != list:
+                count += 1
+                if value == 0:
+                    text += key
+                elif value ==1:
+                    text += str(dict[key])
+                if count < len(dict):
+                    text += '\n'
+        return text
 
     def create_string(self, bonuses: int = 0, values: int = 0):
         if bonuses == 1:

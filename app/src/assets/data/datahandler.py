@@ -2,7 +2,7 @@ import json, os
 from ..player import player
 
 # used paths:
-datapath = 'app/src/assets/data/'
+datapath = 'app/src/assets/data/savefiles/'
 
 class Datahandler:
     def __init__(self) -> None:
@@ -11,8 +11,6 @@ class Datahandler:
     def list_items(self, type):
         list = []
         for item in player.items[type]:
-            print(item.name)
-            print(player.items[type])
             if item != None:
                 list.append(item.name)
         return list
