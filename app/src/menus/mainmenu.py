@@ -64,11 +64,12 @@ class Mainmenu:
             self.loading.widget.configure(state = 'disabled')
             self.cont.widget.configure(state = 'disabled')
             self.info.widget.configure(state = 'disabled')
+            valuetext = ''
         else:
             self.loading.widget.configure(state = 'active')
             self.cont.widget.configure(state = 'active')
             self.info.widget.configure(state = 'active')
-        valuetext = self.create_text(1)
+            valuetext = self.create_text(1)
         self.valuelabel.widget.configure(text = valuetext)
 
     def load_win(self):
