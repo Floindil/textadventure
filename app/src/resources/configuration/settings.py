@@ -9,6 +9,13 @@ playercreationconfig = {
     'Height' : 500
 }
 
+InventoryConfig = {
+    'Width' : 700,
+    'Height' : 500,
+    'Itembox_Width' : 20,
+    'Itembox_Height': 15
+}
+
 loadwinconfig = {
     'Width' : 250,
     'Height' : 300,

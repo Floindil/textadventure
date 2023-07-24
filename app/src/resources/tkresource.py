@@ -53,6 +53,11 @@ class Widgets:
         self.widget = Frame(self.master)
         self.widget.place(x = self.x, y = self.y, anchor = self.anchor)
 
+    def change_lb_content(self, new_content: list):
+        self.widget.delete(0, 'end')
+        for item in new_content:
+            self.widget.insert('end', item)
+
 class Window:
     def __init__(self, master, title : str, width : int, height : int):
         self.window = Toplevel(master)

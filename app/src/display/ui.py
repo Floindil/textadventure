@@ -1,4 +1,5 @@
 from ..resources.tkresource import Widgets
+from ..menus.inventory import Inventory
 
 class UI:
     def __init__(self, master):
@@ -15,6 +16,11 @@ class UI:
         menu = Widgets(master, left, top, 'nw')
         menu.button('MENU', None)
         menu.widget.configure(width = 10)
+
         inventory = Widgets(master, right, bottom, 'se')
-        inventory.button('INVENTORY', None)
+        inventory.button('INVENTORY', lambda: self.open_inventory(master))
         inventory.widget.configure(width = 10)
+
+    def open_inventory(self, master):
+        inventory = Inventory()
+        inventory.open(master)

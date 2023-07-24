@@ -51,9 +51,11 @@ class Datahandler:
 
     def load_itemtype(self, type, data):
         from ..items.itemlist import itemlist
+        list = []
         for item in itemlist:
             if item.name in data['Items'][type]:
-                player.items[type].append(item)
+                list.append(item)
+        player.items[type] = list
 
     def load_equipment(self, slot, data):
         loaded = data['Items']['Equipment'][slot]

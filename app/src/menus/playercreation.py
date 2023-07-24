@@ -73,6 +73,7 @@ class PlayerCreation(Menu):
             self.infolabel.widget.configure(text = 'Please select a Race')
         else:
             player.set_info(name, sex, race)
+            player.set_all_attributes([5,5,5,5,5,5,5])
             datahandler.save()
             self.master.destroy()
 

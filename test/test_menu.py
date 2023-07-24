@@ -35,7 +35,7 @@ class TestMenus(Test):
         main.open()
         main.load_win()
         
-        index = 0
+        index = 1
         if index == ():
             main.label.widget.configure(text = 'please select a file')
         else:

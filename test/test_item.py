@@ -1,9 +1,10 @@
 from methods import Test
+from setup import set_testplayer
 from app.src.assets.items.itemlist import *
 
 class TestItem(Test):
     def test_item(self):
-
+        set_testplayer()
         self.add_all_items()
 
         self.use_item(apple)
