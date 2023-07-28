@@ -84,6 +84,7 @@ class PlayerCreation(Menu):
             player.set_info(name, sex, race)
             player.set_all_attributes([5,5,5,5,5,5,5])
             player.set_all_attributes([0,0,0,0,0,0,0],1)
+            player.languages = []
             player.languages.append(player.info['Race'])
             player.clear_inventory()
             datahandler.save()
