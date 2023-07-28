@@ -5,7 +5,6 @@ class Player:
             'Race' : '',
             'Sex' : ''
         }
-        self.languages = []
         self.attributes = {
             'Health' : '',
             'Stamina' : '',
@@ -39,11 +38,56 @@ class Player:
         }
         self.itemtypes = ['Consumables', 'Keyitems', 'Weapons', 'Armor', 'Talisman']
         self.slots = ['Armor', 'Right Hand', 'Left Hand', 'Talisman']
-        self.skills = []
-        self.damage = 0
 
     def set_playername(self, name: str):
         player.info['Name'] = name
+
+    def set_state(self):
+        self.state = {
+            'Skills' : [],
+            'Languages' : [],
+            'HP FP MP' : [0,0,0],
+            'Damage' : [0,0,0]
+        }
+
+    def calc_value(self, hp_fp_mp: int = 0):
+        self.state['HP FP MP'][hp_fp_mp] = self.maxvalue(hp_fp_mp) - self.state['Damage'][hp_fp_mp]
+        return(self.state['HP FP MP'][hp_fp_mp])
+
+    def calc_all_values(self):
+        self.calc_value(0)
+        self.calc_value(1)
+        self.calc_value(2)
+
+    def calc_damage(self, damage: int, hp_fp_mp: int = 0):
+        if self.calc_value(hp_fp_mp) <= damage:
+            self.damage_exceeded(hp_fp_mp)
+        else:
+            self.state['Damage'][hp_fp_mp] += damage
+            self.calc_value(hp_fp_mp)
+
+    def calc_all_damage(self, hp_damage, ap_damage, mp_damage):
+        self.calc_damage(hp_damage,0)
+        self.calc_damage(ap_damage,1)
+        self.calc_damage(mp_damage,2)
+
+    def damage_exceeded(self, hp_fp_mp: int = 0):
+        self.state['Damage'][hp_fp_mp] = self.maxvalue(hp_fp_mp)
+        self.calc_value(hp_fp_mp)
+        if hp_fp_mp == 0:
+            self.death()
+
+    def death(self):
+        print('\nPlayerdeath')
+
+    def maxvalue(self, hp_fp_mp: int = 0):
+        if hp_fp_mp == 0:
+            maxvalue = self.attributes['Health']*15
+        elif hp_fp_mp == 1:
+            maxvalue = self.attributes['Stamina']*10
+        elif hp_fp_mp == 2:
+            maxvalue = self.attributes['Mana']*5
+        return maxvalue
 
     def set_info(self, name: str, sex: str, race: str):
         self.set_playername(name)
@@ -55,8 +99,8 @@ class Player:
         self.items[type].append(item)
 
     def add_language(self, language):
-        if language not in self.languages:
-            self.languages.append(language)
+        if language not in self.state['Languages']:
+            self.state['Languages'].append(language)
 
     def remove_item(self, item: str, type: str):
         self.items[type].remove(item)

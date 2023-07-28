@@ -4,9 +4,22 @@
         "Race": "Robot",
         "Sex": "Undefined"
     },
-    "Languages": [
-        "Robot"
-    ],
+    "State": {
+        "Skills": [],
+        "Languages": [
+            "Robot"
+        ],
+        "HP FP MP": [
+            15,
+            70,
+            15
+        ],
+        "Damage": [
+            0,
+            0,
+            0
+        ]
+    },
     "Attributes": {
         "Health": 1,
         "Stamina": 7,

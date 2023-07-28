@@ -42,6 +42,7 @@ class Test(TestCase):
 
     def create_summary(self):        
         info = self.list_info(player.info)
+        state = self.list_info(player.state)
         attributes = self.list_info(player.attributes)
         attributbonuses = self.list_info(player.attributbonuses)
         keyitems = self.list_items('Keyitems')
@@ -52,6 +53,7 @@ class Test(TestCase):
         equips = self.list_equipment()
 
         self.summary = f'''    {info}
+    {state}
     {attributes}
     {attributbonuses}
     Keyitems: {keyitems}

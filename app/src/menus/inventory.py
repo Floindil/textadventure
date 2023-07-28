@@ -85,6 +85,24 @@ class Inventory(Menu):
         left.widget.configure(command = lambda: self.change_itemtype(0))
         right.widget.configure(command = self.change_itemtype)
 
+        # Action Frame {
+        
+        action_frame = Widgets(inventory_frame.widget, 0, 2)
+        action_frame.pad = 0
+        action_frame.frame()
+
+        self.action1 = Widgets(action_frame.widget,0,0)
+        self.action1.pad = 0
+        self.action1.button('Use', None)
+        self.action1.widget.configure(width = 8)
+
+        self.action2 = Widgets(action_frame.widget,1,0)
+        self.action2.pad = 0
+        self.action2.button('Discard', None)
+        self.action2.widget.configure(width = 8)
+
+        # } Equip Frame
+
         ### } Inventory Frame
 
         ### Player Information Frame {

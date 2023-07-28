@@ -43,7 +43,7 @@ class Datahandler:
         with open(savepath, 'w') as f:
             data = {
                 'Info' : player.info,
-                'Languages' : player.languages,
+                'State' : player.state,
                 'Attributes' : player.attributes,
                 'Attributbonuses' : player.attributbonuses,
                 'Items' : items
@@ -78,7 +78,7 @@ class Datahandler:
         with open(f'{datapath}{name}.json', 'r') as f:
             data = json.load(f)
             player.info = data['Info']
-            player.languages = data['Languages']
+            player.state = data['State']
             player.attributes = data['Attributes']
             player.attributbonuses = data['Attributbonuses']
             self.load_items(data)

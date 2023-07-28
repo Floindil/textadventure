@@ -13,7 +13,7 @@ InventoryConfig = {
     'Width' : 700,
     'Height' : 550,
     'Itembox_Width' : 25,
-    'Itembox_Height': 15
+    'Itembox_Height': 13
 }
 
 loadwinconfig = {
