@@ -13,11 +13,11 @@ class UI:
         bottom = master_height - padding
 
         # Buttons:
-        menu = Widgets(master, left, top, 'nw')
+        menu = Widgets(master, 0, 0)
         menu.button('MENU', None)
         menu.widget.configure(width = 10)
 
-        inventory = Widgets(master, right, bottom, 'se')
+        inventory = Widgets(master, 99, 99)
         inventory.button('INVENTORY', lambda: self.open_inventory(master))
         inventory.widget.configure(width = 10)
 

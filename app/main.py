@@ -3,6 +3,5 @@ from src.display.ui import UI
 
 mm = Mainmenu()
 mm.open()
-ui = UI(root)
 
 root.mainloop()

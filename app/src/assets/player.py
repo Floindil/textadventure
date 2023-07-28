@@ -3,9 +3,9 @@ class Player:
         self.info = {
             'Name' : '',
             'Race' : '',
-            'Sex' : '',
-            'Languages' : []
+            'Sex' : ''
         }
+        self.languages = []
         self.attributes = {
             'Health' : '',
             'Stamina' : '',
@@ -55,9 +55,8 @@ class Player:
         self.items[type].append(item)
 
     def add_language(self, language):
-        languages = self.info['Languages']
-        if language not in languages:
-            languages.append(language)
+        if language not in self.languages:
+            self.languages.append(language)
 
     def remove_item(self, item: str, type: str):
         self.items[type].remove(item)
@@ -116,5 +115,11 @@ class Player:
                 if count < len(dict):
                     text += '\n'
         return text
+    
+    def clear_inventory(self):
+        for type in player.itemtypes:
+            player.items[type] = []
+        for slot in player.slots:
+            player.items['Equipment'][slot] = None
         
 player = Player()

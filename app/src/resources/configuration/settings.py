@@ -1,30 +1,24 @@
 rootconfig = {
     'Name' : 'Legends of Gwyndarth',
-    'Width' : 500,
+    'Width' : 300,
     'Height' : 250
 }
 
 playercreationconfig = {
-    'Width' : 500,
-    'Height' : 500
+    'Width' : 800,
+    'Height' : 300
 }
 
 InventoryConfig = {
     'Width' : 700,
-    'Height' : 500,
-    'Itembox_Width' : 20,
+    'Height' : 550,
+    'Itembox_Width' : 25,
     'Itembox_Height': 15
 }
 
 loadwinconfig = {
-    'Width' : 250,
-    'Height' : 300,
+    'Width' : 300,
+    'Height' : 350,
     'LB_Width' : 20,
     'LB_Height': 11
-}
-
-padding = {
-    'BorderPadding' : 10,
-    'LinePadding1' : 25,
-    'LinePadding2' : 40
 }

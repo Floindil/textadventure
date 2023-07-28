@@ -2,11 +2,11 @@
     "Info": {
         "Name": "The Tester",
         "Race": "Robot",
-        "Sex": "Undefined",
-        "Languages": [
-            "Robot"
-        ]
+        "Sex": "Undefined"
     },
+    "Languages": [
+        "Robot"
+    ],
     "Attributes": {
         "Health": 1,
         "Stamina": 7,

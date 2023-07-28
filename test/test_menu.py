@@ -17,7 +17,7 @@ class TestMenus(Test):
         playercreation.open(root)
         
         playercreation.nameselect.widget.insert(0,'Testname')
-        testbutton = SelectButton(root,0,0,'n','Test1','Testing',Testlist,Testdata)
+        testbutton = SelectButton(root,0,0,'Test1','Testing',Testlist,Testdata)
         testbutton.command('Testing', Testlist, Testdata)
         print(f'from Test: Testdata {Testdata}')
 
@@ -35,7 +35,7 @@ class TestMenus(Test):
         main.open()
         main.load_win()
         
-        index = 1
+        index = 0
         if index == ():
             main.label.widget.configure(text = 'please select a file')
         else:

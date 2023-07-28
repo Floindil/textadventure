@@ -1,12 +1,14 @@
 {
     "Info": {
-        "Name": "Franzel",
-        "Race": "Human",
-        "Sex": "Male",
-        "Languages": [
-            "Human"
-        ]
+        "Name": "Lenaila",
+        "Race": "Elf",
+        "Sex": "Female"
     },
+    "Languages": [
+        "Robot",
+        "Elf",
+        "Elf"
+    ],
     "Attributes": {
         "Health": 5,
         "Stamina": 5,
