@@ -25,20 +25,34 @@ class Equipable(Item):
     def unequip(self):
         player.unequip(self.type, self.slot)
 
-class Weapon(Equipable):
+class On_Hand(Equipable):
     def __init__(self, name: str, description: str, value: int, attribut: str) -> None:
         super().__init__(name, description, value, attribut)
-        self.type = 'Weapons'
-        self.slot = {
-            0 : 'Right Hand',
-            1 : 'Left Hand'
-        }
+        self.type = 'On-Hand'
+        self.slot = self.type
 
-    def equip(self, slot: int = 0):
-        player.equip(self, self.type, self.slot[slot])
+class Off_Hand(Equipable):
+    def __init__(self, name: str, description: str, value: int, attribut: str) -> None:
+        super().__init__(name, description, value, attribut)
+        self.type = 'Off-Hand'
+        self.slot = self.type
 
-    def unequip(self, slot: int = 0):
-        player.unequip(self.type, self.slot[slot])
+class Twohanded(Equipable):
+    def __init__(self, name: str, description: str, value: int, attribut: str) -> None:
+        super().__init__(name, description, value, attribut)
+        self.type = 'Twohanded'
+        self.slot = ['On-Hand', 'Off-Hand']
+
+    def equip(self):
+        player.equip(self, self.type, self.slot[0])
+        player.add_item(self, self.type)
+        player.equip(self, self.type, self.slot[1])
+
+    def unequip(self):
+        player.unequip(self.type, self.slot[0])
+        player.remove_item(self, self.type)
+        player.unequip(self.type, self.slot[1])
+        
 
 class Armor(Equipable):
     def __init__(self, name: str, description: str, value: int, attribut: str) -> None:

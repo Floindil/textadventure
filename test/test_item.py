@@ -15,11 +15,12 @@ class TestItem(Test):
 
     def test_equipment(self):
 
+        set_testplayer()
         self.add_all_items()
 
         leatherarmor.equip()
         sword.equip()
-        shield.equip(1)
+        shield.equip()
 
         self.create_summary()
         print(self.summary)
@@ -27,7 +28,7 @@ class TestItem(Test):
 
         leatherarmor.unequip()
         sword.unequip()
-        shield.unequip(1)
+        shield.unequip()
 
         self.create_summary()
         print(self.summary)
@@ -36,7 +37,9 @@ class TestItem(Test):
         items = {
             'Consumables' : self.list_items('Consumables'),
             'Keyitems' : self.list_items('Keyitems'),
-            'Weapons' : self.list_items('Weapons'),
+            'On-Hand' : self.list_items('On-Hand'),
+            'Off-Hand' : self.list_items('Off-Hand'),
+            'Twohanded' : self.list_items('Twohanded'),
             'Armor' : self.list_items('Armor'),
             'Talisman' : self.list_items('Talisman'),
             'Equipment' : self.list_equipment()

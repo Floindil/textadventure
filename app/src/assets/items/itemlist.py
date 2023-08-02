@@ -16,13 +16,13 @@ testkey = Keyitem('Testkey', testkeydescription, None, None)
 ####################### Weapons ###########################
 
 sworddescription = 'A simple Sword'
-sword = Weapon('Sword', sworddescription, 3, None)
+sword = On_Hand('Sword', sworddescription, 3, None)
 
 shielddescription = 'A simple Shield'
-shield = Weapon('Shield', shielddescription, 5, None)
+shield = Off_Hand('Shield', shielddescription, 5, None)
 
 greatsworddescription = 'A simple Greatsword'
-greatsword = Weapon('Greatsword', greatsworddescription, 5, None)
+greatsword = Twohanded('Greatsword', greatsworddescription, 5, None)
 
 ####################### Armor #############################
 

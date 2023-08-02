@@ -26,18 +26,24 @@ class Player:
         self.items = {
             'Consumables' : [],
             'Keyitems' : [],
-            'Weapons' : [],
             'Armor' : [],
-            'Talisman' : [],
-            'Equipment' : {
+            'On-Hand' : [],
+            'Off-Hand' : [],
+            'Twohanded' : [],
+            'Talisman' : []
+        }
+        self.equipment = {
                 'Armor' : None,
-                'Right Hand': None,
-                'Left Hand': None,
+                'On-Hand' : None,
+                'Off-Hand': None,
                 'Talisman': None
             }
-        }
-        self.itemtypes = ['Consumables', 'Keyitems', 'Weapons', 'Armor', 'Talisman']
-        self.slots = ['Armor', 'Right Hand', 'Left Hand', 'Talisman']
+        self.itemtypes = []
+        for type in self.items:
+            self.itemtypes.append(type)
+        self.slots = []
+        for slot in self.equipment:
+            self.slots.append(slot)
 
     def set_playername(self, name: str):
         player.info['Name'] = name
@@ -136,15 +142,15 @@ class Player:
             count +=1
 
     def equip(self, item: str, type: str, slot: str):
-        equipped = self.items['Equipment'][slot]
+        equipped = self.equipment[slot]
         if equipped != None:
-            self.add_item(equipped, type)
+            equipped.unequip()
         self.remove_item(item, type)
-        self.items['Equipment'][slot] = item
+        self.equipment[slot] = item
 
     def unequip(self, type: str, slot: str):
-        self.add_item(self.items['Equipment'][slot], type)
-        self.items['Equipment'][slot] = None
+        self.add_item(self.equipment[slot], type)
+        self.equipment[slot] = None
 
     def list_dict(self, dict: dict, value: int= 0):
         text = ''
@@ -161,9 +167,9 @@ class Player:
         return text
     
     def clear_inventory(self):
-        for type in player.itemtypes:
+        for type in player.items:
             player.items[type] = []
-        for slot in player.slots:
-            player.items['Equipment'][slot] = None
+        for slot in player.equipment:
+            player.equipment[slot] = None
         
 player = Player()

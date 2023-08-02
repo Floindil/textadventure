@@ -28,7 +28,7 @@ class Inventory(Menu):
         equipped_label.label('-----------Equipped------------')
 
         row = 1
-        for slot in player.slots:
+        for slot in player.equipment:
             self.unequip_button(slot, row)
             row +=1
         self.equipment_slots()
@@ -50,11 +50,11 @@ class Inventory(Menu):
 
         left = Widgets(navigation_frame.widget, 0, 0)
         left.pad = 0
-        left.button('<', None)
+        left.button('<', self.change_left)
 
         right = Widgets(navigation_frame.widget, 2, 0)
         right.pad = 0
-        right.button('>', None)
+        right.button('>', self.change_right)
 
         self.itemlabel = Widgets(navigation_frame.widget, 1, 0)
         self.itemlabel.pad = 0
@@ -82,9 +82,6 @@ class Inventory(Menu):
 
         # } Listbox Frame
 
-        left.widget.configure(command = lambda: self.change_itemtype(0))
-        right.widget.configure(command = self.change_itemtype)
-
         # Action Frame {
         
         action_frame = Widgets(inventory_frame.widget, 0, 2)
@@ -98,7 +95,7 @@ class Inventory(Menu):
 
         self.action2 = Widgets(action_frame.widget,1,0)
         self.action2.pad = 0
-        self.action2.button('Discard', None)
+        self.action2.button('TBD', None)
         self.action2.widget.configure(width = 8)
 
         # } Equip Frame
@@ -186,12 +183,30 @@ class Inventory(Menu):
             list.append(item.name)
         return list
     
+    def get_item_from_name(self, name: str):
+        itemtype = player.itemtypes[self.itemindex]
+        for item in player.items[itemtype]:
+            if item.name == name:
+                return item
+    
+    def equip(self, slot):
+        target_slot = player.equipment[slot]
+        if target_slot != None:
+            target_slot.unequip()
+        index = self.itembox.widget.curselection()
+        target_equipable = self.itembox.widget.get(index)
+        item = self.get_item_from_name(target_equipable)
+        item.equip()
+        new_content = self.load_items()
+        self.itembox.change_lb_content(new_content)
+        self.update_slots()
+
     def unequip(self, slot: str):
-        if player.items['Equipment'][slot] == None:
+        if player.equipment[slot] == None:
             pass
         else:
-            type = player.items['Equipment'][slot].type
-            player.unequip(type, slot)
+            item = player.equipment[slot]
+            item.unequip()
             new_content = self.load_items()
             self.itembox.change_lb_content(new_content)
             self.update_slots()
@@ -203,10 +218,10 @@ class Inventory(Menu):
         button.widget.configure(width = 10, padx = 10)
 
     def return_equipped(self, slot: str):
-        if player.items['Equipment'][slot] == None:
+        if player.equipment[slot] == None:
             equipped = ''
         else: 
-            equipped = player.items['Equipment'][slot].name
+            equipped = player.equipment[slot].name
         return equipped
 
     def equipment_slots(self):
@@ -221,16 +236,16 @@ class Inventory(Menu):
         self.slots.append((slot_armor.widget, 'Armor'))
 
         slot_right = Widgets(self.equipmentframe.widget, 1, row+1)
-        right = self.return_equipped('Right Hand')
+        right = self.return_equipped('On-Hand')
         slot_right.label(right)
         slot_right.widget.configure(width = width, bg = 'white', justify = 'left')
-        self.slots.append((slot_right.widget, 'Right Hand'))
+        self.slots.append((slot_right.widget, 'On-Hand'))
 
         slot_left= Widgets(self.equipmentframe.widget, 1, row+2)
-        left = self.return_equipped('Left Hand')
+        left = self.return_equipped('Off-Hand')
         slot_left.label(left)
         slot_left.widget.configure(width = width, bg = 'white', justify = 'left')
-        self.slots.append((slot_left.widget, 'Left Hand'))
+        self.slots.append((slot_left.widget, 'Off-Hand'))
 
         slot_talisman = Widgets(self.equipmentframe.widget, 1, row+3)
         talisman = self.return_equipped('Talisman')
@@ -242,26 +257,43 @@ class Inventory(Menu):
         for slot in self.slots:
             equipped = self.return_equipped(slot[1])
             slot[0].configure(text = equipped)
-    
-    def change_itemtype(self, direction: int = 1):
-        if direction == 1:
-            if self.itemindex == len(player.itemtypes )-1:
-                self.itemindex = 0
-            else: self.itemindex += 1
-        elif direction == 0:
-            if self.itemindex == 0:
-                self.itemindex = len(player.itemtypes )-1
-            else: self.itemindex -= 1
+
+    def update_command(self):
         key = player.itemtypes[self.itemindex]
+        if self.itemindex > 1: # last use command in commands
+            type = player.itemtypes[self.itemindex]
+            if type == 'Twohanded':
+                type = 'On-Hand'
+            command = lambda: self.equip(type)
+            text = 'Equip'
+        else: 
+            command = None
+            text = 'Use'
+        self.action1.widget.configure(command = command, text = text)
+        self.itemlabel.widget.configure(text = key)
+    
+    def change_itemtype(self):
+        self.update_command()
         new_content = self.load_items()
         self.itembox.change_lb_content(new_content)
-        self.itemlabel.widget.configure(text = key)
+
+    def change_left(self):
+        if self.itemindex == 0:
+            self.itemindex = len(player.itemtypes)-1
+        else: self.itemindex -= 1
+        self.change_itemtype()
+
+    def change_right(self):
+        if self.itemindex == len(player.itemtypes)-1:
+            self.itemindex = 0
+        else: self.itemindex += 1
+        self.change_itemtype()
 
     def create_equipment(self):
         text = '\n'
-        for key in player.items['Equipment']:
+        for key in player.equipment:
             text += '\n'
-            equipped = player.items['Equipment'][key]
+            equipped = player.equipment[key]
             if equipped == None:
                 pass
             else:

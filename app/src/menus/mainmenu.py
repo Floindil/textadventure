@@ -59,7 +59,7 @@ class Mainmenu(Menu):
         valuetext = self.create_text(1)
         self.valuelabel = Widgets(right_frame.widget,  1, 0)
         self.valuelabel.label(valuetext)
-        self.valuelabel.widget.configure(justify = 'left')
+        self.valuelabel.widget.configure(justify = 'right')
 
         ### Right Frame ###
 

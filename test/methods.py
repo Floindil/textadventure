@@ -16,7 +16,7 @@ class Test(TestCase):
         for type in player.itemtypes:
             player.items[type] = []
         for slot in player.slots:
-            player.items['Equipment'][slot] = None
+            player.equipment[slot] = None
 
     def list_info(self, type):
         infos = ''
@@ -33,11 +33,11 @@ class Test(TestCase):
     
     def list_equipment(self):
         list = []
-        for item in player.items['Equipment']:
-            if player.items['Equipment'][item] != None:
-                list.append(f'{item}: {player.items["Equipment"][item].name}')
+        for item in player.equipment:
+            if player.equipment[item] != None:
+                list.append(f'{item}: {player.equipment[item].name}')
             else:
-                list.append(f'{item}: {player.items["Equipment"][item]}')
+                list.append(f'{item}: {player.equipment[item]}')
         return list
 
     def create_summary(self):        
@@ -47,7 +47,9 @@ class Test(TestCase):
         attributbonuses = self.list_info(player.attributbonuses)
         keyitems = self.list_items('Keyitems')
         consumables = self.list_items('Consumables')
-        weapons = self.list_items('Weapons')
+        on_hand = self.list_items('On-Hand')
+        off_hand = self.list_items('Off-Hand')
+        twohanded = self.list_items('Twohanded')
         armors = self.list_items('Armor')
         talismans = self.list_items('Talisman')
         equips = self.list_equipment()
@@ -58,7 +60,9 @@ class Test(TestCase):
     {attributbonuses}
     Keyitems: {keyitems}
     Consumables: {consumables}
-    Weapons: {weapons}
+    On-Hand: {on_hand}
+    Off-Hand: {off_hand}
+    Twohanded: {twohanded} 
     Armors: {armors}
     Talismans: {talismans}
     Equipment: {equips}'''

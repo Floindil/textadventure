@@ -17,9 +17,8 @@ class Datahandler:
     
     def list_equipment(self):
         dict = {}
-        equipment = player.items['Equipment']
-        for item in equipment:
-            equipped = equipment[item]
+        for item in player.equipment:
+            equipped = player.equipment[item]
             if equipped != None:
                 dict[item] = equipped.name
             else:
@@ -30,10 +29,11 @@ class Datahandler:
         items = {
             'Consumables' : self.list_items('Consumables'),
             'Keyitems' : self.list_items('Keyitems'),
-            'Weapons' : self.list_items('Weapons'),
+            'On-Hand' : self.list_items('On-Hand'),
+            'Off-Hand' : self.list_items('Off-Hand'),
+            'Twohanded' : self.list_items('Twohanded'),
             'Armor' : self.list_items('Armor'),
             'Talisman' : self.list_items('Talisman'),
-            'Equipment' : self.list_equipment()
         }
         return items
 
@@ -46,7 +46,8 @@ class Datahandler:
                 'State' : player.state,
                 'Attributes' : player.attributes,
                 'Attributbonuses' : player.attributbonuses,
-                'Items' : items
+                'Items' : items,
+                'Equipment' : self.list_equipment()
             }
             json.dump(data, f, indent = 4)
 
@@ -59,14 +60,14 @@ class Datahandler:
         player.items[type] = list
 
     def load_equipment(self, slot, data):
-        loaded = data['Items']['Equipment'][slot]
+        loaded = data['Equipment'][slot]
         if loaded == None:
-            player.items['Equipment'][slot] = None
+            player.equipment[slot] = None
         else:
             from ..items.itemlist import itemlist
             for item in itemlist:
                 if item.name in loaded:
-                    player.items['Equipment'][slot] = item
+                    player.equipment[slot] = item
 
     def load_items(self, data):
         for type in player.itemtypes:
