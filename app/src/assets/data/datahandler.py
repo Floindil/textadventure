@@ -29,10 +29,8 @@ class Datahandler:
         items = {
             'Consumables' : self.list_items('Consumables'),
             'Keyitems' : self.list_items('Keyitems'),
-            'On-Hand' : self.list_items('On-Hand'),
-            'Off-Hand' : self.list_items('Off-Hand'),
-            'Twohanded' : self.list_items('Twohanded'),
             'Armor' : self.list_items('Armor'),
+            'Weapons' : self.list_items('Weapons'),
             'Talisman' : self.list_items('Talisman'),
         }
         return items

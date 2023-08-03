@@ -46,24 +46,16 @@
         "Keyitems": [
             "Testkey"
         ],
-        "On-Hand": [],
-        "Off-Hand": [
-            "Shield"
-        ],
-        "Twohanded": [
+        "Armor": [],
+        "Weapons": [
             "Greatsword"
         ],
-        "Armor": [
-            "Leather Armor"
-        ],
-        "Talisman": [
-            "Talisman of Health"
-        ]
+        "Talisman": []
     },
     "Equipment": {
-        "Armor": null,
-        "On-Hand": "Sword",
-        "Off-Hand": null,
-        "Talisman": null
+        "Armor": "Leather Armor",
+        "First Hand": "Sword",
+        "Second Hand": "Shield",
+        "Talisman": "Talisman of Health"
     }
 }

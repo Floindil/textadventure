@@ -27,15 +27,13 @@ class Player:
             'Consumables' : [],
             'Keyitems' : [],
             'Armor' : [],
-            'On-Hand' : [],
-            'Off-Hand' : [],
-            'Twohanded' : [],
+            'Weapons' : [],
             'Talisman' : []
         }
         self.equipment = {
                 'Armor' : None,
-                'On-Hand' : None,
-                'Off-Hand': None,
+                'First Hand' : None,
+                'Second Hand': None,
                 'Talisman': None
             }
         self.itemtypes = []

@@ -1,5 +1,6 @@
 from .basic.menu import Menu
 from ..resources.configuration.settings import InventoryConfig
+from ..assets.data.datahandler import datahandler
 from ..resources.tkresource import Widgets
 from ..assets.player import player
 
@@ -189,17 +190,18 @@ class Inventory(Menu):
             if item.name == name:
                 return item
     
-    def equip(self, slot):
-        target_slot = player.equipment[slot]
-        if target_slot != None:
-            target_slot.unequip()
+    def equip(self):
         index = self.itembox.widget.curselection()
         target_equipable = self.itembox.widget.get(index)
         item = self.get_item_from_name(target_equipable)
+        target_slot = player.equipment[item.slot[0]]
+        if target_slot != None:
+            target_slot.unequip()
         item.equip()
         new_content = self.load_items()
         self.itembox.change_lb_content(new_content)
         self.update_slots()
+        datahandler.save()
 
     def unequip(self, slot: str):
         if player.equipment[slot] == None:
@@ -210,6 +212,7 @@ class Inventory(Menu):
             new_content = self.load_items()
             self.itembox.change_lb_content(new_content)
             self.update_slots()
+            datahandler.save()
     
     def unequip_button(self, slot: str, row: int):
         button = Widgets(self.equipmentframe.widget, 0, row)
@@ -236,16 +239,16 @@ class Inventory(Menu):
         self.slots.append((slot_armor.widget, 'Armor'))
 
         slot_right = Widgets(self.equipmentframe.widget, 1, row+1)
-        right = self.return_equipped('On-Hand')
+        right = self.return_equipped('First Hand')
         slot_right.label(right)
         slot_right.widget.configure(width = width, bg = 'white', justify = 'left')
-        self.slots.append((slot_right.widget, 'On-Hand'))
+        self.slots.append((slot_right.widget, 'First Hand'))
 
         slot_left= Widgets(self.equipmentframe.widget, 1, row+2)
-        left = self.return_equipped('Off-Hand')
+        left = self.return_equipped('Second Hand')
         slot_left.label(left)
         slot_left.widget.configure(width = width, bg = 'white', justify = 'left')
-        self.slots.append((slot_left.widget, 'Off-Hand'))
+        self.slots.append((slot_left.widget, 'Second Hand'))
 
         slot_talisman = Widgets(self.equipmentframe.widget, 1, row+3)
         talisman = self.return_equipped('Talisman')
@@ -263,8 +266,8 @@ class Inventory(Menu):
         if self.itemindex > 1: # last use command in commands
             type = player.itemtypes[self.itemindex]
             if type == 'Twohanded':
-                type = 'On-Hand'
-            command = lambda: self.equip(type)
+                type = 'First Hand'
+            command = self.equip
             text = 'Equip'
         else: 
             command = None

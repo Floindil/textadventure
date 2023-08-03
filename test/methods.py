@@ -47,9 +47,7 @@ class Test(TestCase):
         attributbonuses = self.list_info(player.attributbonuses)
         keyitems = self.list_items('Keyitems')
         consumables = self.list_items('Consumables')
-        on_hand = self.list_items('On-Hand')
-        off_hand = self.list_items('Off-Hand')
-        twohanded = self.list_items('Twohanded')
+        weapons = self.list_items('Weapons')
         armors = self.list_items('Armor')
         talismans = self.list_items('Talisman')
         equips = self.list_equipment()
@@ -60,9 +58,7 @@ class Test(TestCase):
     {attributbonuses}
     Keyitems: {keyitems}
     Consumables: {consumables}
-    On-Hand: {on_hand}
-    Off-Hand: {off_hand}
-    Twohanded: {twohanded} 
+    Weapons: {weapons}
     Armors: {armors}
     Talismans: {talismans}
     Equipment: {equips}'''
