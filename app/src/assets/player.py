@@ -84,6 +84,9 @@ class Player:
     def death(self):
         print('\nPlayerdeath')
 
+    def calc_damageoutput(self):
+        self.damageoutput = self.equipment['First Hand'].damage
+
     def maxvalue(self, hp_fp_mp: int = 0):
         if hp_fp_mp == 0:
             maxvalue = self.attributes['Health']*15

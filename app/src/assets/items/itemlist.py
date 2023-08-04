@@ -1,4 +1,5 @@
 from .types.itemtypes import *
+from .types.weapons import *
 
 ####################### Consumables #######################
 
@@ -16,22 +17,22 @@ testkey = Keyitem('Testkey', testkeydescription, None, None)
 ####################### Weapons ###########################
 
 sworddescription = 'A simple Sword'
-sword = On_Hand('Sword', sworddescription, 3, None)
+sword = Sword('Sword', sworddescription, 3, [('Strenght', 3), ('Dexterity', 3)])
 
 shielddescription = 'A simple Shield'
-shield = Off_Hand('Shield', shielddescription, 5, None)
+shield = Shield('Shield', shielddescription, 5, [('Strenght', 3)])
 
 greatsworddescription = 'A simple Greatsword'
-greatsword = Twohanded('Greatsword', greatsworddescription, 5, None)
+greatsword = Greatsword('Greatsword', greatsworddescription, 5, [('Strenght', 6)])
 
 ####################### Armor #############################
 
 leatherarmordescription = 'A simple Armor made of Leather'
-leatherarmor = Armor('Leather Armor', leatherarmordescription, 7, None)
+leatherarmor = Armor('Leather Armor', leatherarmordescription, 7, [('Stamina', 3)])
 
 ####################### Talisman ##########################
 
 healthtalismandescription = 'A small Talisman which increases Health'
-healthtalisman = Talisman('Talisman of Health', healthtalismandescription, 2, 'Health')
+healthtalisman = Talisman('Talisman of Health', healthtalismandescription, 2, [('Health', 5)])
 
 itemlist = [apple, poisonedapple, testkey, sword, shield, greatsword, leatherarmor, healthtalisman]

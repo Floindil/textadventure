@@ -1,10 +1,10 @@
 from ....player import player
 
 class Item:
-    def __init__(self, name : str, description : str, value : int, attribut : str) -> None:
+    def __init__(self, name : str, description : str, value : int, attributes : list) -> None:
         self.name = name
         self.type = ''
-        self.attribut = attribut
+        self.attributes = attributes
         self.value = value
         self.description = description
 
