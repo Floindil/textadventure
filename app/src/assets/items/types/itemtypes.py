@@ -7,7 +7,7 @@ class Consumable(Item):
         self.type = 'Consumables'
 
     def use(self):
-        player.change_attributese(self.attributes, self.value)
+        player.change_attribute(self.attributes, self.value)
         player.remove_item(self, self.type)
 
 class Keyitem(Item):

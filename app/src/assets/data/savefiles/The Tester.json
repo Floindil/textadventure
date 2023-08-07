@@ -46,16 +46,21 @@
         "Keyitems": [
             "Testkey"
         ],
-        "Armor": [],
+        "Armor": [
+            "Shield",
+            "Leather Armor"
+        ],
         "Weapons": [
             "Greatsword"
         ],
-        "Talisman": []
+        "Talisman": [
+            "Talisman of Health"
+        ]
     },
     "Equipment": {
-        "Armor": "Leather Armor",
+        "Armor": null,
         "First Hand": "Sword",
-        "Second Hand": "Shield",
-        "Talisman": "Talisman of Health"
+        "Second Hand": null,
+        "Talisman": null
     }
 }
