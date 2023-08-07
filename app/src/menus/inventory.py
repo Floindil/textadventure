@@ -15,9 +15,15 @@ class Inventory(Menu):
     def open(self, master):
         super().open(master)
 
+        ##### Top Frame {
+
+        top_frame = Widgets(self.master, 0, 0)
+        top_frame.pad = 0
+        top_frame.frame()
+
         ### Equipment Frame {
 
-        self.equipmentframe = Widgets(self.master, 0, 0)
+        self.equipmentframe = Widgets(top_frame.widget, 0, 0)
         self.equipmentframe.frame()
 
         unequip_label = Widgets(self.equipmentframe.widget, 0, 0)
@@ -36,76 +42,9 @@ class Inventory(Menu):
 
         ### } Equipment Frame
 
-        ### Inventory Frame {
-
-        inventory_frame = Widgets(self.master, 0, 1)
-        inventory_frame.frame()
-        inventory_frame.widget.grid_anchor('center')
-        inventory_frame.widget.grid(sticky = 'w')
-
-        # Navigation Frame {
-
-        navigation_frame = Widgets(inventory_frame.widget, 0, 0)
-        navigation_frame.pad = 0
-        navigation_frame.frame()
-
-        left = Widgets(navigation_frame.widget, 0, 0)
-        left.pad = 0
-        left.button('<', self.change_left)
-
-        right = Widgets(navigation_frame.widget, 2, 0)
-        right.pad = 0
-        right.button('>', self.change_right)
-
-        self.itemlabel = Widgets(navigation_frame.widget, 1, 0)
-        self.itemlabel.pad = 0
-        self.itemlabel.label(player.itemtypes[self.itemindex])
-        self.itemlabel.widget.configure(width = 15)
-
-        # } Navigation Frame
-
-        # Listbox Frame {
-
-        listbox_frame = Widgets(inventory_frame.widget, 0, 1)
-        listbox_frame.pad = 5
-        listbox_frame.frame()
-
-        items = self.load_items()
-        itembox_width = InventoryConfig['Itembox_Width']
-        itembox_lenght = InventoryConfig['Itembox_Height']
-        self.itembox = Widgets(listbox_frame.widget, None, None)
-        self.itembox.pad = 0
-        self.itembox.listbox(itembox_width, itembox_lenght, items)
-        if len(items) > itembox_lenght:
-            sb = Widgets(listbox_frame.widget, None, None)
-            sb.pad = 0
-            sb.scrollbar(self.itembox.widget)
-
-        # } Listbox Frame
-
-        # Action Frame {
-        
-        action_frame = Widgets(inventory_frame.widget, 0, 2)
-        action_frame.pad = 0
-        action_frame.frame()
-
-        self.action1 = Widgets(action_frame.widget,0,0)
-        self.action1.pad = 0
-        self.action1.button('Use', None)
-        self.action1.widget.configure(width = 8)
-
-        self.action2 = Widgets(action_frame.widget,1,0)
-        self.action2.pad = 0
-        self.action2.button('TBD', None)
-        self.action2.widget.configure(width = 8)
-
-        # } Equip Frame
-
-        ### } Inventory Frame
-
         ### Player Information Frame {
 
-        player_frame = Widgets(self.master, 1, 0)
+        player_frame = Widgets(top_frame.widget, 1, 0)
         player_frame.frame()
         player_frame.widget.grid_anchor('w')
 
@@ -172,6 +111,87 @@ class Inventory(Menu):
 
         ### } Player Information Frame
 
+        ### Inventory Frame {
+
+        inventory_frame = Widgets(self.master, 0, 1)
+        inventory_frame.frame()
+        inventory_frame.widget.grid_anchor('center')
+        inventory_frame.widget.grid(sticky = 'w')
+
+        # Navigation Frame {
+
+        navigation_frame = Widgets(inventory_frame.widget, 0, 0)
+        navigation_frame.pad = 0
+        navigation_frame.frame()
+
+        left = Widgets(navigation_frame.widget, 0, 0)
+        left.pad = 0
+        left.button('<', self.change_left)
+
+        right = Widgets(navigation_frame.widget, 2, 0)
+        right.pad = 0
+        right.button('>', self.change_right)
+
+        self.itemlabel = Widgets(navigation_frame.widget, 1, 0)
+        self.itemlabel.pad = 0
+        self.itemlabel.label(player.itemtypes[self.itemindex])
+        self.itemlabel.widget.configure(width = 15)
+
+        # } Navigation Frame
+
+        # Listbox Frame {
+
+        listbox_frame = Widgets(inventory_frame.widget, 0, 1)
+        listbox_frame.pad = 5
+        listbox_frame.frame()
+
+        items = self.load_items()
+        itembox_width = InventoryConfig['Itembox_Width']
+        itembox_lenght = InventoryConfig['Itembox_Height']
+        self.itembox = Widgets(listbox_frame.widget, None, None)
+        self.itembox.pad = 0
+        self.itembox.listbox(itembox_width, itembox_lenght, items)
+        if len(items) > itembox_lenght:
+            sb = Widgets(listbox_frame.widget, None, None)
+            sb.pad = 0
+            sb.scrollbar(self.itembox.widget)
+        self.itembox.widget.bind('<<ListboxSelect>>', self.set_index)
+
+        # } Listbox Frame
+
+        # Action Frame {
+        
+        action_frame = Widgets(inventory_frame.widget, 0, 2)
+        action_frame.pad = 0
+        action_frame.frame()
+
+        self.action1 = Widgets(action_frame.widget,0,0)
+        self.action1.pad = 0
+        self.action1.button('Use', None)
+        self.action1.widget.configure(width = 8)
+
+        self.action2 = Widgets(action_frame.widget,1,0)
+        self.action2.pad = 0
+        self.action2.button('TBD', None)
+        self.action2.widget.configure(width = 8)
+
+        # } Equip Frame
+
+        # Iteminformation Frame {
+        
+        iteminformation_frame = Widgets(inventory_frame.widget, 1, 1)
+        iteminformation_frame.pad = 0
+        iteminformation_frame.frame()
+        iteminformation_frame.widget.grid(sticky = 'nsew')
+
+        self.item_infolabel = Widgets(iteminformation_frame.widget, 0, 0)
+        text = ''
+        self.item_infolabel.label(text)
+
+        # } Iteminformation Frame
+
+        ### } Inventory Frame      
+
     def bonuses_value_text(self):
         text = player.list_dict(player.attributbonuses, 1)
         return text
@@ -184,6 +204,22 @@ class Inventory(Menu):
             list.append(item.name)
         return list
     
+    def set_index(self, event = None):
+        self.index = self.itembox.widget.curselection()
+        self.change_itemdescription()
+    
+    def get_itemdescription(self):
+        itemname = self.itembox.widget.get(self.index)
+        item = self.get_item_from_name(itemname)
+        text = item.description
+        return text
+    
+    def change_itemdescription(self):
+        if self.index != None:
+            text = self.get_itemdescription()
+        else: text = 'select item'
+        self.item_infolabel.widget.configure(text = text)
+    
     def get_item_from_name(self, name: str):
         itemtype = player.itemtypes[self.itemindex]
         for item in player.items[itemtype]:
@@ -191,8 +227,7 @@ class Inventory(Menu):
                 return item
     
     def equip(self):
-        index = self.itembox.widget.curselection()
-        target_equipable = self.itembox.widget.get(index)
+        target_equipable = self.itembox.widget.get(self.index)
         item = self.get_item_from_name(target_equipable)
         target_slot = player.equipment[item.slot[0]]
         if target_slot != None:
@@ -200,6 +235,8 @@ class Inventory(Menu):
         item.equip()
         new_content = self.load_items()
         self.itembox.change_lb_content(new_content)
+        self.index = None
+        self.change_itemdescription()
         self.update_slots()
         datahandler.save()
 
