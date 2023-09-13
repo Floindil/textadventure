@@ -3,7 +3,7 @@ from .types.weapons import *
 
 ####################### Consumables #######################
 
-appledescription = ''
+appledescription = 'An apple, not poisened by the old Witch'
 apple = Consumable('Apple', appledescription, 10, 'Health')
 
 poisonedappledescription = 'An Apple, poised by the Old Witch'

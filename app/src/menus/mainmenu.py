@@ -9,8 +9,8 @@ from .inventory import inventory
 
 class Mainmenu(Menu):
     def __init__(self):
-        self.width = rootconfig['Width']
-        self.height = rootconfig['Height']
+        self.width = rootconfig.get('Width')
+        self.height = rootconfig.get('Height')
         root.grid_anchor('center')
         self.load_newest()
 
@@ -89,9 +89,9 @@ class Mainmenu(Menu):
         self.valuelabel.widget.configure(text = valuetext)
 
     def load_win(self):
-        width = loadwinconfig['Width']
-        height = loadwinconfig['Height']
-        self.win = Window(root, 'Select File', width, height)
+        width = loadwinconfig.get('Width')
+        height = loadwinconfig.get('Height')
+        self.win = Window('Select File', width, height)
         winmaster = self.win.window
         winmaster.focus_force()
 
@@ -102,8 +102,8 @@ class Mainmenu(Menu):
         self.f = Widgets(winmaster, 1, 2)
         self.f.frame()
 
-        lb_height = loadwinconfig['LB_Height']
-        lb_width = loadwinconfig['LB_Width']
+        lb_height = loadwinconfig.get('LB_Height')
+        lb_width = loadwinconfig.get('LB_Width')
         savefiles = datahandler.list_savefiles()
         savefiles.sort(key=lambda x: os.path.getmtime(f'{datapath}{x}.json'), reverse = True)
         self.lb = Widgets(self.f.widget, None, None)

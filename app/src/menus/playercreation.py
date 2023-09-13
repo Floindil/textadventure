@@ -6,8 +6,8 @@ from ..resources.tkresource import Widgets
 
 class PlayerCreation(Menu):
     def __init__(self):
-        width = playercreationconfig['Width']
-        height = playercreationconfig['Height']
+        width = playercreationconfig.get('Width')
+        height = playercreationconfig.get('Height')
         super().__init__(title = 'Character Creation', width = width, height = height)
         self.data = {
             'Race' : None,
@@ -72,8 +72,8 @@ class PlayerCreation(Menu):
 
     def save(self):
         name = self.nameselect.widget.get()
-        race = self.data['Race']
-        sex = self.data['Sex']
+        race = self.data.get('Race')
+        sex = self.data.get('Sex')
         if name == '':
             self.infolabel.widget.configure(text = 'Please select a Name')
         elif sex == None:
@@ -81,11 +81,11 @@ class PlayerCreation(Menu):
         elif race == None:
             self.infolabel.widget.configure(text = 'Please select a Race')
         else:
+            player.set_state()
             player.set_info(name, sex, race)
             player.set_all_attributes([5,5,5,5,5,5,5])
             player.set_all_attributes([0,0,0,0,0,0,0],1)
             player.clear_inventory()
-            player.set_state
             datahandler.save()
             self.master.destroy()
 

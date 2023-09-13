@@ -8,6 +8,11 @@ class Datahandler:
     def __init__(self) -> None:
         pass
 
+    def set_dir(self):
+        dir_name = player.info.get('Name')
+        dir = f'{datapath}{dir_name}/'
+        return dir
+
     def list_items(self, type):
         list = []
         for item in player.items[type]:
@@ -37,7 +42,10 @@ class Datahandler:
 
     def save(self):
         items = self.list_all_items()
-        savepath = f'{datapath}{player.info["Name"]}.json'
+        dir = self.set_dir()
+        if not os.path.exists(dir):
+            os.mkdir(dir)
+        savepath = f'{dir}player.json'
         with open(savepath, 'w') as f:
             data = {
                 'Info' : player.info,
@@ -67,28 +75,51 @@ class Datahandler:
                 if item.name in loaded:
                     player.equipment[slot] = item
 
-    def load_items(self, data):
+    def load_items(self, data: dict):
         for type in player.itemtypes:
             self.load_itemtype(type, data)
         for slot in player.slots:
             self.load_equipment(slot, data)
 
-    def load(self, name):
-        with open(f'{datapath}{name}.json', 'r') as f:
+    def load(self, name: str):
+        with open(f'{datapath}{name}/player.json', 'r') as f:
             data = json.load(f)
-            player.info = data['Info']
-            player.state = data['State']
-            player.attributes = data['Attributes']
-            player.attributbonuses = data['Attributbonuses']
+            player.info = data.get('Info')
+            player.state = data.get('State')
+            player.attributes = data.get('Attributes')
+            player.attributbonuses = data.get('Attributbonuses')
             self.load_items(data)
 
     def list_savefiles(self):
         savefiles = []
-        file_list = os.listdir(datapath)
-        for file in file_list:
-            if file.endswith('.json') == True:
-                to_append = file.replace('.json', '')
-                savefiles.append(to_append)
+        savefiles = os.listdir(datapath)
         return savefiles
+    
+    def update_room(self, room):
+        location = room.enter()
+        dir = self.set_dir()
+        room_dir = f'{dir}rooms.json'
+        dict = {
+                'location': location,
+                room.name: {
+                    'discovered': True,
+                    'displayname': room.name
+                    }
+                }
+        if not os.path.exists(room_dir):
+            data = dict
+        else:
+            data = self.load_roomstate(room_dir)
+            data.update(dict)
+        self.save_roomstate(data, room_dir)
+        
+    def save_roomstate(self, data: dict, dir: str):
+        with open(dir, 'w') as f:
+            json.dump(data, f, indent=2)
+
+    def load_roomstate(self, dir: str):
+        with open(dir, 'r') as f:
+            data = json.load(f)
+        return data
 
 datahandler = Datahandler()

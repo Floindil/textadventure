@@ -1,0 +1,11 @@
+{
+  "location": "Testroom1",
+  "Testroom1": {
+    "discovered": true,
+    "displayname": "Testroom1"
+  },
+  "Testroom": {
+    "discovered": true,
+    "displayname": "Testroom"
+  }
+}

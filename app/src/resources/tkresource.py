@@ -1,10 +1,12 @@
 from tkinter import Tk, Button, Label, Listbox, Entry, Toplevel, Scrollbar, Frame
-from .configuration.settings import rootconfig
+from .configuration.settings import rootconfig, gamewindowconfig
+
+gamename = rootconfig.get('Name')
 
 root = Tk()
-root.title(rootconfig['Name'])
-root_width = int(rootconfig['Width'])
-root_height = int(rootconfig['Height'])
+root.title(gamename)
+root_width = int(rootconfig.get('Width'))
+root_height = int(rootconfig.get('Height'))
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 center_x = int(screen_width/2 - root_width/2)
@@ -53,7 +55,7 @@ class Widgets:
             self.widget.insert('end', item)
 
 class Window:
-    def __init__(self, master, title : str, width : int, height : int):
+    def __init__(self, title : str, width : int, height : int, master: Tk = root):
         self.window = Toplevel(master)
         self.window.title = title
         self.window.grid_anchor('center')
@@ -72,3 +74,5 @@ class Window:
 
     def disable_fullscreen(self):
         self.window.attributes('-fullscreen', False)
+
+gamewindow = Window(gamename, gamewindowconfig.get('Width'), gamewindowconfig.get('Height'))

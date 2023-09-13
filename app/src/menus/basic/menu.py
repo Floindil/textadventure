@@ -9,7 +9,7 @@ class Menu:
         self.master = None
 
     def open(self, master):
-        self.window = Window(master, self.title, self.width, self.height)
+        self.window = Window(self.title, self.width, self.height, master)
         self.master = self.window.window
         self.master.focus_force()
 

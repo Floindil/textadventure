@@ -4,6 +4,11 @@ rootconfig = {
     'Height' : 250
 }
 
+gamewindowconfig = {
+    'Width' : 800,
+    'Height' : 1000
+}
+
 playercreationconfig = {
     'Width' : 800,
     'Height' : 300

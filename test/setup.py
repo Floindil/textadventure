@@ -1,7 +1,6 @@
 from methods import Test
 from app.src.assets.player import player
 from app.src.assets.items.itemlist import sword
-from app.src.assets.data.datahandler import Datahandler
 
 t = Test()
 
@@ -16,6 +15,4 @@ def set_testplayer():
     t.clear_inventory()
     t.add_all_items()
     sword.equip()
-    
-
-testdata = Datahandler()
+    return player
