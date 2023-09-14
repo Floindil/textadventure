@@ -1,8 +1,6 @@
 import json, os, jsonpickle
 from ...player import player
-
-# used paths:
-datapath = 'app/src/assets/data/savefiles/'
+from ....resources.configuration.settings import datapath
 
 class Datahandler:
     def __init__(self, filetype: str) -> None:

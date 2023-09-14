@@ -27,3 +27,5 @@ loadwinconfig = {
     'LB_Width' : 20,
     'LB_Height': 11
 }
+#datapath = 'app/src/assets/data/savefiles/'
+datapath = 'test/data/'
