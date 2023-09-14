@@ -1,6 +1,6 @@
 from .basic.menu import *
 from ..assets.player import player
-from ..assets.data.datahandler import datahandler
+from ..assets.data.basic.datahandler import datahandler
 from ..resources.configuration.settings import playercreationconfig
 from ..resources.tkresource import Widgets
 

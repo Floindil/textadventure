@@ -1,6 +1,6 @@
 from .basic.menu import Menu
 from ..resources.configuration.settings import InventoryConfig
-from ..assets.data.datahandler import datahandler
+from ..assets.data.basic.datahandler import datahandler
 from ..resources.tkresource import Widgets
 from ..assets.player import player
 

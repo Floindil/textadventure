@@ -1,0 +1,27 @@
+{
+  "Items": {
+    "Consumables": [
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Consumable\", \"name\": \"Poisoned Apple\", \"type\": \"Consumables\", \"attributes\": \"Health\", \"value\": -2, \"description\": \"An Apple, poised by the Old Witch\"}",
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Consumable\", \"name\": \"Apple\", \"type\": \"Consumables\", \"attributes\": \"Health\", \"value\": 10, \"description\": \"An apple, not poisened by the old Witch\"}"
+    ],
+    "Keyitems": [
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Keyitem\", \"name\": \"Testkey\", \"type\": \"Keyitems\", \"attributes\": null, \"value\": null, \"description\": \"Key used for testing\"}"
+    ],
+    "Armor": [
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Shield\", \"name\": \"Shield\", \"type\": \"Armor\", \"attributes\": [{\"py/tuple\": [\"Strenght\", 3]}], \"value\": 5, \"description\": \"A simple Shield\", \"slot\": [\"Second Hand\"]}",
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Armor\", \"name\": \"Leather Armor\", \"type\": \"Armor\", \"attributes\": [{\"py/tuple\": [\"Stamina\", 3]}], \"value\": 7, \"description\": \"A simple Armor made of Leather\", \"slot\": [\"Armor\"]}"
+    ],
+    "Weapons": [
+      "{\"py/object\": \"app.src.assets.items.types.weapons.Greatsword\", \"name\": \"Greatsword\", \"type\": \"Weapons\", \"attributes\": [{\"py/tuple\": [\"Strenght\", 6]}], \"value\": 5, \"description\": \"A simple Greatsword\", \"slot\": [\"First Hand\", \"Second Hand\"], \"weapontype\": \"Greatsword\"}"
+    ],
+    "Talisman": [
+      "{\"py/object\": \"app.src.assets.items.types.itemtypes.Talisman\", \"name\": \"Talisman of Health\", \"type\": \"Talisman\", \"attributes\": [{\"py/tuple\": [\"Health\", 5]}], \"value\": 2, \"description\": \"A small Talisman which increases Health\", \"slot\": [\"Talisman\"]}"
+    ]
+  },
+  "Equipment": {
+    "Armor": null,
+    "First Hand": "{\"py/object\": \"app.src.assets.items.types.weapons.Sword\", \"name\": \"Sword\", \"type\": \"Weapons\", \"attributes\": [{\"py/tuple\": [\"Strenght\", 3]}, {\"py/tuple\": [\"Dexterity\", 3]}], \"value\": 3, \"description\": \"A simple Sword\", \"slot\": [\"First Hand\"], \"weapontype\": \"Sword\"}",
+    "Second Hand": null,
+    "Talisman": null
+  }
+}

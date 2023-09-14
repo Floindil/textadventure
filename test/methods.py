@@ -1,6 +1,7 @@
 from unittest import TestCase
 from app.src.assets.player import player
-from app.src.assets.items.itemlist import itemlist
+from app.src.assets.items.itemlist import poisonedapple, apple, sword, greatsword, shield, leatherarmor, healthtalisman, testkey
+testitems = [poisonedapple, apple, sword, greatsword, shield, leatherarmor, healthtalisman, testkey]
 
 class Test(TestCase):
     def use_item(self, item):
@@ -8,9 +9,9 @@ class Test(TestCase):
         item.use()
         print(f'new health: {player.attributes["Health"]}')
 
-    def add_all_items(self):
-        for object in itemlist:
-            object.add()
+    def add_test_items(self):
+        for item in testitems:
+            item.add()
 
     def clear_inventory(self):
         for type in player.itemtypes:

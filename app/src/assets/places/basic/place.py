@@ -1,4 +1,6 @@
-class Room:
+from ...player import player
+
+class Place:
     def __init__(
             self,
             name: str,
@@ -16,6 +18,7 @@ class Room:
 
     def enter(self):
         self.discoverd = True
+        player.location = self
+
+    def learn_name(self):
         self.display_name = self.name
-        location = self.name
-        return location

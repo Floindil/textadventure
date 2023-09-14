@@ -1,5 +1,4 @@
 from ...resources.tkresource import Window
-from ...assets.player import player
 
 class Menu:
     def __init__(self, title, width, height):

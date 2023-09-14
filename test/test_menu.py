@@ -1,7 +1,6 @@
 from methods import Test
 from setup import set_testplayer
 from app.src.menus.playercreation import PlayerCreation, SelectButton
-from app.src.assets.data.datahandler import datahandler
 from app.src.menus.mainmenu import Mainmenu
 from app.src.resources.tkresource import root
 
@@ -40,7 +39,7 @@ class TestMenus(Test):
             main.label.widget.configure(text = 'please select a file')
         else:
             name = main.lb.widget.get(index)
-            datahandler.load(name)
+            #datahandler.load(name)
             main.win.window.destroy()
         self.create_summary()
         print(self.summary)

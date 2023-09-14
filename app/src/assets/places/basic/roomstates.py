@@ -1,1 +1,1 @@
-from ....assets.data.datahandler import Datahandler
+from ...data.basic.datahandler import Datahandler

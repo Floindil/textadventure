@@ -1,0 +1,4 @@
+{
+  "Testroom": "{\"py/object\": \"app.src.assets.places.basic.place.Place\", \"name\": \"Testroom\", \"size\": \"small\", \"furniture\": [\"Bed\", \"Wardrobe\", \"Sofa\"], \"adjacent\": [\"Testroom1\", \"Testroom2\"], \"discoverd\": true, \"display_name\": \"Testroom\", \"number_adjacent\": 2}",
+  "Testroom1": "{\"py/object\": \"app.src.assets.places.basic.place.Place\", \"name\": \"Testroom1\", \"size\": \"small\", \"furniture\": [\"Bed\", \"Wardrobe\", \"Sofa\"], \"adjacent\": [\"Testroom\", \"Testroom2\"], \"discoverd\": true, \"display_name\": \"Unknown Place\", \"number_adjacent\": 2}"
+}

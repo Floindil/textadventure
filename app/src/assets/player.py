@@ -3,8 +3,9 @@ class Player:
         self.info = {
             'Name' : '',
             'Race' : '',
-            'Sex' : ''
+            'Sex' : '',
         }
+        self.location = None
         self.attributes = {
             'Health' : '',
             'Stamina' : '',
@@ -172,5 +173,8 @@ class Player:
             player.items[type] = []
         for slot in player.equipment:
             player.equipment[slot] = None
+
+    def enter(self, room):
+        room.enter
         
 player = Player()

@@ -5,7 +5,6 @@ class On_Hand(Equipable):
         super().__init__(name, description, value, attributes)
         self.type = 'Weapons'
         self.slot = ['First Hand']
-        self.damage = self.value*self.attributes
 
     def hit(self, target):
         target.hp -= self.damage
@@ -54,7 +53,6 @@ class Twohanded(Equipable):
         super().__init__(name, description, value, attributes)
         self.type = 'Weapons'
         self.slot = ['First Hand', 'Second Hand']
-        self.damage = self.value*self.attributes
 
     def equip(self):
         player.equip(self, self.type, self.slot[0])

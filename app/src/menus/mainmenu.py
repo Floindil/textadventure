@@ -1,7 +1,7 @@
 from .basic.menu import Menu
 from ..resources.tkresource import root, Widgets, Window
 from ..resources.configuration.settings import rootconfig, loadwinconfig
-from ..assets.data.datahandler import datahandler, datapath
+from ..assets.data.basic.datahandler import datahandler, datapath
 from ..assets.player import player
 from .playercreation import PlayerCreation
 import os
