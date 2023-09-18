@@ -1,8 +1,8 @@
-from .basic.datahandler import Datahandler
+from .basic.data import Data
 from ..player import player
 import jsonpickle
 
-class Itemdata(Datahandler):
+class Itemdata(Data):
     def __init__(self) -> None:
         super().__init__(filetype = 'items')
 

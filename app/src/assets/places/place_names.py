@@ -1,6 +1,3 @@
-#People
-name_npc1 = 'Herbert'
-
 #places
 name_city1 = 'Hedorn'
 

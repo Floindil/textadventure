@@ -1,6 +1,6 @@
 from .basic.menu import Menu
 from ..resources.configuration.settings import InventoryConfig
-from ..assets.data.basic.datahandler import datahandler
+from ..assets.data.inventorydata import Itemdata
 from ..resources.tkresource import Widgets
 from ..assets.player import player
 
@@ -15,16 +15,10 @@ class Inventory(Menu):
     def open(self, master):
         super().open(master)
 
-        ##### Top Frame {
-
-        top_frame = Widgets(self.master, 0, 0)
-        top_frame.pad = 0
-        top_frame.frame()
-
         ### Equipment Frame {
 
-        self.equipmentframe = Widgets(top_frame.widget, 0, 0)
-        self.equipmentframe.frame()
+        self.equipmentframe = Widgets(self.master)
+        self.equipmentframe.frame('left')
 
         unequip_label = Widgets(self.equipmentframe.widget, 0, 0)
         unequip_label.pad = 0
@@ -44,13 +38,13 @@ class Inventory(Menu):
 
         ### Player Information Frame {
 
-        player_frame = Widgets(top_frame.widget, 1, 0)
-        player_frame.frame()
+        player_frame = Widgets(self.master)
+        player_frame.frame('right')
         player_frame.widget.grid_anchor('w')
 
         # Info Frame {
 
-        info_frame = Widgets(player_frame.widget, 0, 0)
+        info_frame = Widgets(player_frame.widget)
         info_frame.pad = 0
         info_frame.frame()
         info_frame.widget.configure(bg = 'white')
@@ -72,7 +66,7 @@ class Inventory(Menu):
 
         # Attributes Frame {
 
-        attributes_frame = Widgets(player_frame.widget, 0, 1)
+        attributes_frame = Widgets(player_frame.widget)
         attributes_frame.pad = 0
         attributes_frame.frame()
         attributes_frame.widget.configure(bg = 'white')
@@ -113,14 +107,14 @@ class Inventory(Menu):
 
         ### Inventory Frame {
 
-        inventory_frame = Widgets(self.master, 0, 1)
+        inventory_frame = Widgets(self.master)
         inventory_frame.frame()
         inventory_frame.widget.grid_anchor('center')
         inventory_frame.widget.grid(sticky = 'w')
 
         # Navigation Frame {
 
-        navigation_frame = Widgets(inventory_frame.widget, 0, 0)
+        navigation_frame = Widgets(inventory_frame.widget)
         navigation_frame.pad = 0
         navigation_frame.frame()
 
@@ -141,7 +135,7 @@ class Inventory(Menu):
 
         # Listbox Frame {
 
-        listbox_frame = Widgets(inventory_frame.widget, 0, 1)
+        listbox_frame = Widgets(inventory_frame.widget)
         listbox_frame.pad = 5
         listbox_frame.frame()
 
@@ -161,7 +155,7 @@ class Inventory(Menu):
 
         # Action Frame {
         
-        action_frame = Widgets(inventory_frame.widget, 0, 2)
+        action_frame = Widgets(inventory_frame.widget)
         action_frame.pad = 0
         action_frame.frame()
 
@@ -179,7 +173,7 @@ class Inventory(Menu):
 
         # Iteminformation Frame {
         
-        iteminformation_frame = Widgets(inventory_frame.widget, 1, 1)
+        iteminformation_frame = Widgets(inventory_frame.widget)
         iteminformation_frame.pad = 0
         iteminformation_frame.frame()
         iteminformation_frame.widget.grid(sticky = 'nsew')
@@ -238,7 +232,7 @@ class Inventory(Menu):
         self.index = None
         self.change_itemdescription()
         self.update_slots()
-        datahandler.save()
+        Itemdata.dump()
 
     def unequip(self, slot: str):
         if player.equipment[slot] == None:
@@ -249,7 +243,7 @@ class Inventory(Menu):
             new_content = self.load_items()
             self.itembox.change_lb_content(new_content)
             self.update_slots()
-            datahandler.save()
+            Itemdata.dump()
     
     def unequip_button(self, slot: str, row: int):
         button = Widgets(self.equipmentframe.widget, 0, row)

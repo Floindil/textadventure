@@ -1,7 +1,8 @@
 from .basic.menu import Menu
 from ..resources.tkresource import root, Widgets, Window
 from ..resources.configuration.settings import rootconfig, loadwinconfig
-from ..assets.data.basic.datahandler import datahandler, datapath
+from ..assets.data.playerdata import Playerdata
+from ..assets.data.basic.data import datapath
 from ..assets.player import player
 from .playercreation import PlayerCreation
 import os
@@ -18,8 +19,8 @@ class Mainmenu(Menu):
 
         ### Left Frame ###
 
-        left_frame = Widgets(root, 0, 0)
-        left_frame.frame()
+        left_frame = Widgets(root)
+        left_frame.frame('left')
         left_frame.widget.configure(width = self.width/2)
 
         new_game = Widgets(left_frame.widget, 0, 1)
@@ -45,8 +46,8 @@ class Mainmenu(Menu):
 
         ### Right Frame ###
 
-        right_frame = Widgets(root, 1, 0)
-        right_frame.frame()
+        right_frame = Widgets(root)
+        right_frame.frame('right')
         right_frame.widget.configure(width = self.width/2)
 
         infotext = self.create_text()
@@ -68,12 +69,12 @@ class Mainmenu(Menu):
         pc.open(master= root)
 
     def load_newest(self):
-        savefiles = datahandler.list_savefiles()
+        data = Playerdata()
+        savefiles = data.list_savefiles()
         if savefiles != []:
-            savefiles.sort(key=lambda x: os.path.getmtime(f'{datapath}{x}.json'), reverse = True)
-            name = savefiles[0]
-            datahandler.load(name)
-        self.update
+            savefiles.sort(key=lambda x: os.path.getmtime(f'{datapath}{x}/player.json'), reverse = True)
+            player.name = savefiles[0]
+        self.update()
 
     def update(self):
         if os.listdir(datapath) == []:
@@ -92,19 +93,20 @@ class Mainmenu(Menu):
         width = loadwinconfig.get('Width')
         height = loadwinconfig.get('Height')
         self.win = Window('Select File', width, height)
-        winmaster = self.win.window
-        winmaster.focus_force()
+        self.win.window.focus_force()
+        winmaster = self.win.frame
 
         Widgets(winmaster, 1, 1).label('Select Savefile')
 
         ### Listbox Frame ###
 
         self.f = Widgets(winmaster, 1, 2)
-        self.f.frame()
+        self.f.frame(grid=True)
 
         lb_height = loadwinconfig.get('LB_Height')
         lb_width = loadwinconfig.get('LB_Width')
-        savefiles = datahandler.list_savefiles()
+        savefiles = Playerdata()
+        savefiles.list_savefiles()
         savefiles.sort(key=lambda x: os.path.getmtime(f'{datapath}{x}.json'), reverse = True)
         self.lb = Widgets(self.f.widget, None, None)
         self.lb.listbox(lb_width, lb_height, savefiles)
@@ -152,7 +154,8 @@ class Mainmenu(Menu):
             self.label.widget.configure(text = 'please select a file')
         else:
             name = listbox.get(index)
-            datahandler.load(name)
+            data = Playerdata
+            data.get()
             self.update()
             self.win.window.destroy()
 

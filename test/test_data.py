@@ -40,4 +40,4 @@ class TestData(Test):
 
     def test_savefiles(self):
         datahandler = Playerdata()
-        print(datahandler.list_savefiles())
+        datahandler.get_newest_savefile()

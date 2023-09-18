@@ -1,16 +1,17 @@
 class NPC:
     def __init__(
             self,
-            name,
-            age,
-            eyecolor,
-            sex,
-            height,
-            build,
-            haircolor,
-            hair_lenght,
-            shave,
-            profession
+            name: str,
+            age: int,
+            eyecolor: str,
+            sex: str,
+            height :str,
+            build: str,
+            haircolor: str,
+            hair_lenght: str,
+            shave: str,
+            profession: str,
+            texts: dict
             ):
         self.name = name
         self.age = age
@@ -22,11 +23,22 @@ class NPC:
         self.hair_lenght = hair_lenght
         self.shave = shave
         self.profession = profession
+        self.texts = texts
         self.age_description = self.get_age_description()
         self.calling = self.get_calling()
 
     def say(self, text: str):
         return f'{self.name}: {text}'
+    
+    def reactions(self, reactions: list):
+        pass
+
+    def get_text(self, key: str, number:int = None):
+        if not number:
+            text = self.texts.get(key)
+        else:
+            text = self.texts.get(key).get(number)
+        return text
     
     def get_age_description(self):
         if self.age < 16: description = 'underaged'
@@ -42,3 +54,7 @@ class NPC:
         elif self.sex == 'Female':
             if self.age < 16: calling = 'Girl'
             else: calling = 'Woman'
+        return calling
+    
+    def fight(self):
+        pass

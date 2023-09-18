@@ -1,1 +1,1 @@
-from ...data.basic.datahandler import Datahandler
+from ...data.basic.data import Data

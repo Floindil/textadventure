@@ -27,5 +27,11 @@ class Level:
         inventory = Inventory()
         inventory.open(master)
 
+    def npc_encounter(self, npc, number: int):
+        npc.encounter_start(number)
+
+    def progression(self):
+        pass
+
 
 

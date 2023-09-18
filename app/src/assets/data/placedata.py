@@ -1,6 +1,6 @@
-from .basic.datahandler import Datahandler
+from .basic.data import Data
 
-class Placedata(Datahandler):
+class Placedata(Data):
     def __init__(self) -> None:
         super().__init__(filetype = 'places')
 

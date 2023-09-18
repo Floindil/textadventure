@@ -15,7 +15,7 @@ root.geometry(f'{root_width}x{root_height}+{center_x}+{center_y}')
 root.update_idletasks()
 
 class Widgets:
-    def __init__(self, master, column : int, row : int):
+    def __init__(self, master, column : int = 0, row : int = 0):
         self.master = master
         self.column = column
         self.row = row
@@ -45,9 +45,11 @@ class Widgets:
         self.widget = Entry(self.master, width = width)
         self.widget.grid(column = self.column, row = self.row, padx = self.pad, pady = self.pad)
     
-    def frame(self):
-        self.widget = Frame(self.master)
-        self.widget.grid(column = self.column, row = self.row, padx = self.pad, pady = self.pad)
+    def frame(self, side: str = 'top', grid: bool = False):
+        self.widget = Frame(self.master, background='red')
+        if not grid:
+            self.widget.pack(padx = self.pad, pady = self.pad, side=side)
+        else: self.widget.grid(column = self.column, row = self.row, padx = self.pad, pady = self.pad, side=side)
 
     def change_lb_content(self, new_content: list):
         self.widget.delete(0, 'end')
@@ -68,6 +70,7 @@ class Window:
         self.window.geometry(f'{width}x{height}+{int(center_x)}+{int(center_y)}')
         self.center_x = width / 2
         self.center_y = height / 2
+        self.frame = Widgets(self.window).frame()
 
     def enable_fullscreen(self):
         self.window.attributes('-fullscreen', True)
