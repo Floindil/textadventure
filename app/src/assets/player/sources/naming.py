@@ -1,3 +1,9 @@
+player=[
+    'Character',
+    'Items',
+    'Equipment',
+    'Attributes'
+]
 character=[
     'Name',
     'Race',
@@ -16,8 +22,12 @@ equipment=[
     'Armor',
     'Talisman'
     ]
-player=[
-    'Character',
-    'Items',
-    'Equipment'
+attributes=[
+    'Body',
+    'Agility',
+    'Strenght',
+    'Dexterity',
+    'Intelligence',
+    'Light Magic',
+    'Dark Magic'
 ]

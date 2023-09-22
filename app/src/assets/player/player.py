@@ -1,13 +1,15 @@
 from .sources.character import Character
 from .sources.inventory import Inventory
 from .sources.equipment import Equipment
+from .sources.attributes import Attributes
 from .sources.naming import player
 
 class Player:
     player={
             player[0]:None,
             player[1]:None,
-            player[2]:None
+            player[2]:None,
+            player[3]:None
         }
 ### Player ###
     @classmethod
@@ -27,6 +29,8 @@ class Player:
             return cls.return_items()
         elif part==player[2]:
             return cls.return_equipment()
+        elif part==player[3]:
+            return cls.return_attributes()
     
 ### Character ###
     @staticmethod
@@ -79,3 +83,16 @@ class Player:
     @staticmethod
     def get_equipment(dict:dict):
         Equipment.get_equipment(dict=dict)
+
+### Attributes ###
+    @staticmethod
+    def change_attributes(change_list:list=[0,1,2,3,4,5,6]):
+        Attributes.change(change_list)
+
+    @staticmethod
+    def return_attributes():
+        return Attributes.return_attributes()
+    
+    @staticmethod
+    def get_attributes(dict:dict):
+        Attributes.get_attributes(dict=dict)
