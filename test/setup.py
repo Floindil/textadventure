@@ -1,4 +1,5 @@
 from app.src.assets.player.player import Player
+from app.src.assets.items.types.keyitems import Keyitems
 from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a
 
 def testplayer():
@@ -39,3 +40,7 @@ def testplayer():
     Player.update_value(1,-15)
     Player.update_value(2,-5)
     Player.update_player()
+
+def testitems():
+    key = Keyitems('testkey')
+    return [key]

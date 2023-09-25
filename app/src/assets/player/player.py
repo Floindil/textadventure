@@ -43,12 +43,12 @@ class Player:
 
 ### Inventory ###
     @staticmethod
-    def add_item(item:str,type:str):
-        Inventory.add_item(item=item,type=type)
+    def add_item(item:str):
+        Inventory.add_item(item=item)
 
     @staticmethod
-    def remove_item(item:str,type:str):
-        Inventory.remove_item(item=item,type=type)
+    def remove_item(item:str):
+        Inventory.remove_item(item=item)
 
     @staticmethod
     def return_items():
