@@ -1,9 +1,9 @@
-from ...names import character
+from ...names_values import character as c
 class Character:
     character={
-        character[0]:None,
-        character[1]:None,
-        character[2]:None
+        c[0]:None,
+        c[1]:None,
+        c[2]:None
     }
 
     @classmethod

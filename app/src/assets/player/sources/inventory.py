@@ -1,12 +1,12 @@
-from ...names import items
+from ...names_values import items as i
 
 class Inventory:
     items={
-        items[0]:[],
-        items[1]:[],
-        items[2]:[],
-        items[3]:[],
-        items[4]:[]
+        i[0]:[],
+        i[1]:[],
+        i[2]:[],
+        i[3]:[],
+        i[4]:[]
     }
     @classmethod
     def add_item(cls, item, type:list):

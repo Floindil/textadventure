@@ -1,5 +1,5 @@
 from app.src.assets.player.player import Player
-from app.src.assets.names import character as c, items as i, equipment as e, attributes as a
+from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a
 
 def testplayer():
     test_character={
@@ -33,6 +33,9 @@ def testplayer():
         a[6]:2
     }
     Player.get_attributes(test_attributes)
-    Player.update_stats()
-    Player.update_armor(5)
-    Player.create_player()
+    Player.update_statistics()
+    Player.recover_full()
+    Player.update_value(0,-25)
+    Player.update_value(1,-15)
+    Player.update_value(2,-5)
+    Player.update_player()

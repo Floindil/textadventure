@@ -3,7 +3,7 @@ player=[
     'Items',
     'Equipment',
     'Attributes',
-    'Stats'
+    'Statistics'
 ]
 character=[
     'Name',
@@ -16,13 +16,13 @@ items=[
     'Armor',
     'Talisman',
     'Keyitem'
-    ]
+]
 equipment=[
     'On Hand',
     'Off Hand',
     'Armor',
     'Talisman'
-    ]
+]
 attributes=[
     'Body',
     'Agility',
@@ -32,9 +32,13 @@ attributes=[
     'Light Magic',
     'Dark Magic'
 ]
-stats=[
+statistics=[
     'Health',
     'Stamina',
-    'Mana',
-    'Armor'
+    'Mana'
+]
+statistics_values=[
+    15,
+    10,
+    10
 ]

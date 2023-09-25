@@ -2,8 +2,8 @@ from .sources.character import Character
 from .sources.inventory import Inventory
 from .sources.equipment import Equipment
 from .sources.attributes import Attributes
-from .sources.stats import Stats
-from ..names import player
+from .sources.statistics import Statistics
+from ..names_values import player
 
 class Player:
     player={
@@ -15,7 +15,7 @@ class Player:
         }
 ### Player ###
     @classmethod
-    def create_player(cls):
+    def update_player(cls):
         for part in cls.player:
             cls.player.update({part:cls.return_part(part)})
     
@@ -30,7 +30,7 @@ class Player:
         elif part==player[3]:
             return cls.return_attributes()
         elif part==player[4]:
-            return cls.return_stats()
+            return cls.return_statistics()
     
 ### Character ###
     @staticmethod
@@ -97,15 +97,22 @@ class Player:
     def get_attributes(dict:dict):
         Attributes.get_attributes(dict=dict)
 
-### Stats ###
+### Statistics ###
     @staticmethod
-    def update_stats():
-        Stats.update_stats()
+    def update_statistics():
+        Statistics.update_statistics()
+    
+    @staticmethod
+    def update_value(type:int,value:int):
+        Statistics.update_value(type=type,value=value)
 
     @staticmethod
-    def update_armor(value:int):
-        Stats.update_armor(value=value)
-
+    def return_statistics():
+        return Statistics.statistics
+    
     @staticmethod
-    def return_stats():
-        return Stats.stats
+    def recover_value(type:int):
+        Statistics.recover_value(type=type)
+
+    def recover_full():
+        Statistics.recover_full()

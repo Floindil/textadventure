@@ -1,14 +1,14 @@
-from ...names import attributes
+from ...names_values import attributes as a
 
 class Attributes:
     attributes={
-        attributes[0]:0,
-        attributes[1]:0,
-        attributes[2]:0,
-        attributes[3]:0,
-        attributes[4]:0,
-        attributes[5]:0,
-        attributes[6]:0
+        a[0]:0,
+        a[1]:0,
+        a[2]:0,
+        a[3]:0,
+        a[4]:0,
+        a[5]:0,
+        a[6]:0
     }
 
     @classmethod
@@ -16,10 +16,10 @@ class Attributes:
         for value in change_list:
             if value:
                 index = change_list.index(value)
-                new_value = cls.attributes.get(attributes[index]) + value
+                new_value = cls.attributes.get(a[index]) + value
                 if new_value < 0:
                     new_value = 0
-                cls.attributes.update({attributes[index]:new_value})
+                cls.attributes.update({a[index]:new_value})
     
     @classmethod
     def get_attributes(cls,dict:dict):

@@ -1,4 +1,4 @@
-from ..names import items as i
+from ..names_values import items as i
 
 class Keyitems:
     def __init__(self,name:str) -> None:

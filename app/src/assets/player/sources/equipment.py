@@ -1,11 +1,11 @@
-from ...names import equipment
+from ...names_values import equipment as e
 
 class Equipment:
     equipment={
-        equipment[0]:None,
-        equipment[1]:None,
-        equipment[2]:None,
-        equipment[3]:None
+        e[0]:None,
+        e[1]:None,
+        e[2]:None,
+        e[3]:None
     }
 
     @classmethod
