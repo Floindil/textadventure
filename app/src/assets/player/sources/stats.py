@@ -1,4 +1,4 @@
-from ...fixed_values import stats
+from ...names import stats
 from .attributes import Attributes as A, attributes as a
 
 class Stats:

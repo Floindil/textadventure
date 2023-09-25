@@ -1,5 +1,5 @@
 from app.src.assets.player.player import Player
-from app.src.assets.fixed_values import character as c, items as i, equipment as e, attributes as a
+from app.src.assets.names import character as c, items as i, equipment as e, attributes as a
 
 def testplayer():
     test_character={

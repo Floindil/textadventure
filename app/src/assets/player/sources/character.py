@@ -1,4 +1,4 @@
-from ...fixed_values import character
+from ...names import character
 class Character:
     character={
         character[0]:None,

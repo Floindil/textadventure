@@ -1,4 +1,4 @@
-from ...fixed_values import attributes
+from ...names import attributes
 
 class Attributes:
     attributes={

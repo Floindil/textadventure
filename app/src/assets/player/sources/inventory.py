@@ -1,4 +1,4 @@
-from ...fixed_values import items
+from ...names import items
 
 class Inventory:
     items={

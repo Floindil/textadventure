@@ -3,7 +3,7 @@ from .sources.inventory import Inventory
 from .sources.equipment import Equipment
 from .sources.attributes import Attributes
 from .sources.stats import Stats
-from ..fixed_values import player
+from ..names import player
 
 class Player:
     player={

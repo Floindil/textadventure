@@ -1,4 +1,4 @@
-from ...fixed_values import equipment
+from ...names import equipment
 
 class Equipment:
     equipment={
