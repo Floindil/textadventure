@@ -2,24 +2,22 @@ from .sources.character import Character
 from .sources.inventory import Inventory
 from .sources.equipment import Equipment
 from .sources.attributes import Attributes
-from .sources.naming import player
+from .sources.stats import Stats
+from ..fixed_values import player
 
 class Player:
     player={
             player[0]:None,
             player[1]:None,
             player[2]:None,
-            player[3]:None
+            player[3]:None,
+            player[4]:None
         }
 ### Player ###
     @classmethod
     def create_player(cls):
         for part in cls.player:
             cls.player.update({part:cls.return_part(part)})
-
-    @classmethod
-    def return_player(cls):
-        return cls.player
     
     @classmethod
     def return_part(cls,part:str):
@@ -31,11 +29,13 @@ class Player:
             return cls.return_equipment()
         elif part==player[3]:
             return cls.return_attributes()
+        elif part==player[4]:
+            return cls.return_stats()
     
 ### Character ###
     @staticmethod
     def return_character():
-        return Character.return_character()
+        return Character.character
 
     @staticmethod
     def get_character(dict:dict):
@@ -52,7 +52,7 @@ class Player:
 
     @staticmethod
     def return_items():
-        return Inventory.return_items()
+        return Inventory.items
 
     @staticmethod
     def get_items(data:dict):
@@ -74,7 +74,7 @@ class Player:
 
     @staticmethod
     def return_equipment():
-        return Equipment.return_equipment()
+        return Equipment.equipment
 
     @staticmethod
     def return_equipped(slot:str):
@@ -91,8 +91,21 @@ class Player:
 
     @staticmethod
     def return_attributes():
-        return Attributes.return_attributes()
+        return Attributes.attributes
     
     @staticmethod
     def get_attributes(dict:dict):
         Attributes.get_attributes(dict=dict)
+
+### Stats ###
+    @staticmethod
+    def update_stats():
+        Stats.update_stats()
+
+    @staticmethod
+    def update_armor(value:int):
+        Stats.update_armor(value=value)
+
+    @staticmethod
+    def return_stats():
+        return Stats.stats

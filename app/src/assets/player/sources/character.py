@@ -1,14 +1,10 @@
-from .naming import character
+from ...fixed_values import character
 class Character:
     character={
         character[0]:None,
         character[1]:None,
         character[2]:None
     }
-
-    @classmethod
-    def return_character(cls):
-        return cls.character
 
     @classmethod
     def get_character(cls, dict:dict):

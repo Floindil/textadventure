@@ -1,4 +1,4 @@
-from .naming import attributes
+from ...fixed_values import attributes
 
 class Attributes:
     attributes={
@@ -20,10 +20,6 @@ class Attributes:
                 if new_value < 0:
                     new_value = 0
                 cls.attributes.update({attributes[index]:new_value})
-
-    @classmethod
-    def return_attributes(cls):
-        return cls.attributes
     
     @classmethod
     def get_attributes(cls,dict:dict):

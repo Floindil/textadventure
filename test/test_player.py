@@ -5,6 +5,6 @@ from test.setup import testplayer
 class Playertest(TestCase):
     def test_player(self):
         testplayer()
-        print(Player.return_player())
+        print(Player.player)
         
         

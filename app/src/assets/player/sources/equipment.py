@@ -1,4 +1,4 @@
-from .naming import equipment
+from ...fixed_values import equipment
 
 class Equipment:
     equipment={
@@ -15,10 +15,6 @@ class Equipment:
     @classmethod
     def unequip(cls, slot):
         cls.equipment.update({slot:None})
-
-    @classmethod
-    def return_equipment(cls):
-        return cls.equipment
     
     @classmethod
     def get_equipment(cls, dict:dict):

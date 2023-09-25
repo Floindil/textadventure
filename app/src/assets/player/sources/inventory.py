@@ -1,4 +1,4 @@
-from .naming import items
+from ...fixed_values import items
 
 class Inventory:
     items={
@@ -15,10 +15,6 @@ class Inventory:
     @classmethod
     def remove_item(cls, item, type:list):
         type.remove(item)
-
-    @classmethod
-    def return_items(cls):
-        return cls.items
     
     @classmethod
     def get_items(cls, data:dict):

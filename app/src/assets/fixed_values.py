@@ -2,7 +2,8 @@ player=[
     'Character',
     'Items',
     'Equipment',
-    'Attributes'
+    'Attributes',
+    'Stats'
 ]
 character=[
     'Name',
@@ -30,4 +31,10 @@ attributes=[
     'Intelligence',
     'Light Magic',
     'Dark Magic'
+]
+stats=[
+    'Health',
+    'Stamina',
+    'Mana',
+    'Armor'
 ]
