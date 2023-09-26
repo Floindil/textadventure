@@ -57,6 +57,18 @@ class Player:
     @staticmethod
     def return_items():
         return Inventory.items
+    
+    @staticmethod
+    def return_itemnames():
+        item_dict={}
+        for key in Inventory.items:
+            items=Inventory.items.get(key)
+            name_list=[]
+            for item in items:
+                name_list.append(item.name)
+            item_dict.update({key:name_list})
+        return item_dict
+            
 
     @staticmethod
     def get_items(data:dict):

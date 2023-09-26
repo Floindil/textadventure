@@ -12,7 +12,7 @@ class Itemtest(TestCase):
     @staticmethod
     def item_cycle(item):
         item.add()
-        print(Player.return_items().get(item.type))
+        print(Player.return_itemnames().get(item.type))
         item.remove()
-        print(Player.return_items().get(item.type))
+        print(Player.return_itemnames().get(item.type))
 

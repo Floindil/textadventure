@@ -9,14 +9,14 @@ def testplayer():
         c[2]:'undefined'
     }
     Player.get_character(test_character)
-    test_items={
+    '''test_items={
         i[0]:['Drugs'],
         i[1]:['Bubble'],
         i[2]:['Horse'],
         i[3]:['Stapler'],
         i[4]:['Mouse']
     }
-    Player.get_items(test_items)
+    Player.get_items(test_items)'''
     test_equipment={
         e[0]:'Starfish',
         e[1]:'Sponge',
@@ -44,5 +44,5 @@ def testplayer():
     Player.update_player()
 
 def testitems():
-    key = Keyitems('testkey')
+    key = Keyitems('Testkey')
     return [key]
