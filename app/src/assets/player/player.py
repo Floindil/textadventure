@@ -3,6 +3,7 @@ from .sources.inventory import Inventory
 from .sources.equipment import Equipment
 from .sources.attributes import Attributes
 from .sources.statistics import Statistics
+from .sources.resources import Resources
 from ..names_values import player
 
 class Player:
@@ -11,7 +12,8 @@ class Player:
             player[1]:None,
             player[2]:None,
             player[3]:None,
-            player[4]:None
+            player[4]:None,
+            player[5]:None
         }
 ### Player ###
     @classmethod
@@ -31,6 +33,8 @@ class Player:
             return cls.return_attributes()
         elif part==player[4]:
             return cls.return_statistics()
+        elif part==player[5]:
+            return cls.return_resources()
     
 ### Character ###
     @staticmethod
@@ -113,6 +117,20 @@ class Player:
     @staticmethod
     def recover_value(type:int):
         Statistics.recover_value(type=type)
-
+        
+    @staticmethod
     def recover_full():
         Statistics.recover_full()
+        
+### Resources###
+    @staticmethod
+    def update_currency(value:int):
+        Resources.update_resource(value=value,resource=0)
+        
+    @staticmethod
+    def update_exp(value:int):
+        Resources.update_resource(value=value,resource=1)
+        
+    @staticmethod
+    def return_resources():
+        return Resources.resources

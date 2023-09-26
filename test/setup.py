@@ -39,6 +39,8 @@ def testplayer():
     Player.update_value(0,-25)
     Player.update_value(1,-15)
     Player.update_value(2,-5)
+    Player.update_currency(10)
+    Player.update_exp(400)
     Player.update_player()
 
 def testitems():

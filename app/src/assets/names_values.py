@@ -4,7 +4,8 @@ player=[
     'Items',
     'Equipment',
     'Attributes',
-    'Statistics'
+    'Statistics',
+    'Resources'
 ]
 character=[
     'Name',
@@ -42,4 +43,8 @@ statistics_values=[
     15,
     10,
     10
+]
+resources=[
+    'Currency',
+    'Experiance'
 ]
