@@ -25,6 +25,13 @@ equipment=[
     'Armor',
     'Talisman'
 ]
+equipment_values=[
+    'Armor',
+    'Attack',
+    'Block',
+    'Range',
+    'Accuracy'
+]
 attributes=[
     'Body',
     'Agility',

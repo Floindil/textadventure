@@ -1,6 +1,7 @@
 from app.src.assets.player.player import Player
 from app.src.assets.items.types.keyitems import Keyitems
-from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a
+from app.src.assets.items.types.consumables import Consumables
+from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a, statistics as s
 
 def testplayer():
     test_character={
@@ -16,14 +17,14 @@ def testplayer():
         i[3]:['Stapler'],
         i[4]:['Mouse']
     }
-    Player.get_items(test_items)'''
+    Player.get_items(test_items)
     test_equipment={
         e[0]:'Starfish',
         e[1]:'Sponge',
         e[2]:'Coin',
         e[3]:'Dragon'
     }
-    Player.get_equipment(test_equipment)
+    Player.get_equipment(test_equipment)'''
     test_attributes={
         a[0]:3,
         a[1]:4,
@@ -34,15 +35,26 @@ def testplayer():
         a[6]:2
     }
     Player.get_attributes(test_attributes)
+
     Player.update_statistics()
     Player.recover_full()
-    Player.update_value(0,-25)
-    Player.update_value(1,-15)
-    Player.update_value(2,-5)
-    Player.update_currency(10)
-    Player.update_exp(400)
+
+    set_statistic()
+
+    set_resources()
+
     Player.update_player()
 
 def testitems():
-    key = Keyitems('Testkey')
-    return [key]
+    key=Keyitems(name='Testkey')
+    apple=Consumables(name='Apple',affects=s[0],value=10)
+    return [key,apple]
+
+def set_statistic():
+    Player.update_value(s[0],-25)
+    Player.update_value(s[1],-15)
+    Player.update_value(s[2],-5)
+
+def set_resources():
+    Player.update_currency(10)
+    Player.update_exp(400)

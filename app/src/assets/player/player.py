@@ -1,9 +1,9 @@
-from .sources.character import Character
-from .sources.inventory import Inventory
-from .sources.equipment import Equipment
-from .sources.attributes import Attributes
-from .sources.statistics import Statistics
-from .sources.resources import Resources
+from .sources.character import Character as C
+from .sources.inventory import Inventory as I
+from .sources.equipment import Equipment as E
+from .sources.attributes import Attributes as A
+from .sources.statistics import Statistics as S
+from .sources.resources import Resources as R
 from ..names_values import player
 
 class Player:
@@ -39,30 +39,30 @@ class Player:
 ### Character ###
     @staticmethod
     def return_character():
-        return Character.character
+        return C.character
 
     @staticmethod
     def get_character(dict:dict):
-        Character.get_character(dict=dict)
+        C.get_character(dict=dict)
 
 ### Inventory ###
     @staticmethod
     def add_item(item:str):
-        Inventory.add_item(item=item)
+        I.add_item(item=item)
 
     @staticmethod
     def remove_item(item:str):
-        Inventory.remove_item(item=item)
+        I.remove_item(item=item)
 
     @staticmethod
     def return_items():
-        return Inventory.items
+        return I.items
     
     @staticmethod
     def return_itemnames():
         item_dict={}
-        for key in Inventory.items:
-            items=Inventory.items.get(key)
+        for key in I.items:
+            items=I.items.get(key)
             name_list=[]
             for item in items:
                 name_list.append(item.name)
@@ -72,77 +72,83 @@ class Player:
 
     @staticmethod
     def get_items(data:dict):
-        Inventory.get_items(data)
+        I.get_items(data)
 
 ### Equipment ###
     @staticmethod
     def equip(item,slot:str):
         if Player.return_equipped(slot=slot):
             Player.unequip(slot)
-        Inventory.remove_item(item=item,type=item.type)
-        Equipment.equip(item=item,slot=slot)
+        I.remove_item(item=item,type=item.type)
+        E.equip(item=item,slot=slot)
 
     @staticmethod
     def unequip(slot:str):
         equipped=Player.return_equipped(slot=slot)
-        Inventory.add_item(item=equipped,type=equipped.type)
-        Equipment.unequip(slot=slot)
+        I.add_item(item=equipped,type=equipped.type)
+        E.unequip(slot=slot)
 
     @staticmethod
     def return_equipment():
-        return Equipment.equipment
+        return E.equipment
 
     @staticmethod
     def return_equipped(slot:str):
-        return Equipment.equipment.get(slot)
+        return E.equipment.get(slot)
 
     @staticmethod
     def get_equipment(dict:dict):
-        Equipment.get_equipment(dict=dict)
+        E.get_equipment(dict=dict)
 
 ### Attributes ###
     @staticmethod
     def change_attributes(change_list:list=[0,1,2,3,4,5,6]):
-        Attributes.change(change_list)
+        A.change(change_list)
 
     @staticmethod
     def return_attributes():
-        return Attributes.attributes
+        return A.attributes
     
     @staticmethod
     def get_attributes(dict:dict):
-        Attributes.get_attributes(dict=dict)
+        A.get_attributes(dict=dict)
 
 ### Statistics ###
     @staticmethod
     def update_statistics():
-        Statistics.update_statistics()
+        S.update_statistics()
     
     @staticmethod
     def update_value(type:int,value:int):
-        Statistics.update_value(type=type,value=value)
+        S.update_value(type=type,value=value)
 
     @staticmethod
     def return_statistics():
-        return Statistics.statistics
+        return S.statistics
     
     @staticmethod
     def recover_value(type:int):
-        Statistics.recover_value(type=type)
+        S.recover_value(type=type)
         
     @staticmethod
     def recover_full():
-        Statistics.recover_full()
+        S.recover_full()
         
 ### Resources###
     @staticmethod
     def update_currency(value:int):
-        Resources.update_resource(value=value,resource=0)
+        R.update_resource(value=value,resource=0)
         
     @staticmethod
     def update_exp(value:int):
-        Resources.update_resource(value=value,resource=1)
+        R.update_resource(value=value,resource=1)
         
     @staticmethod
     def return_resources():
-        return Resources.resources
+        return R.resources
+    
+### Items ###
+    @staticmethod
+    def use_item(item):
+        Player.update_value(type=item.affected,value=item.value)
+        Player.remove_item(item)

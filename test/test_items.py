@@ -1,5 +1,6 @@
 from unittest import TestCase
 from app.src.assets.player.player import Player
+from app.src.assets.items.types.consumables import Consumables
 from test.setup import testplayer, testitems
 
 class Itemtest(TestCase):
@@ -9,10 +10,21 @@ class Itemtest(TestCase):
         for item in testitem:
             self.item_cycle(item=item)
 
-    @staticmethod
-    def item_cycle(item):
+    def item_cycle(self,item):
         item.add()
-        print(Player.return_itemnames().get(item.type))
-        item.remove()
-        print(Player.return_itemnames().get(item.type))
+        self.print_items(item)
+        if isinstance(item,Consumables):
+            Player.use_item(item=item)
+        else: item.remove()
+        self.print_items(item)
 
+    @staticmethod
+    def print_items(item):
+        if hasattr(item,'affected'):
+            attributes=Player.return_attributes()
+            statistics=Player.return_statistics()
+            if item.affected in attributes:
+                print(attributes.get(item.affected))
+            elif item.affected in statistics:
+                print(statistics.get(item.affected))
+        print(f'{Player.return_itemnames().get(item.type)}\n')

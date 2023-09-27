@@ -1,5 +1,10 @@
 from ...names_values import items as i
+from .basic.item import Item
 
-class Consumables:
-    def __init__(self,name:str,affects:int,value:int) -> None:
-        pass
+class Consumables(Item):
+    def __init__(self,name:str,affects:int,value:int,duration:int=0) -> None:
+        self.type=i[0]
+        self.name=name
+        self.affected=affects
+        self.value=value
+        self.duration=duration

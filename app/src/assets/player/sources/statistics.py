@@ -28,12 +28,12 @@ class Statistics:
 
     @classmethod
     def update_value(cls,type:int,value:int):
-        oldvalue=cls.statistics.get(s[type])[0]
-        newvalue=oldvalue+value
-        maxvalue=cls.statistics.get(s[type])[1]
+        oldvalue=cls.statistics.get(type)
+        newvalue=oldvalue[0]+value
+        maxvalue=cls.statistics.get(type)[1]
         if newvalue<0: newvalue=0
         elif newvalue>maxvalue: newvalue=maxvalue
-        cls.statistics.update({s[type]:(newvalue,maxvalue)})
+        cls.statistics.update({type:(newvalue,maxvalue)})
 
     @classmethod
     def recover_value(cls,type:int):
