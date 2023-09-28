@@ -12,7 +12,13 @@ class Attributes:
     }
 
     @classmethod
-    def change(cls,change_list:list=[0,1,2,3,4,5,6]):
+    def update_attribute(cls,type:str,value:int):
+        old=cls.attributes.get(type)
+        new=old+value
+        if new<1: new=1
+        cls.attributes.update({type:new})
+
+    def update(cls,change_list:list=[0,1,2,3,4,5,6]):
         for value in change_list:
             if value:
                 index = change_list.index(value)

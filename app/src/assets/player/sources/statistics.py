@@ -17,14 +17,18 @@ class Statistics:
     
     @classmethod
     def update_statistics(cls):
-        stat=cls.calculate_statistics()
-        cls.statistics.update(
-            {
-                s[0]:(cls.statistics[s[0]][0],stat[0]),
-                s[1]:(cls.statistics[s[1]][0],stat[1]),
-                s[2]:(cls.statistics[s[2]][0],stat[2]),
-            }
-        )
+        stats=cls.calculate_statistics()
+        update={}
+        for stat in stats:
+            index=stats.index(stat)
+            limit=stats[index]
+            value=cls.statistics[s[index]][0]
+            if value>limit:
+                value=limit
+            update.update(
+                {s[index]:(value,limit)}
+            )
+        cls.statistics.update(update)
 
     @classmethod
     def update_value(cls,type:int,value:int):

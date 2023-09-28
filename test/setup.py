@@ -1,6 +1,6 @@
 from app.src.assets.player.player import Player
-from app.src.assets.items.types.keyitems import Keyitems
-from app.src.assets.items.types.consumables import Consumables
+from app.src.assets.items.types.keyitems import Keyitems as K
+from app.src.assets.items.types.consumables import Consumables as C
 from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a, statistics as s
 
 def testplayer():
@@ -10,6 +10,8 @@ def testplayer():
         c[2]:'undefined'
     }
     Player.get_character(test_character)
+
+    add_testitems()
     '''test_items={
         i[0]:['Drugs'],
         i[1]:['Bubble'],
@@ -46,14 +48,20 @@ def testplayer():
     Player.update_player()
 
 def testitems():
-    key=Keyitems(name='Testkey')
-    apple=Consumables(name='Apple',affects=s[0],value=10)
-    return [key,apple]
+    key=K(name='Testkey')
+    apple=C(name='Apple',affects=s[0],value=10)
+    drugs=C(name='Drugs',affects=a[1],value=-2)
+    return [key,apple,drugs]
+
+def add_testitems():
+    items=testitems()
+    for item in items:
+        Player.add_item(item)
 
 def set_statistic():
-    Player.update_value(s[0],-25)
-    Player.update_value(s[1],-15)
-    Player.update_value(s[2],-5)
+    Player.update_statvalue(s[0],-25)
+    Player.update_statvalue(s[1],-15)
+    Player.update_statvalue(s[2],-5)
 
 def set_resources():
     Player.update_currency(10)

@@ -6,16 +6,21 @@ from test.setup import testplayer, testitems
 class Itemtest(TestCase):
     def test_items(self):
         testplayer()
-        testitem=testitems()
-        for item in testitem:
-            self.item_cycle(item=item)
+        testitem=Player.player.get('Items')
+        for type in testitem:
+            itemlist=[]
+            for item in testitem[type]:
+                itemlist.append(item)
+            for that in itemlist:
+                self.item_cycle(that)
+        Player.update_player()
+        print(Player.player)
 
     def item_cycle(self,item):
-        item.add()
         self.print_items(item)
         if isinstance(item,Consumables):
-            Player.use_item(item=item)
-        else: item.remove()
+            Player.use_item(item)
+        else: Player.remove_item(item)
         self.print_items(item)
 
     @staticmethod

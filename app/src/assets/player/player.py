@@ -32,6 +32,7 @@ class Player:
         elif part==player[3]:
             return cls.return_attributes()
         elif part==player[4]:
+            cls.update_statistics()
             return cls.return_statistics()
         elif part==player[5]:
             return cls.return_resources()
@@ -102,8 +103,12 @@ class Player:
 
 ### Attributes ###
     @staticmethod
-    def change_attributes(change_list:list=[0,1,2,3,4,5,6]):
-        A.change(change_list)
+    def update_attribute(type:str,value:int):
+        A.update_attribute(type=type,value=value)
+
+    @staticmethod
+    def update_attributes(change_list:list=[0,1,2,3,4,5,6]):
+        A.update(change_list)
 
     @staticmethod
     def return_attributes():
@@ -119,7 +124,7 @@ class Player:
         S.update_statistics()
     
     @staticmethod
-    def update_value(type:int,value:int):
+    def update_statvalue(type:int,value:int):
         S.update_value(type=type,value=value)
 
     @staticmethod
@@ -150,5 +155,8 @@ class Player:
 ### Items ###
     @staticmethod
     def use_item(item):
-        Player.update_value(type=item.affected,value=item.value)
+        if item.affected in S.statistics:
+            Player.update_statvalue(type=item.affected,value=item.value)
+        elif item.affected in A.attributes:
+            Player.update_attribute(type=item.affected,value=item.value)
         Player.remove_item(item)
