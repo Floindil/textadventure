@@ -1,5 +1,5 @@
 ### Player ###
-player=[
+player= [
     'Character',
     'Items',
     'Equipment',
@@ -7,32 +7,32 @@ player=[
     'Statistics',
     'Resources'
 ]
-character=[
+character= [
     'Name',
     'Race',
     'Biology'
 ]
-items=[
+items= [
     'Consumable',
     'Weapon',
     'Armor',
     'Talisman',
     'Keyitem'
 ]
-equipment=[
+equipment= [
     'On Hand',
     'Off Hand',
     'Armor',
     'Talisman'
 ]
-equipment_values=[
+equipment_values= [
     'Armor',
     'Attack',
     'Block',
     'Range',
     'Accuracy'
 ]
-attributes=[
+attributes= [
     'Body',
     'Agility',
     'Strenght',
@@ -41,17 +41,17 @@ attributes=[
     'Light Magic',
     'Dark Magic'
 ]
-statistics=[
+statistics= [
     'Health',
     'Stamina',
     'Mana'
 ]
-statistics_values=[
+statistics_values= [
     15,
     10,
     10
 ]
-resources=[
+resources= [
     'Currency',
     'Experiance'
 ]
