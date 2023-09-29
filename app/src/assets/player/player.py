@@ -80,12 +80,14 @@ class Player:
     def equip(item, slot: str):
         if Player.return_equipped(slot= slot):
             Player.unequip(slot)
+        item.equip()
         I.remove_item(item= item, type= item.type)
         E.equip(item= item, slot= slot)
 
     @staticmethod
     def unequip(slot: str):
         equipped= Player.return_equipped(slot= slot)
+        equipped.unequip()
         I.add_item(item= equipped, type= equipped.type)
         E.unequip(slot= slot)
 
@@ -155,8 +157,9 @@ class Player:
 ### Items ###
     @staticmethod
     def use_item(item):
-        if item.affected in S.statistics:
-            Player.update_statvalue(type= item.affected, value= item.value)
-        elif item.affected in A.attributes:
-            Player.update_attribute(type= item.affected, value= item.value)
+        for effect in item.effect:
+            if effect[0] in S.statistics:
+                Player.update_statvalue(type= effect[0], value= effect[1])
+            elif effect[0] in A.attributes:
+                Player.update_attribute(type= effect[0], value= effect[1])
         Player.remove_item(item)

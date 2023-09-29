@@ -6,9 +6,9 @@ from test.setup import testplayer, testitems
 class Itemtest(TestCase):
     def test_items(self):
         testplayer()
-        testitem=Player.player.get('Items')
+        testitem= Player.player.get('Items')
         for type in testitem:
-            itemlist=[]
+            itemlist= []
             for item in testitem[type]:
                 itemlist.append(item)
             for that in itemlist:
@@ -25,9 +25,9 @@ class Itemtest(TestCase):
 
     @staticmethod
     def print_items(item):
-        if hasattr(item,'affected'):
-            attributes=Player.return_attributes()
-            statistics=Player.return_statistics()
+        if hasattr(item, 'affected'):
+            attributes= Player.return_attributes()
+            statistics= Player.return_statistics()
             if item.affected in attributes:
                 print(attributes.get(item.affected))
             elif item.affected in statistics:
