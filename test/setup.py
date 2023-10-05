@@ -1,6 +1,6 @@
 from app.src.assets.player.player import Player
-from app.src.assets.items.types.keyitems import Keyitems as K
-from app.src.assets.items.types.consumables import Consumables as C
+from app.src.assets.items.keyitems import Keyitems as K
+from app.src.assets.items.consumables import Consumables as C
 from app.src.assets.equippables.sword import Sword as S
 from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a, statistics as s
 

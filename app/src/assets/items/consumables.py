@@ -1,4 +1,4 @@
-from ...names_values import items as i
+from ..names_values import items as i
 from .basic.item import Item
 
 class Consumables(Item):
