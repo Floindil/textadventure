@@ -16,22 +16,29 @@ class Equipment:
     }
 
     @classmethod
-    def equip(cls, item, slot: str):
-        if cls.equipment.get(slot): cls.unequip(slot= slot)
-        cls.equipment.update({slot: item})
+    def equip(cls, item):
+        for slot in item.slots:
+            if cls.equipment.get(slot): cls.unequip(slot= slot)
+            cls.equipment.update({slot: item})
         cls.update_values(values= item.values)
 
     @classmethod
     def unequip(cls, slot: str):
         item= cls.equipment.get(slot)
         cls.update_values(values= item.values, remove= True)
-        cls.equipment.update({slot: None})
+        for s in item.slots:
+            cls.equipment.update({s: None})
     
     @classmethod
     def get_equipment(cls, dict: dict):
         for slot in cls.equipment:
             value= dict.get(slot)
             cls.equipment.update({slot: value})
+
+    @classmethod
+    def update_value(cls, type:str, value:int):
+        new_value = cls.values.get(type)+ value
+        cls.values.update({type: new_value})
 
     @classmethod
     def update_values(cls, values: list= [0, 1, 2, 3, 4], remove: bool= False):

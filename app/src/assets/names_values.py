@@ -12,6 +12,11 @@ character= [
     'Race',
     'Biology'
 ]
+resources= [
+    'Currency',
+    'Experiance'
+]
+### Items ###
 items= [
     'Consumable',
     'Weapon',
@@ -32,6 +37,7 @@ equipment_values= [
     'Range',
     'Accuracy'
 ]
+### Attributes ###
 attributes= [
     'Body',
     'Agility',
@@ -50,8 +56,4 @@ statistics_values= [
     15,
     10,
     10
-]
-resources= [
-    'Currency',
-    'Experiance'
 ]

@@ -4,16 +4,16 @@ from .sources.equipment import Equipment as E
 from .sources.attributes import Attributes as A
 from .sources.statistics import Statistics as S
 from .sources.resources import Resources as R
-from ..names_values import player
+from ..names_values import player as p, attributes as a
 
 class Player:
     player= {
-            player[0]: None,
-            player[1]: None,
-            player[2]: None,
-            player[3]: None,
-            player[4]: None,
-            player[5]: None
+            p[0]: None,
+            p[1]: None,
+            p[2]: None,
+            p[3]: None,
+            p[4]: None,
+            p[5]: None
         }
 ### Player ###
     @classmethod
@@ -23,18 +23,18 @@ class Player:
     
     @classmethod
     def return_part(cls, part: str):
-        if part== player[0]:
+        if part== p[0]:
             return cls.return_character()
-        elif part== player[1]:
+        elif part== p[1]:
             return cls.return_items()
-        elif part== player[2]:
+        elif part== p[2]:
             return cls.return_equipment()
-        elif part== player[3]:
+        elif part== p[3]:
             return cls.return_attributes()
-        elif part== player[4]:
+        elif part== p[4]:
             cls.update_statistics()
             return cls.return_statistics()
-        elif part== player[5]:
+        elif part== p[5]:
             return cls.return_resources()
     
 ### Character ###
@@ -77,19 +77,31 @@ class Player:
 
 ### Equipment ###
     @staticmethod
-    def equip(item, slot: str):
-        if Player.return_equipped(slot= slot):
-            Player.unequip(slot)
-        item.equip()
-        I.remove_item(item= item, type= item.type)
-        E.equip(item= item, slot= slot)
+    def equip(item):
+        Player.check_requirements(item=item)
+        for slot in item.slots:
+            if Player.return_equipped(slot= slot):
+                Player.unequip(slot)
+        I.remove_item(item= item)
+        E.equip(item= item)
 
     @staticmethod
-    def unequip(slot: str):
+    def unequip(slot: str): 
         equipped= Player.return_equipped(slot= slot)
-        equipped.unequip()
-        I.add_item(item= equipped, type= equipped.type)
+        I.add_item(item= equipped)
         E.unequip(slot= slot)
+
+    @staticmethod
+    def check_requirements(item):
+        if not item.requirements: return True
+        index= 0
+        attributes= Player.return_attributes()
+        for requirement in item.requirements:
+            attribute= attributes.get(a[index])
+            index+= 1
+            if requirement> attribute:
+                return False
+        return True
 
     @staticmethod
     def return_equipment():

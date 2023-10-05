@@ -1,6 +1,7 @@
 from app.src.assets.player.player import Player
 from app.src.assets.items.types.keyitems import Keyitems as K
 from app.src.assets.items.types.consumables import Consumables as C
+from app.src.assets.equippables.sword import Sword as S
 from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a, statistics as s
 
 def testplayer():
@@ -51,8 +52,10 @@ def testitems():
     key= K(name= 'Testkey')
     apple= C(name= 'Apple', effect= [(s[0], 10)])
     drugs= C(name= 'Drugs', effect= [(a[1], -2)])
-    raw_fish= C(name='Raw Fisch', effect= [(s[2], -15), (a[0], -2)])
-    return [key, apple, drugs, raw_fish]
+    raw_fish= C(name= 'Raw Fisch', effect= [(s[2], -15), (a[0], -2)])
+    testsword= S('Swordus Longus', [0, 4, 2, 2, 9])
+    testsword2= S('Swordus Biggus', [0, 8, 2, 2, 9], [0, 10, 0, 0, 0, 0, 0])
+    return [key, apple, drugs, raw_fish, testsword, testsword2]
 
 def add_testitems():
     items= testitems()
