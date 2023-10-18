@@ -1,7 +1,7 @@
 from unittest import TestCase
 from app.src.assets.player.player import Player as P
-from app.src.assets.items.consumables import Consumables
-from app.src.assets.equippables.basic.equipable import Equipable
+from app.src.assets.items.others.consumables import Consumables
+from app.src.assets.items.equippables.basic.equipable import Equipable
 from test.setup import testplayer, i
 from app.src.assets.names_values import player as p
 

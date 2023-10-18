@@ -1,9 +1,9 @@
 from app.src.assets.player.player import Player
-from app.src.assets.items.keyitems import Keyitems as K
-from app.src.assets.items.consumables import Consumables as C
-from app.src.assets.equippables.sword import Sword as SW
-from app.src.assets.equippables.greatsword import Greatsword as GS
-from app.src.assets.equippables.shield import Shield as SH
+from app.src.assets.items.others.keyitems import Keyitems as K
+from app.src.assets.items.others.consumables import Consumables as C
+from app.src.assets.items.equippables.sword import Sword as SW
+from app.src.assets.items.equippables.greatsword import Greatsword as GS
+from app.src.assets.items.equippables.shield import Shield as SH
 from app.src.assets.names_values import character as c, items as i, equipment as e, attributes as a, statistics as s
 
 def testplayer():

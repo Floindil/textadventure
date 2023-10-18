@@ -1,5 +1,5 @@
 from .basic.equipable import Equipable
-from ..names_values import equipment as e, items as i
+from ...names_values import equipment as e, items as i
 
 class Sword(Equipable):
     '''values: Armor, Attack, Block, Range, Accuracy
