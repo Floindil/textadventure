@@ -1,4 +1,4 @@
-from ...player.player import Player
+from ....player.player import Player
 
 class Item:
     def __init__(self, name: str) -> None:
