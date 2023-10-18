@@ -78,12 +78,15 @@ class Player:
 ### Equipment ###
     @staticmethod
     def equip(item):
-        Player.check_requirements(item=item)
-        for slot in item.slots:
-            if Player.return_equipped(slot= slot):
-                Player.unequip(slot)
-        I.remove_item(item= item)
-        E.equip(item= item)
+        check = Player.check_requirements(item=item)
+        if check:
+            for slot in item.slots:
+                if Player.return_equipped(slot= slot):
+                    Player.unequip(slot)
+            I.remove_item(item= item)
+            E.equip(item= item)
+            return True
+        else: return False
 
     @staticmethod
     def unequip(slot: str): 

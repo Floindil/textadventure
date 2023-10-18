@@ -1,5 +1,4 @@
 class Equipable:
-    '''values: afflicts equipment value for value 0-4'''
     def __init__(
             self,
             name: str,
