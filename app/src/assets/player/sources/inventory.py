@@ -6,15 +6,20 @@ class Inventory:
         i[1]: [],
         i[2]: [],
         i[3]: [],
-        i[4]: []
+        i[4]: [],
+        i[5]: []
     }
     @classmethod
-    def add_item(cls, item):
-        cls.items[item.type].append(item)
+    def add_item(cls, item, amount: int= 1):
+        item.amount += amount
+        if item not in cls.items[item.type]:
+            cls.items[item.type].append(item)
 
     @classmethod
-    def remove_item(cls, item):
-        cls.items[item.type].remove(item)
+    def remove_item(cls, item, amount: int= 1):
+        item.amount -= amount
+        if item.amount < 1:
+            cls.items[item.type].remove(item)
     
     @classmethod
     def get_items(cls, data: dict):

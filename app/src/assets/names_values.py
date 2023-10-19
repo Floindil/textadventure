@@ -22,7 +22,8 @@ items= [
     'Weapon',
     'Armor',
     'Talisman',
-    'Keyitem'
+    'Keyitem',
+    'Material'
 ]
 equipment= [
     'On Hand',
@@ -39,7 +40,7 @@ equipment_values= [
 ]
 ### Attributes ###
 attributes= [
-    'Body',
+    'Vigor',
     'Agility',
     'Strenght',
     'Dexterity',
