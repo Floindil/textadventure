@@ -1,9 +1,9 @@
 from .sources.character import Character as C
 from .sources.inventory import Inventory as I
 from .sources.equipment import Equipment as E
+from .sources.resources import Resources as R
 from .sources.attributes import Attributes as A
 from .sources.statistics import Statistics as S
-from .sources.resources import Resources as R
 from ..names_values import player as p, attributes as a
 
 class Player:
@@ -28,7 +28,7 @@ class Player:
         elif part== p[1]:
             return cls.return_items()
         elif part== p[2]:
-            return cls.return_equipment()
+            return cls.return_equipment(), cls.return_equipment_values()
         elif part== p[3]:
             return cls.return_attributes()
         elif part== p[4]:
@@ -109,6 +109,10 @@ class Player:
     @staticmethod
     def return_equipment():
         return E.equipment
+    
+    @staticmethod
+    def return_equipment_values():
+        return E.values
 
     @staticmethod
     def return_equipped(slot: str):

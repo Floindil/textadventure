@@ -71,7 +71,7 @@ class Itemtest(TestCase):
     @staticmethod
     def print_slots(item):
         for slot in item.slots:
-            if P.player.get(p[2]).get(slot):
-                name = P.player.get(p[2]).get(slot).name
+            if P.player.get(p[2])[0].get(slot):
+                name = P.player.get(p[2])[0].get(slot).name
             else: name = None
             print(f'{slot}: {name}')
