@@ -16,7 +16,7 @@ def testplayer():
     Player.get_character(test_character)
 
     key= K(name= 'Testkey')
-    apple= C(name= 'Apple', effect= [(s[0], 10)])
+    apple= C.apple()
     drugs= C(name= 'Drugs', effect= [(a[1], -2)])
     ink= M(name= 'Ink')
     raw_fish= C(name= 'Raw Fisch', effect= [(s[2], -15), (a[0], -2)])

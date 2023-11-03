@@ -23,6 +23,8 @@ class Itemtest(TestCase):
     def test_consumables(self):
         testplayer()
         testitems= P.player.get(p[1])
+        apple = Consumables.apple()
+        apple.add()
         consumables= []
         for item in testitems.get(i[0]):
             consumables.append(item)
