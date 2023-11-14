@@ -1,4 +1,4 @@
-from ...names_values import items as i, statistics as s
+from ...names_values import items as i, statistics as s, attributes as a
 from .basic.item import Item
 
 class Consumables(Item):
@@ -13,17 +13,35 @@ class Consumables(Item):
 
     @classmethod
     def apple(cls):
-        return cls('Apple',[(s[0], 10)])
+        return cls(
+            name = 'Apple',
+            effect = [(s[0], 10)]
+        )
     
     @classmethod
     def healthpotion(cls):
-        return cls('Health Potion', [(s[0]), 20])
+        return cls(
+            name = 'Health Potion',
+            effect = [(s[0]), 20]
+        )
     
     @classmethod
     def staminapotion(cls):
-        return cls('Stamina Potion', [(s[1]), 20])
+        return cls(
+            name = 'Stamina Potion',
+            effect = [(s[1]), 20]
+        )
     
     @classmethod
     def manapotion(cls):
-        return cls('Mana Potion', [(s[1]), 20])
+        return cls(
+            name = 'Mana Potion',
+            effect = [(s[1]), 20]
+        )
     
+    @classmethod
+    def drugs(cls):
+        return cls(
+            name = 'Drugs',
+            effect = [(a[1], -2)]
+        )

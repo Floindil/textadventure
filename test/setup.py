@@ -17,13 +17,13 @@ def testplayer():
 
     key= K(name= 'Testkey')
     apple= C.apple()
-    drugs= C(name= 'Drugs', effect= [(a[1], -2)])
+    drugs= C.drugs()
     ink= M(name= 'Ink')
     raw_fish= C(name= 'Raw Fisch', effect= [(s[2], -15), (a[0], -2)])
-    sword= SW('Swordus Longus', [0, 4, 2, 2, 9])
+    sword= SW.swordusLongus()
     shield= SH('Corpse', [5, 0, 5, 0, 0], [1, 1, 2, 0, 0, 0, 0])
-    sword2= SW('Swordus Biggus', [0, 8, 2, 2, 9], [0, 10, 0, 0, 0, 0, 0])
-    greatsword= GS('Swordus Biggustest', [0, 15, 2, 3, 9])
+    sword2= SW.swordusBiggus()
+    greatsword= GS.swordusBiggustest()
 
     add_testitems([key, drugs, drugs, raw_fish, sword, sword, shield, sword2, greatsword, ink])
     Player.add_item(apple, 5)

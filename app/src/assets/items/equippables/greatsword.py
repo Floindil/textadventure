@@ -7,3 +7,7 @@ class Greatsword(Equipable):
     def __init__(self, name: str, values: list, requirements: list= None) -> None:
         super().__init__(name, [e[0], e[1]], values, requirements)
         self.type= i[1]
+
+    @classmethod
+    def swordusBiggustest(cls):
+        return cls(name = 'Swordus Biggustest', values = [0, 15, 2, 3, 9])
