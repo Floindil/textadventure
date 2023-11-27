@@ -7,7 +7,7 @@ from app.src.assets.items.equippables.sword import Sword as SW
 from app.src.assets.items.equippables.greatsword import Greatsword as GS
 from app.src.assets.items.equippables.shield import Shield as SH
 from app.src.assets.items.equippables.talisman import Talisman as T
-from app.src.assets.names_values import character as c, attributes as a, statistics as s 
+from app.src.assets.names_values import character as c, attributes as a, statistics as s
 
 def testplayer():
     test_character= {

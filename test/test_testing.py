@@ -47,7 +47,7 @@ class Testing(TestCase):
             self.item_cycle(item)
             print('\n')
 
-######## Not actual tests:
+#region support methods
     
     def item_cycle(self,item):
         print(f"---test item {item.name}---\n")
@@ -102,3 +102,4 @@ class Testing(TestCase):
         for t in buffs:
             i = buffs.index(t)
             print(f'buff: {t} by {values[i]}')
+    #endregion
