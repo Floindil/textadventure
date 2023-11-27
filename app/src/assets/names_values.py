@@ -5,7 +5,8 @@ player= [
     'Equipment',
     'Attributes',
     'Statistics',
-    'Resources'
+    'Resources',
+    'Buffs'
 ]
 character= [
     'Name',

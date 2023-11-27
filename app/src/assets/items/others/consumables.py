@@ -1,6 +1,8 @@
 from ...names_values import items as i, statistics as s, attributes as a
 from .basic.item import Item
-
+'''
+Values imported from names_values file are only stated there to allow easy name changes late in the project
+'''
 class Consumables(Item):
     
     def __init__(self, name: str, effect: list, duration: int=0) -> None:

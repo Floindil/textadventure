@@ -1,14 +1,14 @@
 from unittest import TestCase
-from test.setup import testplayer
+from test.setup import testplayer, print_player
 from app.src.assets.player.player import Player as P
 from app.src.assets.items.others.consumables import Consumables
 from app.src.assets.items.equippables.basic.equipable import Equipable
 from app.src.assets.names_values import player as p, items as i
 
-class Itemtest(TestCase):
+class Testing(TestCase):
     def test_all(self):
         testplayer()
-        print(P.player)
+        print_player()
         testitem= P.player.get(p[1])
         for type in testitem:
             itemlist= []
@@ -18,7 +18,11 @@ class Itemtest(TestCase):
                 self.item_cycle(that)
                 print('\n')
         P.update_player()
-        print(P.player)
+        print_player()
+
+    def test_player(self):
+        testplayer()
+        print_player()
 
     def test_consumables(self):
         testplayer()
@@ -53,18 +57,22 @@ class Itemtest(TestCase):
             print(f"used item {item.name}")
             self.print_items(item)
         elif isinstance(item, Equipable):
+            if item.buff:
+                self.print_buff(item)
             self.print_slots(item)
             equip = P.equip(item)
             if equip: print("equip success")
             else: print("requirements not met")
             self.print_slots(item)
             self.print_items(item)
+            if item.buff:
+                self.print_buff(item)
 
     @staticmethod
     def print_items(item):
         if hasattr(item, 'effect'):
             attributes= P.return_attributes()
-            statistics= P.return_statistics()
+            statistics= P.return_statistics_values()
             for affected in item.effect:
                 name = affected[0]
                 value = affected[1]
@@ -86,3 +94,11 @@ class Itemtest(TestCase):
                 name = P.player.get(p[2])[0].get(slot).name
             else: name = None
             print(f'{slot}: {name}')
+
+    @staticmethod
+    def print_buff(item):
+        buffs = item.buff.get('type')
+        values = item.buff.get('value')
+        for t in buffs:
+            i = buffs.index(t)
+            print(f'buff: {t} by {values[i]}')

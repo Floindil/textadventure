@@ -1,5 +1,7 @@
 from ...names_values import items as i
-
+'''
+Values imported from names_values file are only stated there to allow easy name changes late in the project
+'''
 class Inventory:
     items= {
         i[0]: [],

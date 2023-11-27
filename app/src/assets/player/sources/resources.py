@@ -1,5 +1,7 @@
 from ...names_values import resources as r
-
+'''
+Values imported from names_values file are only stated there to allow easy name changes late in the project
+'''
 class Resources:
     resources= {
         r[0]: 0,

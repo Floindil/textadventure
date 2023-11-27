@@ -5,7 +5,8 @@ from app.src.assets.items.others.materials import Materials as M
 from app.src.assets.items.equippables.sword import Sword as SW
 from app.src.assets.items.equippables.greatsword import Greatsword as GS
 from app.src.assets.items.equippables.shield import Shield as SH
-from app.src.assets.names_values import character as c, attributes as a, statistics as s
+from app.src.assets.items.equippables.talisman import Talisman as T
+from app.src.assets.names_values import character as c, attributes as a, statistics as s 
 
 def testplayer():
     test_character= {
@@ -21,11 +22,13 @@ def testplayer():
     ink= M(name= 'Ink')
     raw_fish= C(name= 'Raw Fisch', effect= [(s[2], -15), (a[0], -2)])
     sword= SW.swordusLongus()
-    shield= SH('Corpse', [5, 0, 5, 0, 0], [1, 1, 2, 0, 0, 0, 0])
+    shield= SH('Corpse', [5, 0, 5, 0, 0], requirements=[1, 1, 2, 0, 0, 0, 0])
     sword2= SW.swordusBiggus()
     greatsword= GS.swordusBiggustest()
+    health_talisman = T.h_talisman()
+    stamina_talisman = T.s_talisman()
 
-    add_testitems([key, drugs, drugs, raw_fish, sword, sword, shield, sword2, greatsword, ink])
+    add_testitems([key, drugs, drugs, raw_fish, sword, sword, shield, sword2, greatsword, ink, health_talisman, stamina_talisman])
     Player.add_item(apple, 5)
 
     test_attributes= {
@@ -60,3 +63,24 @@ def set_statistic():
 def set_resources():
     Player.update_currency(10)
     Player.update_exp(400)
+
+def print_player():
+    for part in Player.player:
+        '''prints all the container names'''
+        print(part)
+        p = Player.player.get(part)
+        if isinstance(p, dict):
+            '''prints first content layer if its a dict'''
+            for object in p:
+                if isinstance(p.get(object), list):
+                    print(f'    {object}:')
+                    for element in p.get(object):
+                        print(f'        {element}')
+                else:
+                    print(f'    {object}: {p.get(object)}')
+        elif isinstance(p, tuple):
+            '''prints first content layer if its a tuple (Equipment)'''
+            for this in p:
+                i = p.index(this)
+                for that in p[i]:
+                    print(f'    {that}: {p[i].get(that)}')

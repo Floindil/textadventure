@@ -4,8 +4,11 @@ from .sources.equipment import Equipment as E
 from .sources.resources import Resources as R
 from .sources.attributes import Attributes as A
 from .sources.statistics import Statistics as S
+from .sources.buffs import Buffs as B
 from ..names_values import player as p, attributes as a
-
+'''
+Values imported from names_values file are only stated there to allow easy name changes late in the project
+'''
 class Player:
     player= {
             p[0]: None,
@@ -13,9 +16,10 @@ class Player:
             p[2]: None,
             p[3]: None,
             p[4]: None,
-            p[5]: None
+            p[5]: None,
+            p[6]: None
         }
-### Player ###
+#region Player
     @classmethod
     def update_player(cls):
         for part in cls.player:
@@ -33,11 +37,14 @@ class Player:
             return cls.return_attributes()
         elif part== p[4]:
             cls.update_statistics()
-            return cls.return_statistics()
+            return cls.return_statistics(), cls.return_statistics_values()
         elif part== p[5]:
             return cls.return_resources()
+        elif part== p[6]:
+            return cls.return_buffs(), cls.return_buff_values()
+    #endregion
     
-### Character ###
+#region Character
     @staticmethod
     def return_character():
         return C.character
@@ -45,8 +52,9 @@ class Player:
     @staticmethod
     def get_character(dict: dict):
         C.get_character(dict= dict)
+    #endregion
 
-### Inventory ###
+#region Inventory
     @staticmethod
     def add_item(item, amount: int= 1):
         I.add_item(item= item, amount= amount)
@@ -74,8 +82,9 @@ class Player:
     @staticmethod
     def get_items(data: dict):
         I.get_items(data)
+    #endregion
 
-### Equipment ###
+#region Equipment
     @staticmethod
     def equip(item):
         check = Player.check_requirements(item=item)
@@ -83,7 +92,9 @@ class Player:
             for slot in item.slots:
                 if Player.return_equipped(slot= slot):
                     Player.unequip(slot)
-            I.remove_item(item= item)
+            if item.buff:
+                Player.update_buff(item.buff)
+            Player.remove_item(item= item)
             E.equip(item= item)
             return True
         else: return False
@@ -91,7 +102,9 @@ class Player:
     @staticmethod
     def unequip(slot: str): 
         equipped= Player.return_equipped(slot= slot)
-        I.add_item(item= equipped)
+        Player.add_item(item= equipped)
+        if equipped.buff:
+            Player.update_buff(equipped.buff, remove = True)
         E.unequip(slot= slot)
 
     @staticmethod
@@ -99,8 +112,9 @@ class Player:
         if not item.requirements: return True
         index= 0
         attributes= Player.return_attributes()
+        buff_values = Player.return_buff_values()
         for requirement in item.requirements:
-            attribute= attributes.get(a[index])
+            attribute= attributes.get(a[index]) + buff_values.get(a[index])
             index+= 1
             if requirement> attribute:
                 return False
@@ -121,8 +135,9 @@ class Player:
     @staticmethod
     def get_equipment(dict: dict):
         E.get_equipment(dict= dict)
+    #endregion
 
-### Attributes ###
+#region Attributes
     @staticmethod
     def update_attribute(type: str, value: int):
         A.update_attribute(type= type, value= value)
@@ -133,13 +148,14 @@ class Player:
 
     @staticmethod
     def return_attributes():
-        return A.attributes
+        return A.values
     
     @staticmethod
     def get_attributes(dict: dict):
         A.get_attributes(dict= dict)
+    #endregion
 
-### Statistics ###
+#region Statistics
     @staticmethod
     def update_statistics():
         S.update_statistics()
@@ -152,6 +168,9 @@ class Player:
     def return_statistics():
         return S.statistics
     
+    def return_statistics_values():
+        return S.values
+    
     @staticmethod
     def recover_value(type: int):
         S.recover_value(type= type)
@@ -159,8 +178,9 @@ class Player:
     @staticmethod
     def recover_full():
         S.recover_full()
+    #endregion
         
-### Resources###
+#region Resources
     @staticmethod
     def update_currency(value: int):
         R.update_resource(value= value, resource= 0)
@@ -172,13 +192,35 @@ class Player:
     @staticmethod
     def return_resources():
         return R.resources
+    #endregion
     
-### Items ###
+#region Items
     @staticmethod
     def use_item(item):
         for effect in item.effect:
             if effect[0] in S.statistics:
                 Player.update_statvalue(type= effect[0], value= effect[1])
-            elif effect[0] in A.attributes:
+            elif effect[0] in A.values:
                 Player.update_attribute(type= effect[0], value= effect[1])
+                Player.update_statistics()
         Player.remove_item(item)
+    #endregion
+
+#region Buffs
+    @staticmethod
+    def return_buffs():
+        return B.buffs
+
+    @staticmethod
+    def return_buff_values():
+        return B.values
+    
+    def update_buff(buff: dict, remove: bool = False):
+        B.update_buff(buff = buff, remove = remove)
+        types = buff.get('type')
+        for t in types:
+            if t in Player.player.get(p[2])[1]:
+                pass
+            else:
+                Player.update_statistics()
+    #endregion
