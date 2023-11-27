@@ -41,15 +41,15 @@ class Equipment:
             cls.equipment.update({slot: value})
 
     @classmethod
-    def update_value(cls, type:str, value:int):
-        new_value = cls.values.get(type) + B.values.get(type) + value
-        cls.values.update({type: new_value})
-
-    @classmethod
-    def update_values(cls, values: list = [0, 1, 2, 3, 4], remove: bool = False):
-        index = 0
+    def update_values(cls, values: list, remove: bool = False):
+        '''
+        see "names_values" "equipment_values" 0 - 4
+        values: list = [ev0, ev1, ev2, ev3, ev4]
+        '''
+        i = 0
         for value in cls.values:
             current = cls.values.get(value)
-            if not remove: new = current+ values[index]
-            else: new = current - values[index]
+            if not remove: new = current+ values[i]
+            else: new = current - values[i]
             cls.values.update({value: new})
+            i += 1

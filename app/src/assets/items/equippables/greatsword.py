@@ -3,7 +3,7 @@ from ...names_values import equipment as e, items as i
 
 class Greatsword(Equipable):
     '''values: Armor, Attack, Block, Range, Accuracy
-    buff: {attribute1: value1, attribute2: value2}
+    buffs: [[attribute1, attribute2], [value1, value2]]
     requirements: Body, Agility, Strenght, Dexterity, Intelligence, Light Magic, Dark Magic'''
     def __init__(self, name: str, values: list, buff: dict= None, requirements: list= None) -> None:
         super().__init__(

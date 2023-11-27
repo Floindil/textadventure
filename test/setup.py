@@ -2,6 +2,7 @@ from app.src.assets.player.player import Player
 from app.src.assets.items.others.keyitems import Keyitems as K
 from app.src.assets.items.others.consumables import Consumables as C
 from app.src.assets.items.others.materials import Materials as M
+from app.src.assets.items.equippables.armor import Armor as A
 from app.src.assets.items.equippables.sword import Sword as SW
 from app.src.assets.items.equippables.greatsword import Greatsword as GS
 from app.src.assets.items.equippables.shield import Shield as SH
@@ -22,13 +23,14 @@ def testplayer():
     ink= M(name= 'Ink')
     raw_fish= C(name= 'Raw Fisch', effect= [(s[2], -15), (a[0], -2)])
     sword= SW.swordusLongus()
-    shield= SH('Corpse', [5, 0, 5, 0, 0], requirements=[1, 1, 2, 0, 0, 0, 0])
+    shield= SH.i_shield()
     sword2= SW.swordusBiggus()
     greatsword= GS.swordusBiggustest()
     health_talisman = T.h_talisman()
     stamina_talisman = T.s_talisman()
+    leather_armor = A.l_armor()
 
-    add_testitems([key, drugs, drugs, raw_fish, sword, sword, shield, sword2, greatsword, ink, health_talisman, stamina_talisman])
+    add_testitems([key, drugs, drugs, raw_fish, sword, greatsword, sword, shield, sword2, ink, health_talisman, stamina_talisman, leather_armor])
     Player.add_item(apple, 5)
 
     test_attributes= {
@@ -72,15 +74,19 @@ def print_player():
         if isinstance(p, dict):
             '''prints first content layer if its a dict'''
             for object in p:
-                if isinstance(p.get(object), list):
+                o = p.get(object)
+                if isinstance(o, list):
                     print(f'    {object}:')
-                    for element in p.get(object):
-                        print(f'        {element}')
+                    for element in o:
+                        print(f'        {element.name}')
                 else:
-                    print(f'    {object}: {p.get(object)}')
+                    print(f'    {object}: {o}')
         elif isinstance(p, tuple):
             '''prints first content layer if its a tuple (Equipment)'''
             for this in p:
                 i = p.index(this)
                 for that in p[i]:
-                    print(f'    {that}: {p[i].get(that)}')
+                    t = p[i].get(that)
+                    if isinstance(t, int) or not t or isinstance(t, tuple):
+                        print(f'    {that}: {t}')
+                    else: print(f'    {that}: {t.name}')
