@@ -1,5 +1,4 @@
 from ...names_values import equipment as e, equipment_values as ev
-from .buffs import Buffs as B
 '''
 Values imported from names_values file are only stated there to allow easy name changes late in the project
 '''
