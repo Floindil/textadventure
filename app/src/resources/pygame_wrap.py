@@ -137,6 +137,10 @@ def redrawGameWindow():
     if isJump:
         walkCount = 0
         idleCount = 0
+        if direction == 'right':
+            win.blit(idleRight[0], (x,y))
+        elif direction == 'left':
+            win.blit(idleLeft[0], (x,y))
     elif isAttack:
         walkCount = 0
         idleCount = 0
