@@ -1,6 +1,5 @@
 # Example file showing a basic pygame "game loop"
 import pygame
-import os
 from animation import Animator
 
 # region animation example
@@ -9,14 +8,6 @@ pygame.init()
 
 win = pygame.display.set_mode((1920,1080))
 pygame.display.set_caption("First Game")
-
-def load_sprites(path):
-    spriteImages = os.listdir(path)
-    spriteLIst = []
-    for sprite in spriteImages:
-        image = pygame.image.load(f'{path}/{sprite}')
-        spriteLIst.append(image)
-    return spriteLIst
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
 char_right = pygame.image.load('app/src/resources/character1/idle/Idle1.png')
@@ -44,13 +35,16 @@ walkCount = 0
 idleCount = 0
 attackCount = 0
 direction = 'right'
+menu = False
 
 def redrawGameWindow():
-    global vel, direction, isAttack, isJump, x, walk, attack, idle
+    global vel, direction, isAttack, isJump, x, walk, attack, idle, menu
     
     win.blit(bg, bg.get_rect())
-        
-    if isJump:
+    
+    if menu:
+        win.fill('green')
+    elif isJump:
         if direction == 'right':
             win.blit(char_right, (x,y))
         elif direction == 'left':
@@ -78,20 +72,36 @@ def redrawGameWindow():
     elif direction == 'left':
         idle.run((x,y), animation_speed = 2, opposite_direction = True)
         
-    pygame.display.update() 
+    pygame.display.update()
     
 
 
 run = True
 
 while run:
-    clock.tick(27)
+    clock.tick(30)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                if menu:
+                    menu = False
+                else:
+                    menu = True
 
     keys = pygame.key.get_pressed()
+
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_ESCAPE:
+            if menu:
+                menu = False
+            else:
+                menu = True
+
+    if keys[pygame.K_DELETE]:
+        run = False
     
     if keys[pygame.K_a] and x > vel: 
         x -= vel
@@ -129,7 +139,7 @@ while run:
             right = False
             vel = 0
 
-    redrawGameWindow() 
+    redrawGameWindow()
     
     
 pygame.quit()
