@@ -40,6 +40,7 @@ attackCount = 0
 fallCount = 0
 direction = 'right'
 menu = False
+menu_cooldown = 0
 
 def redrawGameWindow():
     global vel, direction, isAttack, isJump, x, walk, attack, idle, menu, y, falling
@@ -100,8 +101,10 @@ while run:
                     menu = True
 
     keys = pygame.key.get_pressed()
+    if menu > 0: menu_cooldown -= 1
 
-    if event.type == pygame.KEYDOWN:
+    if not menu_cooldown and event.type == pygame.KEYDOWN:
+        menu_cooldown == 1
         if event.key == pygame.K_ESCAPE:
             if menu:
                 menu = False
