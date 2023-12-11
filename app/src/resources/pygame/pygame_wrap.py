@@ -111,50 +111,51 @@ while run:
             else:
                 menu = True
 
-    if keys[pygame.K_DELETE]:
-        run = False
-    
-    if keys[pygame.K_a] and x > vel:
-        x -= vel
-        left = True
-        right = False
+    if not menu:
+        if keys[pygame.K_DELETE]:
+            run = False
+        
+        if keys[pygame.K_a] and x > vel:
+            x -= vel
+            left = True
+            right = False
 
-    elif keys[pygame.K_d] and x < 1920 - vel - width:  
-        x += vel
-        left = False
-        right = True
-        
-    else: 
-        left = False
-        right = False
-        walkCount = 0
-        
-    if not(isJump):
-        if keys[pygame.K_w]:
-            isJump = True
+        elif keys[pygame.K_d] and x < 1920 - vel - width:  
+            x += vel
+            left = False
+            right = True
+            
+        else: 
             left = False
             right = False
             walkCount = 0
-    else:
-        gc = level_bg.ground_check(x)
-        if jumpCount >= -10:
-            y -= int((jumpCount * abs(jumpCount)) * 0.5)
-            if y >= gc:
+            
+        if not(isJump):
+            if keys[pygame.K_w]:
+                isJump = True
+                left = False
+                right = False
+                walkCount = 0
+        else:
+            gc = level_bg.ground_check(x)
+            if jumpCount >= -10:
+                y -= int((jumpCount * abs(jumpCount)) * 0.5)
+                if y >= gc:
+                    jumpCount = 10
+                    isJump = False
+                else:
+                    jumpCount -= 1
+            else:
+                y = gc
                 jumpCount = 10
                 isJump = False
-            else:
-                jumpCount -= 1
-        else:
-            y = gc
-            jumpCount = 10
-            isJump = False
 
-    if not(isAttack):
-        if keys[pygame.K_e]:
-            isAttack = True
-            left = False
-            right = False
-            vel = 0
+        if not(isAttack):
+            if keys[pygame.K_e]:
+                isAttack = True
+                left = False
+                right = False
+                vel = 0
 
     redrawGameWindow()
     
