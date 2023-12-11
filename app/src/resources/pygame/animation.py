@@ -36,6 +36,6 @@ class Animator:
         for sprite in spriteImages:
             image = pygame.image.load(f'{sprite_path}/{sprite}')
             xy = image.get_rect()
-            pygame.transform.scale(image, (xy.bottomleft[0]/10,xy.bottomleft[1]/10))
+            image = pygame.transform.scale(image, (xy.bottomright[0]/2,xy.bottomright[1]/2))
             spriteLIst.append(image)
         return spriteLIst

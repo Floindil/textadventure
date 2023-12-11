@@ -1,6 +1,7 @@
 # Example file showing a basic pygame "game loop"
 import pygame
 from animation import Animator
+from bglayout import level_bg
 
 # region animation example
 import pygame
@@ -11,10 +12,11 @@ pygame.display.set_caption("First Game")
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
 char_right = pygame.image.load('app/src/resources/character1/idle/Idle1.png')
+char_right = pygame.transform.scale(char_right, (char_right.get_rect().bottomright[0]/2, char_right.get_rect().bottomright[1]/2))
 char_left = pygame.transform.flip(char_right, 1, 0)
 
-x = 50
-y = 400
+x = 250
+y = level_bg.calc_y(x)
 width = 40
 height = 60
 vel = 10
@@ -31,14 +33,16 @@ jumpCount = 10
 
 left = False
 right = False
+falling = False
 walkCount = 0
 idleCount = 0
 attackCount = 0
+fallCount = 0
 direction = 'right'
 menu = False
 
 def redrawGameWindow():
-    global vel, direction, isAttack, isJump, x, walk, attack, idle, menu
+    global vel, direction, isAttack, isJump, x, walk, attack, idle, menu, y, falling
     
     win.blit(bg, bg.get_rect())
     
@@ -51,10 +55,12 @@ def redrawGameWindow():
             win.blit(char_left, (x,y))
     elif isAttack:
         if direction == 'right':
+            y = level_bg.calc_y(x)
             attack.run((x,y))
             if 14 <= attackCount <= 17:
                 x += 20
         elif direction == 'left':
+            y = level_bg.calc_y(x)
             attack.run((x,y), opposite_direction = True)
             if 14 <= attackCount <= 17:
                 x -= 20
@@ -62,9 +68,11 @@ def redrawGameWindow():
             isAttack = False
             vel = 10
     elif left:
+        y = level_bg.calc_y(x)
         walk.run((x,y), opposite_direction = True)
         direction = 'left'
     elif right:
+        y = level_bg.calc_y(x)
         walk.run((x,y))
         direction = 'right'
     elif direction == 'right':
@@ -103,7 +111,7 @@ while run:
     if keys[pygame.K_DELETE]:
         run = False
     
-    if keys[pygame.K_a] and x > vel: 
+    if keys[pygame.K_a] and x > vel:
         x -= vel
         left = True
         right = False
@@ -125,10 +133,16 @@ while run:
             right = False
             walkCount = 0
     else:
+        gc = level_bg.ground_check(x)
         if jumpCount >= -10:
-            y -= (jumpCount * abs(jumpCount)) * 0.5
-            jumpCount -= 1
-        else: 
+            y -= int((jumpCount * abs(jumpCount)) * 0.5)
+            if y >= gc:
+                jumpCount = 10
+                isJump = False
+            else:
+                jumpCount -= 1
+        else:
+            y = gc
             jumpCount = 10
             isJump = False
 
