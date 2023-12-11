@@ -8,7 +8,7 @@ import pygame
 pygame.init()
 
 win = pygame.display.set_mode((1920,1080))
-pygame.display.set_caption("First Game")
+pygame.display.set_caption("Spirit Cards")
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
 char_right = pygame.image.load('app/src/resources/character1/idle/Idle1.png')
@@ -56,12 +56,10 @@ def redrawGameWindow():
             win.blit(char_left, (x,y))
     elif isAttack:
         if direction == 'right':
-            y = level_bg.calc_y(x)
             attack.run((x,y))
             if 14 <= attackCount <= 17:
                 x += 20
         elif direction == 'left':
-            y = level_bg.calc_y(x)
             attack.run((x,y), opposite_direction = True)
             if 14 <= attackCount <= 17:
                 x -= 20
@@ -69,11 +67,9 @@ def redrawGameWindow():
             isAttack = False
             vel = 10
     elif left:
-        y = level_bg.calc_y(x)
         walk.run((x,y), opposite_direction = True)
         direction = 'left'
     elif right:
-        y = level_bg.calc_y(x)
         walk.run((x,y))
         direction = 'right'
     elif direction == 'right':
@@ -116,15 +112,19 @@ while run:
             run = False
         
         if keys[pygame.K_a] and x > vel:
-            x -= vel
+            if not level_bg.wall_check(x - vel, y):
+                x -= vel
+            y = level_bg.calc_y(x)
             left = True
             right = False
 
-        elif keys[pygame.K_d] and x < 1920 - vel - width:  
-            x += vel
+        elif keys[pygame.K_d] and x < 1920 - vel - width:
+            if not level_bg.wall_check(x + vel, y):
+                x += vel
+            y = level_bg.calc_y(x)
             left = False
             right = True
-            
+        
         else: 
             left = False
             right = False
