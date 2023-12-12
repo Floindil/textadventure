@@ -18,7 +18,7 @@ class Animator:
         Displays the Animationframe depending on the Animations count
         '''
         speed = animation_speed * 3
-        image = self.spritelist[self.count//speed]
+        image = self.spritelist[int(self.count//speed)]
         if opposite_direction:
             image = pygame.transform.flip(image, 1, 0)
         self.dispaly.blit(image, position)

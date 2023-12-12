@@ -11,7 +11,7 @@ win = pygame.display.set_mode((1920,1080))
 pygame.display.set_caption("Spirit Cards")
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
-char_right = pygame.image.load('app/src/resources/character1/idle/Idle1.png')
+char_right = pygame.image.load('app/src/resources/character1/idle/Idle-1.png')
 char_right = pygame.transform.scale(char_right, (char_right.get_rect().bottomright[0]/2, char_right.get_rect().bottomright[1]/2))
 char_left = pygame.transform.flip(char_right, 1, 0)
 
@@ -24,6 +24,7 @@ vel = 10
 walk = Animator('app/src/resources/character1/walk', win)
 attack = Animator('app/src/resources/character1/attack', win)
 idle = Animator('app/src/resources/character1/idle', win)
+attack_effect = Animator('app/src/resources/effects/attack', win)
 
 clock = pygame.time.Clock()
 
@@ -57,10 +58,12 @@ def redrawGameWindow():
     elif isAttack:
         if direction == 'right':
             attack.run((x,y))
+            attack_effect.run((x+160, y))
             if 14 <= attackCount <= 17:
                 x += 20
         elif direction == 'left':
             attack.run((x,y), opposite_direction = True)
+            attack_effect.run((x-160, y), opposite_direction = True)
             if 14 <= attackCount <= 17:
                 x -= 20
         if attack.count == attack.frames*3-1:
@@ -112,15 +115,13 @@ while run:
             run = False
         
         if keys[pygame.K_a] and x > vel:
-            if not level_bg.wall_check(x - vel, y):
-                x -= vel
+            x -= vel
             y = level_bg.calc_y(x)
             left = True
             right = False
 
         elif keys[pygame.K_d] and x < 1920 - vel - width:
-            if not level_bg.wall_check(x + vel, y):
-                x += vel
+            x += vel
             y = level_bg.calc_y(x)
             left = False
             right = True
