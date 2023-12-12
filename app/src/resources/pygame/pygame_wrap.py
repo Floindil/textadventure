@@ -26,6 +26,20 @@ attack = Animator('app/src/resources/character1/attack', win)
 idle = Animator('app/src/resources/character1/idle', win)
 attack_effect = Animator('app/src/resources/effects/attack', win)
 
+creature_walk = Animator('app/src/resources/creature1/walk', win)
+creature_attack = Animator('app/src/resources/creature1/attack', win)
+creature_idle = Animator('app/src/resources/creature1/idle', win)
+creature_x = 1000
+creature_y = level_bg.calc_y(creature_x)
+
+creature_left = False
+creature_right = False
+creature_walkCount = 0
+creature_idleCount = 0
+creature_attackCount = 0
+creature_direction = 'right'
+creature_isAttack = False
+
 clock = pygame.time.Clock()
 
 isJump = False
@@ -45,40 +59,58 @@ menu_cooldown = 0
 
 def redrawGameWindow():
     global vel, direction, isAttack, isJump, x, walk, attack, idle, menu, y, falling
+    global creature_direction, creature_isAttack, creature_x, creature_walk, creature_attack, creature_idle, creature_y
     
     win.blit(bg, bg.get_rect())
     
     if menu:
         win.fill('green')
-    elif isJump:
-        if direction == 'right':
-            win.blit(char_right, (x,y))
+    else:
+
+        if creature_isAttack:
+            if creature_direction == 'right':
+                creature_attack.run((creature_x,creature_y))
+            elif creature_direction == 'left':
+                creature_attack.run((creature_x,creature_y), opposite_direction = True)
+            if creature_attack.count == creature_attack.frames*3-1:
+                creature_isAttack = False
+                vel = 10
+        elif creature_left:
+            creature_walk.run((creature_x,creature_y), opposite_direction = True)
+            creature_direction = 'left'
+        elif creature_right:
+            creature_walk.run((creature_x,creature_y))
+            creature_direction = 'right'
+        elif creature_direction == 'right':
+            creature_idle.run((creature_x,creature_y), animation_speed = 2)
         elif direction == 'left':
-            win.blit(char_left, (x,y))
-    elif isAttack:
-        if direction == 'right':
-            attack.run((x,y))
-            attack_effect.run((x+160, y))
-            if 14 <= attackCount <= 17:
-                x += 20
+            creature_idle.run((creature_x,creature_y), animation_speed = 2, opposite_direction = True)
+
+        if isJump:
+            if direction == 'right':
+                win.blit(char_right, (x,y))
+            elif direction == 'left':
+                win.blit(char_left, (x,y))
+        elif isAttack:
+            if direction == 'right':
+                attack.run((x,y))
+                attack_effect.run((x+160, y))
+            elif direction == 'left':
+                attack.run((x,y), opposite_direction = True)
+                attack_effect.run((x-160, y), opposite_direction = True)
+            if attack.count == attack.frames*3-1:
+                isAttack = False
+                vel = 10
+        elif left:
+            walk.run((x,y), opposite_direction = True)
+            direction = 'left'
+        elif right:
+            walk.run((x,y))
+            direction = 'right'
+        elif direction == 'right':
+            idle.run((x,y), animation_speed = 2)
         elif direction == 'left':
-            attack.run((x,y), opposite_direction = True)
-            attack_effect.run((x-160, y), opposite_direction = True)
-            if 14 <= attackCount <= 17:
-                x -= 20
-        if attack.count == attack.frames*3-1:
-            isAttack = False
-            vel = 10
-    elif left:
-        walk.run((x,y), opposite_direction = True)
-        direction = 'left'
-    elif right:
-        walk.run((x,y))
-        direction = 'right'
-    elif direction == 'right':
-        idle.run((x,y), animation_speed = 2)
-    elif direction == 'left':
-        idle.run((x,y), animation_speed = 2, opposite_direction = True)
+            idle.run((x,y), animation_speed = 2, opposite_direction = True)
         
     pygame.display.update()
     
@@ -134,33 +166,35 @@ while run:
             left = False
             right = False
             walkCount = 0
-            
-        if not(isJump):
-            if keys[pygame.K_w]:
-                isJump = True
-                left = False
-                right = False
-                walkCount = 0
-        else:
-            gc = level_bg.ground_check(x)
-            if jumpCount >= -10:
-                y -= int((jumpCount * abs(jumpCount)) * 0.5)
-                if y >= gc:
+        
+        if not isJump:
+            if not(isAttack):
+                if keys[pygame.K_e]:
+                    isAttack = True
+                    left = False
+                    right = False
+                    vel = 0
+
+        if not isAttack:
+            if not(isJump):
+                if keys[pygame.K_w]:
+                    isJump = True
+                    left = False
+                    right = False
+                    walkCount = 0
+            else:
+                gc = level_bg.ground_check(x)
+                if jumpCount >= -10:
+                    y -= int((jumpCount * abs(jumpCount)) * 0.5)
+                    if y >= gc:
+                        jumpCount = 10
+                        isJump = False
+                    else:
+                        jumpCount -= 1
+                else:
+                    y = gc
                     jumpCount = 10
                     isJump = False
-                else:
-                    jumpCount -= 1
-            else:
-                y = gc
-                jumpCount = 10
-                isJump = False
-
-        if not(isAttack):
-            if keys[pygame.K_e]:
-                isAttack = True
-                left = False
-                right = False
-                vel = 0
 
     redrawGameWindow()
     
