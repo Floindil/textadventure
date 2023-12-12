@@ -115,14 +115,18 @@ while run:
             run = False
         
         if keys[pygame.K_a] and x > vel:
-            x -= vel
-            y = level_bg.calc_y(x)
+            if not level_bg.wall_check(x-vel, y):
+                x -= vel
+            if not isJump:
+                y = level_bg.calc_y(x)
             left = True
             right = False
 
         elif keys[pygame.K_d] and x < 1920 - vel - width:
-            x += vel
-            y = level_bg.calc_y(x)
+            if not level_bg.wall_check(x+vel, y):
+                x += vel
+            if not isJump:
+                y = level_bg.calc_y(x)
             left = False
             right = True
         

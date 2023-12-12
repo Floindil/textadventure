@@ -2,12 +2,12 @@ platforms = [
     [0, 270, 660, 660],
     [270, 440, 660, 570],
     [440, 460, 570, 570],
-    [460, 550, 800, 800],
+    [460, 550, 700, 700],
     [550, 2000, 475, 475]
 ]
 walls = [
-    [460, 800, 570],
-    [550, 800, 475]
+    [460, 801, 570],
+    [550, 801, 475]
 ]
 
 class Levelhandler:
@@ -38,8 +38,8 @@ class Levelhandler:
             
     def wall_check(self, x: int, y: int):
         for wall in self.walls:
-            if x == wall[0] and wall[1] > y > wall[2]:
+            if x == wall[0] and y < wall[1] and y > wall[2]:
                 return True
-            else: return False
+        return False
             
 level_bg = Levelhandler(platforms, walls)
