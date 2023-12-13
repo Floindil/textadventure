@@ -29,12 +29,12 @@ class Levelhandler:
                     diff_y = platform[2] - platform[3]
                     part_y = diff_y/diff_x*(x - platform[0])
                     y = platform[2] - part_y
-                return y
+                return int(y)
     
     def ground_check(self, x: int):
         for platform in self.platforms:
             if x < platform[1]:
-                return self.calc_y(x)
+                return int(self.calc_y(x))
             
     def wall_check(self, x: int, y: int):
         for wall in self.walls:

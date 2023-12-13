@@ -12,6 +12,7 @@ class Animator:
         self.spritelist = self.sprite_loader(sprite_path = sprite_path)
         self.frames = len(self.spritelist)
         self.count = 0
+        self.cycles = 0
 
     def run(self, position: tuple, animation_speed: int = 1, opposite_direction: bool = False):
         '''
@@ -23,8 +24,13 @@ class Animator:
             image = pygame.transform.flip(image, 1, 0)
         self.dispaly.blit(image, position)
         self.count +=1
-        if self.count > self.frames * 3 - 1:
+        if self.count >= self.frames * 3 - 1:
             self.count = 0
+            self.cycles += 1
+
+    def reset(self):
+        self.cycles = 0
+        self.count = 0
 
     @staticmethod
     def sprite_loader(sprite_path):
