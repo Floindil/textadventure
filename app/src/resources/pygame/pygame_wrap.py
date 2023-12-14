@@ -155,11 +155,13 @@ while run:
 
         if player_moveset.state == 'roll':
             if player_moveset.direction == 'right':
-                if not level_bg.wall_check(x+vel*2, y):
-                    x += vel*2
+                if not level_bg.wall_check(x+vel, y):
+                    if not level_bg.wall_check(x+vel*2, y):
+                        x += vel*2
             elif player_moveset.direction == 'left':
-                if not level_bg.wall_check(x-vel*2, y):
-                    x -= vel*2
+                if not level_bg.wall_check(x-vel, y):
+                    if not level_bg.wall_check(x-vel*2, y):
+                        x -= vel*2
             y = level_bg.calc_y(x)
             if player_moveset.animations.get('roll').cycles >= 1 and not keys[pygame.K_e]:
                 player_moveset.animations.get('roll').reset()
