@@ -150,7 +150,7 @@ while run:
             count = player_moveset.animations.get('jump').count
             add_y = int(((count-frames/2)**2 - (frames/2)**2)*4)
             y = last_y + add_y
-            if count >= frames/2 and y >= level_bg.ground_check(x) or player_moveset.animations.get('jump').cycles >= 1 and not keys[pygame.K_SPACE]:
+            if count >= frames/2 and y >= level_bg.ground_check(x) or player_moveset.animations.get('jump').cycles >= 1:
                 y = level_bg.calc_y(x)
                 player_moveset.animations.get('jump').reset()
                 player_moveset.set_state('idle')
@@ -189,7 +189,7 @@ while run:
             if creature1_moveset.direction == 'left': creature_x -= creature_vel
             elif creature1_moveset.direction == 'right': creature_x += creature_vel
 
-        if abs(creature_x - x) < 50 and creature_cooldown == 0: creature1_moveset.set_state('attack')
+        if abs(creature_x - x) < 150 and creature_cooldown == 0: creature1_moveset.set_state('attack')
 
         if creature_cooldown > 0: creature_cooldown -= 1
 
@@ -207,7 +207,7 @@ while run:
                     creature_x -= 5
             if ca.cycles >= 1:
                 creature_cooldown = 10
-                creature1_moveset.set_state('idle')
+                creature1_moveset.set_state('walk')
                 creature1_moveset.animations.get('attack').reset()
 
 
