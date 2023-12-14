@@ -19,3 +19,6 @@ class Moveset:
 
     def set_state(self, state: str):
         self.state = state
+
+    def set_direction(self, direction: str):
+        self.direction = direction

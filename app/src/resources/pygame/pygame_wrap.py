@@ -37,7 +37,8 @@ player_moveset = Moveset(
 attack_effect = Animator('app/src/resources/effects/attack', win)
 
 creature_x = 1000
-creature_y = level_bg.calc_y(creature_x)
+creature_y = level_bg.calc_y(creature_x) + 100
+creature_vel = 7
 creature1_moveset = Moveset(win, 'app/src/resources/creature1/')
 
 clock = pygame.time.Clock()
@@ -65,6 +66,7 @@ def redrawGameWindow():
     pygame.display.update()
 
 run = True
+creature_cooldown = 0
 
 while run:
     clock.tick(30)
@@ -171,13 +173,46 @@ while run:
 
     #region Creature behaviour
 
-        creature1_moveset.state = 'walk'
+        if creature1_moveset.state != 'attack':
+            if creature1_moveset.direction == 'right' and creature_x >= 1500 or creature1_moveset.direction == 'left' and creature_x <= 1000:
+                creature1_moveset.set_state('idle')
+        
+        if creature1_moveset.animations.get('idle').cycles >= 5:
+            creature1_moveset.animations.get('idle').reset()
+            if creature1_moveset.direction == 'right':
+                creature1_moveset.set_direction('left')
+            elif creature1_moveset.direction == 'left':
+                creature1_moveset.set_direction('right')
+            creature1_moveset.set_state('walk')
 
-        if creature_x >= 1500: creature1_moveset.direction = 'left'
-        elif creature_x <= 1000: creature1_moveset.direction = 'right'
+        if creature1_moveset.state == 'walk':
+            if creature1_moveset.direction == 'left': creature_x -= creature_vel
+            elif creature1_moveset.direction == 'right': creature_x += creature_vel
 
-        if creature1_moveset.direction == 'left': creature_x -= 10
-        elif creature1_moveset.direction == 'right': creature_x += 10
+        if abs(creature_x - x) < 50 and creature_cooldown == 0: creature1_moveset.set_state('attack')
+
+        if creature_cooldown > 0: creature_cooldown -= 1
+
+        if creature1_moveset.state == 'attack':
+            ca = creature1_moveset.animations.get('attack')
+            if creature1_moveset.direction == 'right':
+                if ca.count == 5:
+                    creature_x += 100
+                if ca.count == 6: 
+                    creature_x += 5
+            elif creature1_moveset.direction == 'left':
+                if ca.count == 5:
+                    creature_x -= 100
+                if ca.count == 6: 
+                    creature_x -= 5
+            if ca.cycles >= 1:
+                creature_cooldown = 10
+                creature1_moveset.set_state('idle')
+                creature1_moveset.animations.get('attack').reset()
+
+
+
+
 
         #endregion
 
