@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "app/src/resources/pygame/pygame_wrap.py",
+            "program": "app/src/resources/pygameResource/pygame_wrap.py",
             "console": "integratedTerminal",
             "justMyCode": true
         }
