@@ -5,7 +5,6 @@ from moveset import Moveset
 from bglayout import level_bg
 
 # region animation example
-import pygame
 pygame.init()
 
 win = pygame.display.set_mode((1920,1080), pygame.FULLSCREEN)
@@ -182,28 +181,23 @@ while run:
         if creature1_moveset.state == 'attack':
             ca = creature1_moveset.animations.get('attack')
             if creature1_moveset.direction == 'right':
-                if ca.count == 5:
-                    creature_x += 100
-                if ca.count == 6: 
+                if ca.count == 18:
+                    creature_x += 150
+                if ca.count in (19, 20): 
                     creature_x += 5
             elif creature1_moveset.direction == 'left':
-                if ca.count == 5:
-                    creature_x -= 100
-                if ca.count == 6: 
+                if ca.count == 18:
+                    creature_x -= 150
+                if ca.count in (19, 20): 
                     creature_x -= 5
             if ca.cycles >= 1:
                 creature_cooldown = 10
                 creature1_moveset.set_state('walk')
                 creature1_moveset.animations.get('attack').reset()
 
-
-
-
-
         #endregion
 
     redrawGameWindow()
-    
     
 pygame.quit()
 # endregion

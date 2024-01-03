@@ -24,7 +24,7 @@ class Animator:
             image = pygame.transform.flip(image, 1, 0)
         self.dispaly.blit(image, position)
         self.count +=1
-        if self.count >= self.frames * 3 - 1:
+        if self.count >= self.frames * 3:
             self.count = 0
             self.cycles += 1
 
