@@ -160,6 +160,10 @@ while run:
         if creature1_moveset.state != 'attack':
             if creature1_moveset.direction == 'right' and creature_x >= 1500 or creature1_moveset.direction == 'left' and creature_x <= 1000:
                 creature1_moveset.set_state('idle')
+            if abs(creature_x - x) < 150 and creature_cooldown == 0:
+                if creature_x - x < 0:creature1_moveset.set_direction('right')
+                else: creature1_moveset.set_direction('left')
+                creature1_moveset.set_state('attack')
         
         if creature1_moveset.animations.get('idle').cycles >= 5:
             creature1_moveset.animations.get('idle').reset()
@@ -172,8 +176,6 @@ while run:
         if creature1_moveset.state == 'walk':
             if creature1_moveset.direction == 'left': creature_x -= creature_vel
             elif creature1_moveset.direction == 'right': creature_x += creature_vel
-
-        if abs(creature_x - x) < 150 and creature_cooldown == 0: creature1_moveset.set_state('attack')
 
         if creature_cooldown > 0: creature_cooldown -= 1
 
