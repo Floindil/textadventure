@@ -8,18 +8,13 @@ from bglayout import level_bg
 import pygame
 pygame.init()
 
-win = pygame.display.set_mode((1920,1080))
+win = pygame.display.set_mode((1920,1080), pygame.FULLSCREEN)
 pygame.display.set_caption("Spirit Cards")
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
-char_right = pygame.image.load('app/src/resources/character1/idle/Idle-1.png')
-char_right = pygame.transform.scale(char_right, (char_right.get_rect().bottomright[0]/2, char_right.get_rect().bottomright[1]/2))
-char_left = pygame.transform.flip(char_right, 1, 0)
 
 x = 250
 y = level_bg.calc_y(x)
-width = 40
-height = 60
 vel = 10
 
 player_moveset = Moveset(
@@ -44,10 +39,9 @@ creature1_moveset = Moveset(win, 'app/src/resources/creature1/')
 clock = pygame.time.Clock()
 
 menu = False
-menu_cooldown = 0
 
 def redrawGameWindow():
-    global vel, direction, isAttack, isJump, x, walk, attack, idle, menu, y, falling
+    global vel, x, menu, y
     
     win.blit(bg, bg.get_rect())
     
@@ -82,18 +76,9 @@ while run:
                     menu = True
 
     keys = pygame.key.get_pressed()
-    if menu > 0: menu_cooldown -= 1
 
     if keys[pygame.K_DELETE]:
             run = False
-
-    if not menu_cooldown and event.type == pygame.KEYDOWN:
-        menu_cooldown == 1
-        if event.key == pygame.K_ESCAPE:
-            if menu:
-                menu = False
-            else:
-                menu = True
 
     if not menu:
 
@@ -110,7 +95,7 @@ while run:
                 if player_moveset.state != 'jump':
                     y = level_bg.calc_y(x)
 
-            elif keys[pygame.K_d] and x < 1920 - vel - width:
+            elif keys[pygame.K_d] and x < 1920 - vel:
                 player_moveset.direction = 'right'
                 player_moveset.set_state('walk')
                 if not level_bg.wall_check(x+vel, y):
@@ -172,7 +157,6 @@ while run:
         #endregion
 
     #region Creature behaviour
-
         if creature1_moveset.state != 'attack':
             if creature1_moveset.direction == 'right' and creature_x >= 1500 or creature1_moveset.direction == 'left' and creature_x <= 1000:
                 creature1_moveset.set_state('idle')
