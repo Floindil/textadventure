@@ -8,7 +8,7 @@ class Animator:
     display: Where the Animation will be played
     '''
     def __init__(self, sprite_path: str, display: pygame.display) -> None:
-        self.dispaly = display
+        self.display = display
         self.spritelist = self.sprite_loader(sprite_path = sprite_path)
         self.frames = len(self.spritelist)
         self.count = 0
@@ -22,7 +22,7 @@ class Animator:
         image = self.spritelist[int(self.count//speed)]
         if opposite_direction:
             image = pygame.transform.flip(image, 1, 0)
-        self.dispaly.blit(image, position)
+        self.display.blit(image, position)
         self.count +=1
         if self.count >= self.frames * 3:
             self.count = 0

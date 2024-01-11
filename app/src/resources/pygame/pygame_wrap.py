@@ -39,13 +39,22 @@ clock = pygame.time.Clock()
 
 menu = False
 
+button1images = [pygame.image.load("app/src/resources/pygame/menu/button1up.png"),pygame.image.load("app/src/resources/pygame/menu/button1down.png")]
+buttonsize = (195,71)
+buttonposition = (500,500)
+buttonstate = False
+
 def redrawGameWindow():
-    global vel, x, menu, y
+    global vel, x, menu, y, buttonstate
     
     win.blit(bg, bg.get_rect())
     
     if menu:
         win.fill('green')
+        if not buttonstate: buttonindex = 0
+        else: buttonindex = 1
+        win.blit(button1images[buttonindex], buttonposition)
+        
     else:
 
         creature1_moveset.run(creature_x, creature_y)
@@ -78,6 +87,12 @@ while run:
 
     if keys[pygame.K_DELETE]:
             run = False
+    if menu:
+        mouse_position = pygame.mouse.get_pos()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if buttonposition[0] < mouse_position[0] < buttonposition[0]+buttonsize[0] and buttonposition[1] < mouse_position[1] < buttonposition[0]+buttonsize[1]:
+                buttonstate = True
+        else: buttonstate = False
 
     if not menu:
 

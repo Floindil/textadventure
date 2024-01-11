@@ -1,5 +1,5 @@
 from unittest import TestCase
-from test.setup import testplayer, print_player
+from setup import testplayer, print_player
 from app.src.assets.player.player import Player as P
 from app.src.assets.items.others.consumables import Consumables
 from app.src.assets.items.equippables.basic.equipable import Equipable
