@@ -3,6 +3,7 @@ import pygame
 from animation import Animator
 from moveset import Moveset
 from bglayout import level_bg
+from menu.menu import Menu
 
 # region animation example
 pygame.init()
@@ -37,26 +38,17 @@ creature1_moveset = Moveset(win, 'app/src/resources/creature1/')
 
 clock = pygame.time.Clock()
 
-menu = False
-
-button1images = [pygame.image.load("app/src/resources/pygame/menu/button1up.png"),pygame.image.load("app/src/resources/pygame/menu/button1down.png")]
-buttonsize = (195,71)
-buttonposition = (500,500)
-buttonstate = False
+menu = Menu()
 
 def redrawGameWindow():
-    global vel, x, menu, y, buttonstate
+    global vel, x, y
     
     win.blit(bg, bg.get_rect())
     
-    if menu:
-        win.fill('green')
-        if not buttonstate: buttonindex = 0
-        else: buttonindex = 1
-        win.blit(button1images[buttonindex], buttonposition)
+    if menu.state:
+        menu.update(win)
         
     else:
-
         creature1_moveset.run(creature_x, creature_y)
         player_moveset.run(x, y)
         if player_moveset.state == 'attack':
@@ -78,21 +70,21 @@ while run:
             run = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                if menu:
-                    menu = False
+                if menu.state:
+                    menu.switch()
                 else:
-                    menu = True
+                    menu.switch()
 
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_DELETE]:
             run = False
-    if menu:
-        mouse_position = pygame.mouse.get_pos()
+    if menu.state:
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if buttonposition[0] < mouse_position[0] < buttonposition[0]+buttonsize[0] and buttonposition[1] < mouse_position[1] < buttonposition[0]+buttonsize[1]:
-                buttonstate = True
-        else: buttonstate = False
+            menu.button1.press()
+        else: menu.button1.set_down(False)
+    if menu.button1.down:
+        run = False
 
     if not menu:
 
