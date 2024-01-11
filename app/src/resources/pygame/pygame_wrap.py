@@ -80,11 +80,13 @@ while run:
     if keys[pygame.K_DELETE]:
             run = False
     if menu.state:
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            menu.button1.press()
-        else: menu.button1.set_down(False)
-    if menu.button1.down:
-        run = False
+        if pygame.mouse.get_pressed()[0]:
+            for button in menu.buttons:
+                button.press()
+        else:
+            for button in menu.buttons:
+                button.set_down(False)
+        run = menu.buttonactions()
 
     if not menu:
 

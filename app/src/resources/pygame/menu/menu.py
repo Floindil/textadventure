@@ -3,17 +3,30 @@ import pygame
 class Menu:
     def __init__(self) -> None:
         self.state = False
-        self.button1 = Button("button1", (500,500))
+        button1 = Button("button1", (500,500))
+        button2 = Button("button1", (500,400))
+        self.buttons = [button1, button2]
 
     def update(self, surface: pygame.surface):
-        surface.fill('green')
-        self.button1.display(surface)
+        for button in self.buttons:
+            button.display(surface)
 
     def switch(self):
         if self.state:
             self.state = False
         else:
             self.state = True
+        
+    def buttonactions(self):
+        if self.buttons[0].down:
+            print("close menu")
+            self.state = False
+            return True
+        if self.buttons[1].down:
+            print("quit Game")
+            return False
+        return True
+
 
 class Button:
     def __init__(self, name: str, position:tuple) -> None:
