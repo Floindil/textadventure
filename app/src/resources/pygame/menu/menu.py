@@ -7,7 +7,7 @@ class Menu:
         '''
         self.state = False
         button1 = Button("button1", (500,500))
-        button2 = Button("button1", (500,400))
+        button2 = Button("button2", (500,400))
         self.buttons = [button1, button2]
 
     def update(self, surface: pygame.surface):
