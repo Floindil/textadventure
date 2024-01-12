@@ -13,6 +13,7 @@ pygame.display.set_caption("Spirit Cards")
 
 bg = pygame.image.load('app/src/resources/bg.jpg')
 
+#region Player variables ---to be outsourced to other file---
 x = 250
 y = level_bg.calc_y(x)
 vel = 10
@@ -30,11 +31,15 @@ player_moveset = Moveset(
 )
 
 attack_effect = Animator('app/src/resources/effects/attack', win)
+#endregion
 
+#region creature1 variables ---to be outsourced to other file---
 creature_x = 1000
 creature_y = level_bg.calc_y(creature_x) + 100
 creature_vel = 7
 creature1_moveset = Moveset(win, 'app/src/resources/creature1/')
+creature_cooldown = 0
+#endregion
 
 clock = pygame.time.Clock()
 
@@ -60,11 +65,13 @@ def redrawGameWindow():
     pygame.display.update()
 
 run = True
-creature_cooldown = 0
 
 while run:
+
+    #region eventhandler
     clock.tick(30)
 
+    #region app behaviour
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
@@ -87,10 +94,11 @@ while run:
             for button in menu.buttons:
                 button.set_down(False)
         run = menu.buttonactions()
+    #endregion
 
     if not menu:
 
-    #region Player behaviour
+    #region Player behaviour ---to be outsourced to other file---
         if player_moveset.state == 'walk':
             player_moveset.set_state('idle')
         
@@ -161,10 +169,9 @@ while run:
             if player_moveset.animations.get('roll').cycles >= 1 and not keys[pygame.K_e]:
                 player_moveset.animations.get('roll').reset()
                 player_moveset.set_state('idle')
-
         #endregion
 
-    #region Creature behaviour
+    #region Creature behaviour ---to be outsourced to other file---
         if creature1_moveset.state != 'attack':
             if creature1_moveset.direction == 'right' and creature_x >= 1500 or creature1_moveset.direction == 'left' and creature_x <= 1000:
                 creature1_moveset.set_state('idle')
@@ -203,9 +210,9 @@ while run:
                 creature_cooldown = 10
                 creature1_moveset.set_state('walk')
                 creature1_moveset.animations.get('attack').reset()
-
         #endregion
-
+    #endregion
+    
     redrawGameWindow()
     
 pygame.quit()
