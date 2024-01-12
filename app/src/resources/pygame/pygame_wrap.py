@@ -83,6 +83,7 @@ while run:
                     menu.switch()
 
     keys = pygame.key.get_pressed()
+    
 
     if keys[pygame.K_DELETE]:
             run = False
@@ -93,7 +94,7 @@ while run:
         else:
             for button in menu.buttons:
                 button.set_down(False)
-        run = menu.buttonactions()
+    if menu.state: run = menu.buttonactions()
     #endregion
 
     if not menu:
