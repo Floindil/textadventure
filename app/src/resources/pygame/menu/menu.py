@@ -6,8 +6,8 @@ class Menu:
         Class to hold the elements of the menu.
         '''
         self.state = False
-        button1 = Button("button1", (500,500))
-        button2 = Button("button2", (500,400))
+        button1 = Button("button2", (500,500))
+        button2 = Button("button1", (500,400))
         self.buttons = [button1, button2]
 
     def update(self, surface: pygame.surface):
@@ -19,25 +19,20 @@ class Menu:
         for button in self.buttons:
             button.display(surface)
 
-    def switch(self):
+    def set_state(self, state: bool):
         '''
         switches the "state" variable from True to False and vice versa.
         '''
-        if self.state:
-            self.state = False
-        else:
-            self.state = True
+        self.state = state
         
     def buttonactions(self):
         '''
         Methods for the buttons in the "buttons" list.
         '''
         if self.buttons[0].down:
-            print("close menu")
             self.state = False
             return True
         if self.buttons[1].down:
-            print("quit Game")
             return False
         return True
 
@@ -78,3 +73,12 @@ class Button:
         sets the "down" variable to the input value.
         '''
         self.down = input
+
+    def switch(self):
+        '''
+        switches the "state" variable from True to False and vice versa.
+        '''
+        if self.down:
+            self.down = False
+        else:
+            self.down = True

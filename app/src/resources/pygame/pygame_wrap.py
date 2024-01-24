@@ -78,26 +78,28 @@ while run:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 if menu.state:
-                    menu.switch()
+                    menu.set_state(False)
                 else:
-                    menu.switch()
+                    menu.set_state(True)
 
     keys = pygame.key.get_pressed()
     
-
     if keys[pygame.K_DELETE]:
             run = False
     if menu.state:
+        run = menu.buttonactions()
         if pygame.mouse.get_pressed()[0]:
             for button in menu.buttons:
                 button.press()
         else:
             for button in menu.buttons:
                 button.set_down(False)
-    if menu.state: run = menu.buttonactions()
+
     #endregion
 
-    if not menu:
+    if not menu.state:
+        for button in menu.buttons:
+            button.set_down(False)
 
     #region Player behaviour ---to be outsourced to other file---
         if player_moveset.state == 'walk':
