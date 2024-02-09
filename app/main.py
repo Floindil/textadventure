@@ -1,3 +1,3 @@
-from src.resources.pygameResource.gameloop import gameloop
+from src.resources.UI.gameloop import gameloop
 
 gameloop()

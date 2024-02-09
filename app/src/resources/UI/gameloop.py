@@ -4,9 +4,9 @@ def gameloop():
     pygame.init()
 
     #region Setup
-    displaySize = (1000,800)
+    displaySize = (1024,1024)
     display = pygame.display.set_mode(displaySize)
-    pygame.display.set_caption("Spirit Cards")
+    pygame.display.set_caption("Textadventure")
 
     clock = pygame.time.Clock()
 
@@ -37,8 +37,8 @@ def gameloop():
                         menu = False
                     else:
                         menu = True
-                    pygame.mouse.set_visible(menu)
-                    pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
+                    #pygame.mouse.set_visible(menu)
+                    #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
         
         # define what happens outside of menu
         if not menu:
