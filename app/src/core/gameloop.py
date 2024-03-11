@@ -1,24 +1,36 @@
 import pygame
+from src.core.configuration import Configuration
+from src.resources.UI.elements import Button
 
 def gameloop():
     pygame.init()
 
     #region Setup
-    displaySize = (1024,1024)
+    displaySize = Configuration.DISPLAY_SIZE
     display = pygame.display.set_mode(displaySize)
     pygame.display.set_caption("Textadventure")
 
     clock = pygame.time.Clock()
-
     menu = False
-    pygame.mouse.set_visible(menu)
+
+    def some_action():
+        print("action!")
+        
+    button = Button(display,(500,500), (300,50),some_action)
+    buttons = [button]
+
+
+    #pygame.mouse.set_visible(menu)
     #endregion Setup
 
     def displayUpdate():
         if not menu:
-            display.fill('white')
+            display.fill('blue')
         else:
             display.fill('grey')
+            for b in buttons:
+                b.place()
+
         pygame.display.update()
 
     run = True
@@ -39,6 +51,11 @@ def gameloop():
                         menu = True
                     #pygame.mouse.set_visible(menu)
                     #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
+            if menu:
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for b in buttons:
+                        if b.mousecheck():
+                            b.action()
         
         # define what happens outside of menu
         if not menu:
