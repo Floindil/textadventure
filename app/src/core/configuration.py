@@ -1,3 +1,3 @@
 class Configuration:
 
-    DISPLAY_SIZE = (1024,1024)
+    DISPLAY_SIZE = (1000,700)

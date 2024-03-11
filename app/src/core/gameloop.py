@@ -11,12 +11,13 @@ def gameloop():
     pygame.display.set_caption("Textadventure")
 
     clock = pygame.time.Clock()
-    menu = False
+    menu = True
 
     def some_action():
         print("action!")
-        
-    button = Button(display,(500,500), (300,50),some_action)
+    buttonsize = (300,50)
+    buttonposition = (displaySize[0]/2-buttonsize[0]/2,displaySize[1]/2-buttonsize[1]/2)
+    button = Button(display,(buttonposition), buttonsize,some_action)
     buttons = [button]
 
 
