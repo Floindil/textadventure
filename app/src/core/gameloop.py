@@ -2,6 +2,7 @@ import pygame
 from src.core.configuration import Configuration
 from src.scenes.menu.menu import Menu
 from src.scenes.test_scene.test_scene import TestScene
+from src.scenes.scene import Scene
 
 class Gameloop:
     def __init__(self) -> None:
@@ -27,7 +28,10 @@ class Gameloop:
                 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        self.change_scene()
+                        if isinstance(self.scene, Menu):
+                            self.change_scene(TestScene)
+                        else:
+                            self.change_scene(Menu)
                         #pygame.mouse.set_visible(menu)
                         #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
                 if self.menu:
@@ -49,8 +53,5 @@ class Gameloop:
 
         pygame.display.update()
 
-    def change_scene(self):
-            if isinstance(self.scene, Menu):
-                self.scene = TestScene(self.display)
-            else:
-                self.scene = Menu(self.display)
+    def change_scene(self, scene: Scene):
+        self.scene = scene(self.display)
