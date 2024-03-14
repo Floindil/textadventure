@@ -1,3 +1,4 @@
-from src.core.gameloop import gameloop
+from src.core.gameloop import Gameloop
 
-gameloop()
+gl = Gameloop()
+gl.run()

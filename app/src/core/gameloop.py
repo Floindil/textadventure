@@ -1,67 +1,56 @@
 import pygame
 from src.core.configuration import Configuration
-from src.resources.UI.elements import Button
+from src.scenes.menu.menu import Menu
+from src.scenes.test_scene.test_scene import TestScene
 
-def gameloop():
-    pygame.init()
+class Gameloop:
+    def __init__(self) -> None:
+        displaySize = Configuration.DISPLAY_SIZE
+        self.fps = Configuration.FPS
+        self.display = pygame.display.set_mode(displaySize)
+        pygame.display.set_caption("Textadventure")
+        self.scene = Menu(self.display)
+        self.clock = pygame.time.Clock()
+        self.menu = True
 
-    #region Setup
-    displaySize = Configuration.DISPLAY_SIZE
-    display = pygame.display.set_mode(displaySize)
-    pygame.display.set_caption("Textadventure")
+    def run(self):
+        pygame.init()
 
-    clock = pygame.time.Clock()
-    menu = True
+        run = True
 
-    def some_action():
-        print("action!")
-    buttonsize = (300,50)
-    buttonposition = (displaySize[0]/2-buttonsize[0]/2,displaySize[1]/2-buttonsize[1]/2)
-    button = Button(display,(buttonposition), buttonsize,some_action)
-    buttons = [button]
+        while run:
+            self.clock.tick(self.fps)
 
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        self.change_scene()
+                        #pygame.mouse.set_visible(menu)
+                        #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
+                if self.menu:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        for b in self.scene.buttons:
+                            if b.mousecheck():
+                                b.action()
+            
+            # define what happens outside of menu
+            if not self.menu:
+                keys = pygame.key.get_pressed()
 
-    #pygame.mouse.set_visible(menu)
-    #endregion Setup
+            self.displayUpdate()
 
-    def displayUpdate():
-        if not menu:
-            display.fill('blue')
-        else:
-            display.fill('grey')
-            for b in buttons:
-                b.place()
+        pygame.quit()
+
+    def displayUpdate(self):
+        self.scene.render()
 
         pygame.display.update()
 
-    run = True
-    fps = 60
-
-    while run:
-        clock.tick(fps)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-            
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    if menu:
-                        menu = False
-                    else:
-                        menu = True
-                    #pygame.mouse.set_visible(menu)
-                    #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
-            if menu:
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    for b in buttons:
-                        if b.mousecheck():
-                            b.action()
-        
-        # define what happens outside of menu
-        if not menu:
-            keys = pygame.key.get_pressed()
-
-        displayUpdate()
-
-    pygame.quit()
+    def change_scene(self):
+            if isinstance(self.scene, Menu):
+                self.scene = TestScene(self.display)
+            else:
+                self.scene = Menu(self.display)
