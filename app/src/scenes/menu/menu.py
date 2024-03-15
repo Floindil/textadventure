@@ -1,6 +1,6 @@
 import pygame
 from src.scenes.scene import Scene
-from src.resources.UI.elements import Button
+from src.resources.ui.elements import Button
 
 class Menu(Scene):
     def __init__(self, _display_surface: pygame.Surface) -> None:

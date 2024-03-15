@@ -3,6 +3,7 @@ from src.core.configuration import Configuration
 from src.scenes.menu.menu import Menu
 from src.scenes.test_scene.test_scene import TestScene
 from src.scenes.scene import Scene
+from src.resources.ui.controller import Controller
 
 class Gameloop:
     def __init__(self) -> None:
@@ -13,6 +14,7 @@ class Gameloop:
         self.scene = Menu(self.display)
         self.clock = pygame.time.Clock()
         self.menu = True
+        self.controller = Controller()
 
     def run(self):
         pygame.init()
@@ -30,8 +32,11 @@ class Gameloop:
                     if event.key == pygame.K_ESCAPE:
                         if isinstance(self.scene, Menu):
                             self.change_scene(TestScene)
+                            self.scene.add_controller(self.controller)
+                            self.menu = False
                         else:
                             self.change_scene(Menu)
+                            self.menu = True
                         #pygame.mouse.set_visible(menu)
                         #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
                 if self.menu:
@@ -43,6 +48,8 @@ class Gameloop:
             # define what happens outside of menu
             if not self.menu:
                 keys = pygame.key.get_pressed()
+                self.controller.update(keys)
+                self.scene.player.position = self.controller.position
 
             self.displayUpdate()
 
