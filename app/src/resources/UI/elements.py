@@ -9,6 +9,7 @@ class UIElements:
         self._display_surface = display_surface
         self._display_position = display_position
         self._rect = pygame.Rect(display_position[0], display_position[1], size[0], size[1])
+        self._surface = None
 
     def mousecheck(self) -> bool:
         _mousecoordinates = pygame.Vector2(pygame.mouse.get_pos())
