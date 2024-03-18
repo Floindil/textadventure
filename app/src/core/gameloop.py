@@ -1,9 +1,7 @@
 import pygame
 from src.core.configuration import Configuration
-from src.scenes.menu.menu import Menu
-from src.scenes.test_scene.test_scene import TestScene
-from src.scenes.scene import Scene
-from src.resources.ui.controller import Controller
+from src.resources.ui.ui import UI
+from src.scenes.menu import Menu
 
 class Gameloop:
     def __init__(self) -> None:
@@ -11,10 +9,10 @@ class Gameloop:
         self.fps = Configuration.FPS
         self.display = pygame.display.set_mode(displaySize)
         pygame.display.set_caption("Textadventure")
-        self.scene = Menu(self.display)
+        self.ui = UI(self.display)
         self.clock = pygame.time.Clock()
+        self.ui.start_menu()
         self.menu = True
-        self.controller = Controller()
 
     def run(self):
         pygame.init()
@@ -30,35 +28,34 @@ class Gameloop:
                 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
-                        if isinstance(self.scene, Menu):
-                            self.change_scene(TestScene)
-                            self.scene.add_controller(self.controller)
+                        if self.menu:
+                            self.ui.start_last_scene()
                             self.menu = False
                         else:
-                            self.change_scene(Menu)
+                            self.ui.start_menu()
                             self.menu = True
                         #pygame.mouse.set_visible(menu)
                         #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
-                if self.menu:
-                    if event.type == pygame.MOUSEBUTTONDOWN:
-                        for b in self.scene.buttons:
-                            if b.mousecheck():
-                                b.action()
+
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    for button in self.ui.return_buttons():
+                        if button.mousecheck():
+                            button.action()
+
+            if isinstance(self.ui.scene, Menu):
+                self.menu = True
+            else: self.menu = False
             
             # define what happens outside of menu
             if not self.menu:
                 keys = pygame.key.get_pressed()
-                self.controller.update(keys)
-                self.scene.player.position = self.controller.position
+                self.ui.controller.update(keys)
+                self.ui.scene.player.position = self.ui.controller.position
 
             self.displayUpdate()
 
         pygame.quit()
 
     def displayUpdate(self):
-        self.scene.render()
-
+        self.ui.render()
         pygame.display.update()
-
-    def change_scene(self, scene: Scene):
-        self.scene = scene(self.display)
