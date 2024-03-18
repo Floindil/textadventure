@@ -1,4 +1,5 @@
 from src.scenes.menu import Menu
+from src.scenes.scene import Scene
 from src.scenes.test_scene import TestScene
 from src.resources.ui.elements import Button, UIElements
 from src.resources.ui.controller import Controller
@@ -7,7 +8,11 @@ import pygame
 class UI:
 
     _display_surface: pygame.Surface
-    _elements: list[UIElements]
+    scene_elements: list[UIElements]
+    controller: Controller
+    menu: Menu
+    scene: Scene
+    last_scene: Scene
 
     def __init__(self, display_surface: pygame.Surface) -> None:
         self.controller = Controller()
@@ -17,7 +22,7 @@ class UI:
         self.last_scene = None
         self.scene = TestScene(self._display_surface)
 
-        _last_scene_button = Button(display_surface, (300,300), (200,30), self.start_last_scene, "START")
+        _last_scene_button = Button(display_surface, (self._display_surface.get_size()[0]/2-100,200), (200,30), self.start_last_scene, "START")
         _last_scene_button.fill("white")
         self._menu_elements = [_last_scene_button]
 
@@ -32,6 +37,13 @@ class UI:
         self.scene.render()
         for element in self.scene_elements:
             element.place()
+
+    def update(self, keys):
+        self.controller.update_change(keys)
+        self.scene.player.position += self.controller.position_change
+        if not self.scene.check_bounds(self.scene.player) or self.scene.check_colliders(self.scene.player):
+            self.scene.player.position -= self.controller.position_change
+        else: self.controller.update_position
         
     def start_menu(self):
         self.last_scene = self.scene

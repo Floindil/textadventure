@@ -49,8 +49,7 @@ class Gameloop:
             # define what happens outside of menu
             if not self.menu:
                 keys = pygame.key.get_pressed()
-                self.ui.controller.update(keys)
-                self.ui.scene.player.position = self.ui.controller.position
+                self.ui.update(keys)
 
             self.displayUpdate()
 
