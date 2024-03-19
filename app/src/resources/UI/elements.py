@@ -1,6 +1,6 @@
 import pygame
 
-class UIElements:
+class UIElement:
 
     TAG = "UIElement"
 
@@ -16,7 +16,7 @@ class UIElements:
         _mousecoordinates = pygame.Vector2(pygame.mouse.get_pos())
         return self._rect.collidepoint(_mousecoordinates.x, _mousecoordinates.y)
 
-class Button(UIElements):
+class Button(UIElement):
 
     TAG = "Button"
 

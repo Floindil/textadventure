@@ -1,14 +1,14 @@
 from src.scenes.menu import Menu
 from src.scenes.scene import Scene
 from src.scenes.test_scene import TestScene
-from src.resources.ui.elements import Button, UIElements
+from src.resources.ui.elements import Button, UIElement
 from src.resources.ui.controller import Controller
 import pygame
 
 class UI:
 
     _display_surface: pygame.Surface
-    scene_elements: list[UIElements]
+    scene_elements: list[UIElement]
     controller: Controller
     menu: Menu
     scene: Scene

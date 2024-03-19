@@ -1,13 +1,13 @@
 import pygame
 from src.assets.maps.map import Map3D
-from src.resources.ui.elements import Button
+from src.resources.ui.elements import Button, UIElement
 from src.resources.entites.entity import Entity
 
 class Scene:
     _display_surface: pygame.Surface
     surface: pygame.Surface
     buttons: list[Button]
-    entities: list[Entity]
+    to_display: list[Entity|UIElement]
     player: Entity
     map3d = Map3D
 
@@ -16,13 +16,11 @@ class Scene:
         self.surface = pygame.Surface(_display_surface.get_size())
         self.map3d = pygame.Surface(_display_surface.get_size())
         self.buttons = []
-        self.entities = []
+        self.to_display = []
 
     def render(self):
         self.surface.blit(self.map3d.texture,(0,0))
-        for button in self.buttons:
-            self.surface.blit(button.surface, (button.position.x, button.position.y))
-        for entity in self.entities:
+        for entity in self.to_display:
             self.surface.blit(entity.surface, (entity.position.x, entity.position.y))
 
         '''###### DEBUG
@@ -37,9 +35,10 @@ class Scene:
 
     def add_button(self, button: Button):
         self.buttons.append(button)
+        self.to_display.append(button)
 
-    def add_entity(self, entity: Entity):
-        self.entities.append(entity)
+    def add_to_display(self, entity: Entity):
+        self.to_display.append(entity)
 
     def check_colliders(self, entity: Entity) -> bool:
         for collider in self.map3d.colliders:
