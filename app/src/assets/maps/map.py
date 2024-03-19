@@ -14,13 +14,16 @@ class Map3D:
         self.rect = self.texture.get_rect()
         self.colliders = []
 
-    def add_bounds(self, player: Entity) -> pygame.Rect|None:
-            self.bounds = pygame.Rect(
-                player.rect.right,
-                player.rect.bottom,
-                self.rect.right - 2*player.rect.right,
-                self.rect.height - 2*player.rect.height
-            )
+    def add_bounds(self, player: Entity) -> pygame.Rect:
+            if player:
+                self.bounds = pygame.Rect(
+                    player.rect.right-1,
+                    player.rect.bottom-1,
+                    self.rect.right + 1 - 2*player.rect.right,
+                    self.rect.height + 1 - 2*player.rect.height
+                )
+            else:
+                 self.bounds = self.rect
     
     def add_collider(self, collider: pygame.Rect):
         self.colliders.append(collider)

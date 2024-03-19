@@ -18,7 +18,7 @@ class TestScene(Scene):
         self.map3d = Map3D(_display_surface, "app/src/assets/maps/testmap.png")
         self.map3d.add_bounds(self.player)
         self.map3d.new_collider((125,80),(55,50))
-        self.map3d.new_collider((200,175),(80,375))
+        self.map3d.new_collider((200,140),(80,375))
 
     def some_action(self):
         print("action!")

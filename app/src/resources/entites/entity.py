@@ -13,3 +13,5 @@ class Entity:
 
     def update(self, new_position):
         self.position = new_position
+        self.rect.left = self.position.x
+        self.rect.top = self.position.y

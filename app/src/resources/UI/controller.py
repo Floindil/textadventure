@@ -4,7 +4,7 @@ class Controller:
     position : pygame.Vector3
 
     def __init__(self) -> None:
-        self.speed = 10
+        self.speed = 5
         self.position = pygame.Vector3(200,200,0)
         self.position_change = pygame.Vector3(0,0,0)
         self.configuration = {

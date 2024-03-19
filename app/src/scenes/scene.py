@@ -24,6 +24,15 @@ class Scene:
             button.place()
         for entity in self.entities:
             self.surface.blit(entity.surface, (entity.position.x, entity.position.y))
+
+        '''###### DEBUG
+        pygame.draw.rect(self.surface, "green", self.map3d.bounds)
+        if self.player:
+            pygame.draw.rect(self.surface, "blue", self.player.rect)
+        for collider in self.map3d.colliders:
+            pygame.draw.rect(self.surface,"red", collider)
+        ###### DEBUG'''
+        
         self._display_surface.blit(self.surface, self._display_surface.get_rect().topleft)
 
     def add_button(self, button: Button):

@@ -40,9 +40,11 @@ class UI:
 
     def update(self, keys):
         self.controller.update_change(keys)
-        self.scene.player.position += self.controller.position_change
+        current_position = self.scene.player.position
+        temp_position = current_position + self.controller.position_change
+        self.scene.player.update(temp_position)
         if not self.scene.check_bounds(self.scene.player) or self.scene.check_colliders(self.scene.player):
-            self.scene.player.position -= self.controller.position_change
+            self.scene.player.position.update(current_position)
         else: self.controller.update_position
         
     def start_menu(self):
