@@ -13,7 +13,7 @@ class Menu(Scene):
         buttonsize = (200,30)
         displaySize = self.surface.get_size()
         buttonposition = (displaySize[0]/2-buttonsize[0]/2,displaySize[1]/2-buttonsize[1]/2)
-        button = Button(self.surface,(buttonposition), buttonsize, self.some_action, "ACTION")
+        button = Button((buttonposition), buttonsize, self.some_action, "ACTION")
         button.fill("white")
         self.add_button(button)
     

@@ -53,6 +53,8 @@ class Gameloop:
 
             self.displayUpdate()
 
+            run = self.ui.run
+
         pygame.quit()
 
     def displayUpdate(self):

@@ -5,29 +5,23 @@ class UIElements:
     TAG = "UIElement"
 
     def __init__(self,
-        display_surface: pygame.surface.Surface,
-        display_position: tuple,
+        position: tuple,
         size: tuple
         ):
-        self._display_surface = display_surface
-        self._display_position = display_position
-        self._rect = pygame.Rect(display_position[0], display_position[1], size[0], size[1])
+        self.position = pygame.Vector2(position)
+        self._rect = pygame.Rect(position[0], position[1], size[0], size[1])
         self.surface = pygame.Surface(size)
 
     def mousecheck(self) -> bool:
         _mousecoordinates = pygame.Vector2(pygame.mouse.get_pos())
         return self._rect.collidepoint(_mousecoordinates.x, _mousecoordinates.y)
-    
-    def place(self):
-        self._display_surface.blit(self.surface, self._rect.topleft)
 
 class Button(UIElements):
 
     TAG = "Button"
 
-    def __init__(self, display_surface: pygame.Surface, display_position: tuple, size: tuple, command: callable, text: str = ""):
-        super().__init__(display_surface, display_position, size)
-        self.pressed = False
+    def __init__(self, position: tuple, size: tuple, command: callable, text: str = ""):
+        super().__init__(position, size)
         self._command = command
         self._text = text
         if text:

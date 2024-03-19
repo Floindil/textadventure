@@ -21,7 +21,7 @@ class Scene:
     def render(self):
         self.surface.blit(self.map3d.texture,(0,0))
         for button in self.buttons:
-            button.place()
+            self.surface.blit(button.surface, (button.position.x, button.position.y))
         for entity in self.entities:
             self.surface.blit(entity.surface, (entity.position.x, entity.position.y))
 

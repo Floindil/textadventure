@@ -16,19 +16,26 @@ class UI:
 
     def __init__(self, display_surface: pygame.Surface) -> None:
         self.controller = Controller()
+        self.run = True
         self._display_surface = display_surface
 
         self.menu = Menu(display_surface)
         self.last_scene = None
         self.scene = TestScene(self._display_surface)
 
-        _last_scene_button = Button(display_surface, (self._display_surface.get_size()[0]/2-100,200), (200,30), self.start_last_scene, "START")
-        _last_scene_button.fill("white")
-        self._menu_elements = [_last_scene_button]
+        center = pygame.Vector2(self._display_surface.get_size())/2
+        _button_size = pygame.Vector2(200,30)
 
-        _menu_button = Button(display_surface, (10,10), (200, 30), self.start_menu, "MENU")
+        _quit_button = Button((self._display_surface.get_size()[0]-10-_button_size.x,10), _button_size, self.quit, "QUIT")
+        _quit_button.fill("white")
+
+        _last_scene_button = Button((center.x-_button_size.x/2,center.y-100), _button_size, self.start_last_scene, "RESUME")
+        _last_scene_button.fill("white")
+        self._menu_elements = [_last_scene_button, _quit_button]
+
+        _menu_button = Button((10,10), _button_size, self.start_menu, "MENU")
         _menu_button.fill("white")
-        self._elements = [_menu_button]
+        self._elements = [_menu_button, _quit_button]
 
         self.scene_elements = []
 
@@ -36,7 +43,7 @@ class UI:
     def render(self):
         self.scene.render()
         for element in self.scene_elements:
-            element.place()
+            self._display_surface.blit(element.surface, element.position)
 
     def update(self, keys):
         self.controller.update_change(keys)
@@ -65,3 +72,6 @@ class UI:
             if element.TAG == "Button":
                 _list.append(element)
         return _list
+    
+    def quit(self):
+        self.run = False
