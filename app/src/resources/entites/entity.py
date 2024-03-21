@@ -11,7 +11,7 @@ class Entity:
         self.rect = texture.get_rect()
         self.position = position
 
-    def update(self, new_position):
+    def update(self, new_position: pygame.Vector3):
         self.position = new_position
         self.rect.left = self.position.x
         self.rect.top = self.position.y

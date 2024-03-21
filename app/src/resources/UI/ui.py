@@ -52,7 +52,7 @@ class UI:
         self.scene.player.update(temp_position)
         if not self.scene.check_bounds(self.scene.player) or self.scene.check_colliders(self.scene.player):
             self.scene.player.position.update(current_position)
-        else: self.controller.update_position
+        else: self.controller.update_position()
         
     def start_menu(self):
         self.last_scene = self.scene
@@ -61,12 +61,12 @@ class UI:
 
     def start_last_scene(self):
         _last_scene = self.scene
-        self.scene = self.last_scene
+        self.scene: Scene = self.last_scene
         self.last_scene = _last_scene
         self.scene_elements = self._elements + self.scene.buttons
         self.scene.add_controller(self.controller)
 
-    def return_buttons(self):
+    def return_buttons(self) -> list[Button]:
         _list: list[Button] = []
         for element in self.scene_elements:
             if element.TAG == "Button":

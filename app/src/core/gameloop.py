@@ -4,6 +4,13 @@ from src.resources.ui.ui import UI
 from src.scenes.menu import Menu
 
 class Gameloop:
+
+    display: pygame.display
+    fps: int
+    ui: UI
+    clock: pygame.time.Clock
+    menu: bool
+
     def __init__(self) -> None:
         displaySize = Configuration.DISPLAY_SIZE
         self.fps = Configuration.FPS

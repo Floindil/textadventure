@@ -3,9 +3,12 @@ from src.scenes.scene import Scene
 from src.resources.ui.elements import Button
 from src.assets.maps.map import Map3D
 from src.resources.entites.entity import Entity
-from src.resources.ui.controller import Controller
 
 class TestScene(Scene):
+
+    map3d: Map3D
+    player: Entity
+
     def __init__(self, _display_surface: pygame.Surface) -> None:
         super().__init__(_display_surface)
         self.controller = None
@@ -22,6 +25,3 @@ class TestScene(Scene):
 
     def some_action(self):
         print("action!")
-
-    def add_controller(self, controller: Controller):
-        self.controller = controller
