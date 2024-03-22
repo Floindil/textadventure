@@ -10,8 +10,7 @@ class TestScene(Scene):
     player: Entity
 
     def __init__(self, _display_surface: pygame.Surface) -> None:
-        super().__init__(_display_surface)
-        self.controller = None
+        super().__init__(_display_surface, True)
 
         player_surface = pygame.image.load("app/src/red_circle.png")
         player_start = pygame.Vector3(200,200,0)

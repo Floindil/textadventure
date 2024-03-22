@@ -11,14 +11,21 @@ class Scene:
     buttons: list[Button]
     to_display: list[Entity|UIElement]
     player: Entity
-    map3d = Map3D
+    map3d: Map3D
+    bounds: pygame.Rect
+    controller: Controller
+    collisions: bool = False
 
-    def __init__(self, _display_surface: pygame.Surface) -> None:
+    def __init__(self, _display_surface: pygame.Surface, collision: bool = False) -> None:
         self._display_surface = _display_surface
         self.surface = pygame.Surface(_display_surface.get_size())
         self.map3d = pygame.Surface(_display_surface.get_size())
         self.buttons = []
         self.to_display = []
+        self.player = None
+        self.bounds = None
+        self.controller = None
+        self.collisions = collision
 
     def render(self):
         self.surface.blit(self.map3d.texture,(0,0))

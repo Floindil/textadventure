@@ -12,8 +12,6 @@ class Menu(Scene):
     def __init__(self, _display_surface: pygame.Surface) -> None:
         super().__init__(_display_surface)
         self.map3d = Map3D(_display_surface, "app/src/assets/maps/menu.png")
-        self.player = None
-        self.map3d.add_bounds(self.player)
 
         buttonsize = (200,30)
         displaySize = self.surface.get_size()

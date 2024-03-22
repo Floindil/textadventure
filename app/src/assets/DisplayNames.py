@@ -15,6 +15,14 @@ class CHARACTER:
 class RESOURCES:
     CURRENCY = 'Currency'
     EXPERIENCE = 'Experience'
+    HEALTH = 'Health'
+    STAMINA = 'Stamina'
+    MANA = 'Mana'
+
+class RESOURCEMODIFIERS:
+    HEALTH = 15
+    STAMINA = 10
+    MANA = 10
 
 class ITEMS:
     CONSUMABLE = 'Consumable'
@@ -45,13 +53,3 @@ class ATTRIBUTES:
     INTELLIGENCE = 'Intelligence'
     LIGHTMAGIC = 'Light Magic'
     DARKMAGIC = 'Dark Magic'
-
-class PROPERTY:
-    HEALTH = 'Health'
-    STAMINA = 'Stamina'
-    MANA = 'Mana'
-
-class PROPERTYBASE:
-    HEALTH = 15
-    STAMINA = 10
-    MANA = 10
