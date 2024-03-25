@@ -45,9 +45,14 @@ class Gameloop:
                         #pygame.mouse.set_pos(displaySize[0]/2,displaySize[1]/2)
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    for button in self.ui.return_buttons():
-                        if button.mousecheck():
-                            button.action()
+                    for element in self.ui.return_elements():
+                        element.action()
+                
+                if event.type == pygame.MOUSEBUTTONUP:
+                    for element in self.ui.return_elements():
+                        if element.TAG == "Movable":
+                            if element.grabbed:
+                                element.drop()
 
             if isinstance(self.ui.scene, Menu):
                 self.menu = True

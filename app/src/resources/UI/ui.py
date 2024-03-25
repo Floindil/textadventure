@@ -26,14 +26,14 @@ class UI:
         center = pygame.Vector2(self._display_surface.get_size())/2
         _button_size = pygame.Vector2(200,30)
 
-        _quit_button = Button((self._display_surface.get_size()[0]-10-_button_size.x,10), _button_size, self.quit, "QUIT")
+        _quit_button = Button(self._display_surface, (self._display_surface.get_size()[0]-10-_button_size.x,10), _button_size, self.quit, "QUIT")
         _quit_button.fill("white")
 
-        _last_scene_button = Button((center.x-_button_size.x/2,center.y-100), _button_size, self.start_last_scene, "RESUME")
+        _last_scene_button = Button(self._display_surface, (center.x-_button_size.x/2,center.y-100), _button_size, self.start_last_scene, "RESUME")
         _last_scene_button.fill("white")
         self._menu_elements = [_last_scene_button, _quit_button]
 
-        _menu_button = Button((10,10), _button_size, self.start_menu, "MENU")
+        _menu_button = Button(self._display_surface, (10,10), _button_size, self.start_menu, "MENU")
         _menu_button.fill("white")
         self._elements = [_menu_button, _quit_button]
 
@@ -43,7 +43,7 @@ class UI:
     def render(self):
         self.scene.render()
         for element in self.scene_elements:
-            self._display_surface.blit(element.surface, element.position)
+            element.render()
 
     def update(self, keys):
         self.controller.update_change(keys)
@@ -58,19 +58,19 @@ class UI:
     def start_menu(self):
         self.last_scene = self.scene
         self.scene = self.menu
-        self.scene_elements = self._menu_elements + self.scene.buttons
+        self.scene_elements = self._menu_elements + self.scene.ui_elements
 
     def start_last_scene(self):
         _last_scene = self.scene
         self.scene: Scene = self.last_scene
         self.last_scene = _last_scene
-        self.scene_elements = self._elements + self.scene.buttons
+        self.scene_elements = self._elements + self.scene.ui_elements
         self.scene.add_controller(self.controller)
 
-    def return_buttons(self) -> list[Button]:
-        _list: list[Button] = []
+    def return_elements(self) -> list[Button]:
+        _list: list[UIElement] = []
         for element in self.scene_elements:
-            if element.TAG == "Button":
+            if isinstance(element, UIElement):
                 _list.append(element)
         return _list
     

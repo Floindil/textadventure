@@ -1,6 +1,6 @@
 import pygame
 from src.assets.maps.map import Map3D
-from src.resources.ui.elements import Button, UIElement
+from src.resources.ui.elements import UIElement
 from src.resources.ui.controller import Controller
 from src.resources.entites.entity import Entity
 
@@ -8,7 +8,7 @@ class Scene:
 
     _display_surface: pygame.Surface
     surface: pygame.Surface
-    buttons: list[Button]
+    ui_elements: list[UIElement]
     to_display: list[Entity|UIElement]
     player: Entity
     map3d: Map3D
@@ -20,7 +20,7 @@ class Scene:
         self._display_surface = _display_surface
         self.surface = pygame.Surface(_display_surface.get_size())
         self.map3d = pygame.Surface(_display_surface.get_size())
-        self.buttons = []
+        self.ui_elements = []
         self.to_display = []
         self.player = None
         self.bounds = None
@@ -31,13 +31,15 @@ class Scene:
         self.surface.blit(self.map3d.texture,(0,0))
         
         for entity in self.to_display:
-            self.surface.blit(entity.surface, (entity.position.x, entity.position.y))
+            if isinstance(entity, UIElement):
+                entity.update()
+            entity.render()
         
         self._display_surface.blit(self.surface, self._display_surface.get_rect().topleft)
 
-    def add_button(self, button: Button):
-        self.buttons.append(button)
-        self.to_display.append(button)
+    def add_ui_element(self, ui_element: UIElement):
+        self.ui_elements.append(ui_element)
+        self.to_display.append(ui_element)
 
     
     def add_controller(self, controller: Controller):

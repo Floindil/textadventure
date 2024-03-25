@@ -14,7 +14,7 @@ class TestScene(Scene):
 
         player_surface = pygame.image.load("app/src/red_circle.png")
         player_start = pygame.Vector3(200,200,0)
-        self.player = Entity(player_surface, player_start)
+        self.player = Entity(self.surface, player_surface, player_start)
         self.add_to_display(self.player)
 
         self.map3d = Map3D(_display_surface, "app/src/assets/maps/testmap.png")
