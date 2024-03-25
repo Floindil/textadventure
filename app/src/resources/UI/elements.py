@@ -2,7 +2,7 @@ import pygame
 
 class UIElement:
 
-    TAG = "UIElement"
+    TAG: str = "UIElement"
     _display_surface: pygame.Surface
     position = pygame.Vector2
     rect = pygame.Rect
@@ -52,7 +52,7 @@ class UIElement:
 
 class Button(UIElement):
 
-    TAG = "Button"
+    TAG: str = "Button"
     _command: callable
 
     def __init__(self,
@@ -74,14 +74,16 @@ class Button(UIElement):
 
 class DropZone(UIElement):
 
-    TAG = "DropZone"
+    TAG: str = "DropZone"
+    blocked: bool = False
 
     def __init__(self,
             _display_surface: pygame.Surface,
             position: tuple,
             size: tuple,
+            text: str = ""
         ):
-        super().__init__(_display_surface, position, size)
+        super().__init__(_display_surface, position, size, text)
 
 class Movable(UIElement):
 
@@ -99,21 +101,23 @@ class Movable(UIElement):
         self.registered_zones = []
 
     def action(self):
-        print(self.grabbed)
         if self.mousecheck():
             self.grabbed = True
 
     def drop(self):
         mouse_pos = pygame.mouse.get_pos()
         for zone in self.registered_zones:
-            if zone.rect.collidepoint(mouse_pos):
+            if zone.rect.collidepoint(mouse_pos) and not zone.blocked:
                 self.set_zone(zone)
             else:
                 self.draw_position = self.position
         self.grabbed = False
 
     def set_zone(self, zone: DropZone):
+        if self.active_zone:
+            self.active_zone.blocked = False
         self.active_zone = zone
+        self.active_zone.blocked = True
         self.update_pos(zone.rect.center-pygame.Vector2(self.rect.size)/2)
         self.update_draw_pos()
 

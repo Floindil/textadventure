@@ -10,16 +10,16 @@ class Scene:
     surface: pygame.Surface
     ui_elements: list[UIElement]
     to_display: list[Entity|UIElement]
-    player: Entity
-    map3d: Map3D
     bounds: pygame.Rect
     controller: Controller
+    player: Entity | None
+    map3d: Map3D | None
     collisions: bool = False
 
     def __init__(self, _display_surface: pygame.Surface, collision: bool = False) -> None:
         self._display_surface = _display_surface
         self.surface = pygame.Surface(_display_surface.get_size())
-        self.map3d = pygame.Surface(_display_surface.get_size())
+        self.map3d = None
         self.ui_elements = []
         self.to_display = []
         self.player = None
@@ -28,7 +28,8 @@ class Scene:
         self.collisions = collision
 
     def render(self):
-        self.surface.blit(self.map3d.texture,(0,0))
+        if self.map3d:
+            self.surface.blit(self.map3d.texture,(0,0))
         
         for entity in self.to_display:
             if isinstance(entity, UIElement):

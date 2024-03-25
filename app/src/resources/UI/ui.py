@@ -1,5 +1,6 @@
 from src.scenes.menu import Menu
 from src.scenes.scene import Scene
+from src.scenes.inventory import Inventory
 from src.scenes.test_scene import TestScene
 from src.resources.ui.elements import Button, UIElement
 from src.resources.ui.controller import Controller
@@ -31,11 +32,15 @@ class UI:
 
         _last_scene_button = Button(self._display_surface, (center.x-_button_size.x/2,center.y-100), _button_size, self.start_last_scene, "RESUME")
         _last_scene_button.fill("white")
-        self._menu_elements = [_last_scene_button, _quit_button]
 
         _menu_button = Button(self._display_surface, (10,10), _button_size, self.start_menu, "MENU")
         _menu_button.fill("white")
-        self._elements = [_menu_button, _quit_button]
+
+        _inventory_button = Button(self._display_surface, (self._display_surface.get_width()/2-_button_size.x/2,10), _button_size, self.start_inventory, "INVENTORY")
+        _inventory_button.fill("white")
+
+        self._menu_elements = [_last_scene_button, _quit_button]
+        self._elements = [_menu_button, _quit_button, _inventory_button]
 
         self.scene_elements = []
 
@@ -46,19 +51,25 @@ class UI:
             element.render()
 
     def update(self, keys):
-        self.controller.update_change(keys)
-        current_position = self.scene.player.position
-        temp_position = current_position + self.controller.raycast
-        self.scene.player.update(temp_position)
-        if self.scene.collisions:
-            if not self.scene.check_bounds(self.scene.player) or self.scene.check_colliders(self.scene.player):
-                self.scene.player.position.update(current_position)
-            else: self.controller.update_position()
+        if self.scene.player:
+            self.controller.update_change(keys)
+            current_position = self.scene.player.position
+            temp_position = current_position + self.controller.raycast
+            self.scene.player.update(temp_position)
+            if self.scene.collisions:
+                if not self.scene.check_bounds(self.scene.player) or self.scene.check_colliders(self.scene.player):
+                    self.scene.player.position.update(current_position)
+                else: self.controller.update_position()
         
     def start_menu(self):
         self.last_scene = self.scene
         self.scene = self.menu
         self.scene_elements = self._menu_elements + self.scene.ui_elements
+
+    def start_inventory(self):
+        self.last_scene = self.scene
+        self.scene = Inventory(self._display_surface)
+        self.scene_elements = self.scene.ui_elements
 
     def start_last_scene(self):
         _last_scene = self.scene
